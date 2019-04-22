@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FundooApi", "FundooApi\FundooApi.csproj", "{AE24F4FF-70E0-42EB-B497-007CB527557F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FundooApi", "FundooApi\FundooApi.csproj", "{AE24F4FF-70E0-42EB-B497-007CB527557F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FundooBusiness", "FundooBusiness\FundooBusiness.csproj", "{983E82B0-F0EC-4CF9-8873-70C9B4E2FC23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FundooBusiness", "FundooBusiness\FundooBusiness.csproj", "{983E82B0-F0EC-4CF9-8873-70C9B4E2FC23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FundooRepository", "FundooRepository\FundooRepository.csproj", "{D6DFF129-4689-4CB7-B372-A6E6715276E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FundooRepository", "FundooRepository\FundooRepository.csproj", "{D6DFF129-4689-4CB7-B372-A6E6715276E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{443BACC6-3615-44AD-9A13-AF09D3B1F50C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{443BACC6-3615-44AD-9A13-AF09D3B1F50C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FundooTest", "FundooTest\FundooTest.csproj", "{A368BDCB-57C2-46FB-B85F-6B084D3C76F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{443BACC6-3615-44AD-9A13-AF09D3B1F50C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{443BACC6-3615-44AD-9A13-AF09D3B1F50C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{443BACC6-3615-44AD-9A13-AF09D3B1F50C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A368BDCB-57C2-46FB-B85F-6B084D3C76F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A368BDCB-57C2-46FB-B85F-6B084D3C76F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A368BDCB-57C2-46FB-B85F-6B084D3C76F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A368BDCB-57C2-46FB-B85F-6B084D3C76F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

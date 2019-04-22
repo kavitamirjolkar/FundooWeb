@@ -1,11 +1,34 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="FundooNotes.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator Name="Kavita Mirjolkar"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace FundooRepository.Migrations
 {
-    public partial class Fundoo : Migration
+    using System;
+    using Microsoft.EntityFrameworkCore.Metadata;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
+    /// <summary>
+    /// This is migration file
+    /// </summary>
+    /// <seealso cref="Microsoft.EntityFrameworkCore.Migrations.Migration" />
+    public partial class FundooNotes : Migration
     {
+        /// <summary>
+        /// <para>
+        /// Builds the operations that will migrate the database 'up'.
+        /// </para>
+        /// <para>
+        /// That is, builds the operations that will take the database from the state left in by the
+        /// previous migration so that it is up-to-date with regard to this migration.
+        /// </para>
+        /// <para>
+        /// This method must be overridden in each class the inherits from <see cref="T:Microsoft.EntityFrameworkCore.Migrations.Migration" />.
+        /// </para>
+        /// </summary>
+        /// <param name="migrationBuilder">The <see cref="T:Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder" /> that will build the operations.</param>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -51,6 +74,23 @@ namespace FundooRepository.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<Guid>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -199,6 +239,21 @@ namespace FundooRepository.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
         }
 
+        /// <summary>
+        /// <para>
+        /// Builds the operations that will migrate the database 'down'.
+        /// </para>
+        /// <para>
+        /// That is, builds the operations that will take the database from the state left in by
+        /// this migration so that it returns to the state that it was in before this migration was applied.
+        /// </para>
+        /// <para>
+        /// This method must be overridden in each class the inherits from <see cref="T:Microsoft.EntityFrameworkCore.Migrations.Migration" /> if
+        /// both 'up' and 'down' migrations are to be supported. If it is not overridden, then calling it
+        /// will throw and it will not be possible to migrate in the 'down' direction.
+        /// </para>
+        /// </summary>
+        /// <param name="migrationBuilder">The <see cref="T:Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder" /> that will build the operations.</param>
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
@@ -215,6 +270,9 @@ namespace FundooRepository.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Notes");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

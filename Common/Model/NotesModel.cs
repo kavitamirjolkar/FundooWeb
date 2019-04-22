@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EmailSettings.cs" company="Bridgelabz">
+// <copyright file="NotesModel.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator Name="Kavita Mirjolkar"/>
@@ -7,60 +7,60 @@
 namespace Common.Model
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     /// <summary>
-    /// this is Email setting model
+    /// this is notes model
     /// </summary>
-    public class EmailSettings
+    public class NotesModel
     {
         /// <summary>
-        /// Gets or sets the mail server.
+        /// Gets or sets the identifier.
         /// </summary>
         /// <value>
-        /// The mail server.
+        /// The identifier.
         /// </value>
-        public string MailServer { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the mail port.
+        /// Gets or sets the user identifier.
         /// </summary>
         /// <value>
-        /// The mail port.
+        /// The user identifier.
         /// </value>
-        public int MailPort { get; set; }
+        [ForeignKey("ApplicationUserModel")]
+        public Guid UserId { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the sender.
+        /// Gets or sets the title.
         /// </summary>
         /// <value>
-        /// The name of the sender.
+        /// The title.
         /// </value>
-        public string SenderName { get; set; }
+        public string Title { get; set; }
 
         /// <summary>
-        /// Gets or sets the sender.
+        /// Gets or sets the description.
         /// </summary>
         /// <value>
-        /// The sender.
+        /// The description.
         /// </value>
-        public string Sender { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the password.
+        /// Gets or sets the created date.
         /// </summary>
         /// <value>
-        /// The password.
+        /// The created date.
         /// </value>
-        public string Password { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether [enable s s l ].
+        /// Gets or sets the modified date.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if [enable s s l]; otherwise, <c>false</c>.
+        /// The modified date.
         /// </value>
-        public bool EnableSSL { get; set; }
+        public DateTime? ModifiedDate { get; set; }
     }
 }

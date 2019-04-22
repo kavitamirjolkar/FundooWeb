@@ -5,11 +5,7 @@
 // <creator Name="Kavita Mirjolkar"/>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Common.Model
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-    
+{ 
     /// <summary>
     /// this is model class of app settings
     /// </summary>
