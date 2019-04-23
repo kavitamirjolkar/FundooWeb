@@ -6,10 +6,12 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace FundooTest.RepositoryTest
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;   
     using Common.Model;
     using FundooRepository.DBContext;
+    using FundooRepository.Interfaces;
     using FundooRepository.Service;
     using GenFu;
     using Microsoft.EntityFrameworkCore;
@@ -27,6 +29,7 @@ namespace FundooTest.RepositoryTest
         [Fact]
         public void AllPersonsTest()
         {
+            ////arrange
             var context = this.CreateDbContext();
             var service = new NotesRepository(context.Object);
 
@@ -35,6 +38,28 @@ namespace FundooTest.RepositoryTest
             var count = results.Count();
             //// assert
             Assert.Equal(26, count);
+        }
+        [Fact]
+        public void Add()
+        {
+            ////arrange
+            var context = new Mock<AuthenticationContext>();
+            var service = new NotesRepository(context.Object);
+            var notes = new NotesModel()
+            {
+                Id = 0,
+                Title = "Title",
+                Description = "Description",
+                UserId = System.Guid.NewGuid(),
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now
+            };
+
+            ////act
+            var data = service.Add(notes);
+
+            ////assert
+            Assert.NotNull(data);
         }
 
         /// <summary>

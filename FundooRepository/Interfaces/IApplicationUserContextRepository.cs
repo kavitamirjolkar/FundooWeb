@@ -8,6 +8,7 @@ namespace FundooRepository.Interfaces
 {
     using System.Threading.Tasks;
     using Common.Model;
+    using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
     /// this is an interface
@@ -21,19 +22,19 @@ namespace FundooRepository.Interfaces
         /// <returns>returns response</returns>
         Task CreateAsync(ApplicationUserModel applicationUserModel);
 
-        /// <summary>
-        /// Finds the by name asynchronous.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <returns>returns response</returns>
-        Task FindByNameAsync(LoginModel model);
+        ///// <summary>
+        ///// Finds the by name asynchronous.
+        ///// </summary>
+        ///// <param name="model">The model.</param>
+        ///// <returns>returns response</returns>
+        //Task<ApplicationUserDBModel> FindByNameAsync(string userName);
 
-        /// <summary>
-        /// Checks the password asynchronous.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <returns>returns response</returns>
-        Task<bool> CheckPasswordAsync(LoginModel model);
+        ///// <summary>
+        ///// Checks the password asynchronous.
+        ///// </summary>
+        ///// <param name="model">The model.</param>
+        ///// <returns>returns response</returns>
+        //Task<bool> CheckPasswordAsync(LoginModel model, string password);
 
         /// <summary>
         /// Finds the by email asynchronous.
@@ -55,5 +56,7 @@ namespace FundooRepository.Interfaces
         /// <param name="model">The model.</param>
         /// <returns>returns response</returns>
         Task<object> ResetPasswordAsync(ResetPasswordModel model);
+
+        Task<string> LoginAsync(LoginModel model);
     }
 }

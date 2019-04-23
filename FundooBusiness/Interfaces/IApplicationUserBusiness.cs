@@ -8,7 +8,8 @@ namespace FundooBusiness.Interfaces
 {
     using System.Threading.Tasks;
     using Common.Model;
- 
+    using Microsoft.AspNetCore.Mvc;
+
     /// <summary>
     /// This is an interface
     /// </summary>
@@ -26,7 +27,7 @@ namespace FundooBusiness.Interfaces
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>returns string</returns>
-        string LoginAsync(LoginModel model);
+       Task<string> LoginAsync(LoginModel model);
 
         /// <summary>
         /// Forgot the password asynchronous.

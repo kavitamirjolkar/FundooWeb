@@ -42,7 +42,7 @@ namespace FundooRepository.Service
         /// Adds the specified notes.
         /// </summary>
         /// <param name="notes">The notes.</param>
-        public void Add(NotesModel notes)
+        public string Add(NotesModel notes)
         {
             NotesModel note = new NotesModel()
             {
@@ -50,7 +50,8 @@ namespace FundooRepository.Service
                 Title = notes.Title,
                 Description = notes.Description
             };            
-                var result = this.Context.Notes.Add(note);          
+                var result = this.Context.Notes.Add(note);
+            return null;
         }
 
         /// <summary>

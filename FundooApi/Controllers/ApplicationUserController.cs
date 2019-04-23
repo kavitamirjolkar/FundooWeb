@@ -62,10 +62,12 @@ namespace FundooApi.Controllers
         /// <returns>returns response</returns>
         [HttpPost]
         [Route("login")]
-        public IActionResult Login(LoginModel model)
+        public Task<string> Login(LoginModel model)
         {
+
             var result = this.applicationUser.LoginAsync(model);
-            return this.Ok(new { result });
+         
+            return result;
         }
 
         /// <summary>

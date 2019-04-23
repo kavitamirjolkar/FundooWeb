@@ -81,8 +81,7 @@ namespace FundooApi.Controllers
         /// </summary>
         /// <returns>returns response</returns>
         [HttpGet]
-        [Route("allnotes")]
-      
+        [Route("allnotes")]      
         public IEnumerable<NotesModel> GetAllNotes()
         {
             return this.notesBusiness.GetAllNotesAsync();             
@@ -114,7 +113,8 @@ namespace FundooApi.Controllers
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>returns response</returns>
-        [HttpGet]       
+        [HttpGet]  
+        [Route("notesbyId")]
         public IActionResult Get(Guid userId)
         {
             IList<NotesModel> notes = this.notesBusiness.GetNotes(userId);

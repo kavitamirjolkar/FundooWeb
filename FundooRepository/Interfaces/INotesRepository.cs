@@ -21,7 +21,7 @@ namespace FundooRepository.Interfaces
         /// Adds the specified notes.
         /// </summary>
         /// <param name="notes">The notes.</param>
-        void Add(NotesModel notes);
+        string Add(NotesModel notes);
 
         /// <summary>
         /// Saves the changes asynchronous.
