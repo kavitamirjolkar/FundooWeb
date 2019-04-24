@@ -1,0 +1,208 @@
+/* @import "~@angular/material/prebuilt-themes/purple-green.css"; */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+body{
+    background-color: #fff;
+    margin:0;
+}
+
+input.form-control,input.form-control:focus{
+    background-color:#636b7b;
+    color:  #fff;
+    border: 1px solid #636b7b;
+
+}
+
+input.form-control:focus{
+    box-shadow: none;
+}
+
+button[type=submit].btn{
+    border-radius: 20px;
+    background-color: azure;
+    color: black;
+}
+
+div.form-group label:not(.text-danger){
+    color: #fff;
+    font-weight: 700;
+}
+
+div.form-group.required>label:first-child:after{
+    content:'*';
+    color: red;
+    padding-left: 5px;
+}
+
+#toast-container > div {
+    opacity:1;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .wrapped-div {
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: rgb(165, 198, 236);
+    padding: 30px;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    padding: 0px;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  }
+
+  /* Tabs */
+.tab-header{
+    text-align: center;
+}
+
+  .tab-header h2.active {
+    color: #fff;
+    border-bottom: 4px solid #fff;
+  }
+
+  .tab-header h2 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    display:inline-block;
+    padding: 30px 40px 10px 40px;
+    cursor: pointer;
+    color: #545d6a;
+    border-bottom: 2px solid #545d6a;
+  }
+
+  .tab-header h2:focus {
+      outline: none;
+  }
+
+  form{
+      margin: 0px 16px;
+  }
+
+ div.form-group input.invalid{
+    border: 1px solid #dc3545; 
+ }
+ div.form-group label:first-child{
+    text-transform: uppercase;
+    font-size: 0.9rem;
+ }
+ 
+ .example-icon {
+padding: 0 14px;
+  }
+  
+  .example-spacer {
+flex: 1 1 auto;
+  }
+  .example-container {
+    
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .example-is-mobile .example-toolbar {
+    position: fixed;
+    background-color:white;
+    /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+    z-index: 2;
+  }
+  
+  h1.example-app-name {
+    margin-left: 8px;
+    background-color: white;
+    
+  }
+  
+  .example-sidenav-container {
+    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+    flex: 1;
+    background-color: white;  
+     
+  }
+  
+  .example-is-mobile .example-sidenav-container.side {
+    /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+       `<body>` to be our scrolling element for mobile layouts. */
+    flex: 1 0 auto;
+    background-color: white; 
+  }
+  mat-sidenav {
+    width: 250px; 
+    
+  }
+  .search{
+    margin-right: 180px;
+    margin-left: 200px;
+    width: 500px;
+    background-color:white;
+    color:black;
+    border: 0px solid white;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.example-card {
+  
+  margin-right: 250px;
+    margin-left: 250px;
+  width: 600px;
+  margin-top: 50px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  outline: none; 
+  /* flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: center flex-start;
+    align-items: center;
+    margin-top: 8px; */
+}
+
+textarea {
+  border-style: none;
+  border-color: Transparent;
+  overflow: hidden;
+  outline: none;
+  resize: none;
+ 
+}
+
+.take_a_note{
+  /* margin-right: 180px;
+  margin-left: 200px; */
+  width: 500px;
+  background-color:white;
+  color:black;
+  border: 0px solid white;
+  border-radius: 20px;
+  font-size: 0.9rem;
+ 
+}
+
+.icon{
+  outline: none;  
+}
+
+.material-icons{
+    outline: none;
+}
+
+.mat-18{
+    outline: none;
+}

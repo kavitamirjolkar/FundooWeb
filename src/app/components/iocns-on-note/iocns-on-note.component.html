@@ -1,0 +1,56 @@
+<div class = "icon">
+<button mat-icon-button [matMenuTriggerFor]="menureminder">
+<mat-icon class="material-icons">add_alert</mat-icon>
+</button>
+<mat-menu #menureminder="matMenu">
+        <button mat-menu-item (click)="Today(card)">Later today 8:00PM </button>
+        <button mat-menu-item (click)="Tomorrow(card)">Tomorrow 8:00AM</button>
+        <button mat-menu-item (click)="nextWeek(card)">Next Week 8:00AM</button>
+        <button mat-menu-item>Pick date & time</button>
+        </mat-menu>
+<button mat-icon-button (click)="openDialog()">
+<mat-icon class="mat-18">person_add</mat-icon>
+</button>
+
+<button mat-icon-button [matMenuTriggerFor]="colorMenu">
+<mat-icon class="mat-18">palette</mat-icon>
+</button>
+
+<button mat-icon-button >
+<mat-icon class="mat-18">photo</mat-icon>
+</button>
+
+<button mat-icon-button *ngIf='type!="archive"' matTooltip="Archive" (click)="setArchive(card)">
+<mat-icon class="mat-18">archive</mat-icon>
+</button>
+
+<button mat-icon-button *ngIf='type=="archive"' matTooltip="Archive" (click)="doUnArchive(card)">
+<mat-icon class="mat-18">unarchive</mat-icon>
+</button>
+
+<button mat-icon-button [matMenuTriggerFor]="menu">
+<i class="material-icons">more_vert</i>
+</button>
+
+<mat-menu #menu="matMenu">
+<button mat-menu-item (click)="delete(noteId)">Delete note</button>
+<button mat-menu-item [matMenuTriggerFor]="Labelsmenu">Change lables</button>
+<button mat-menu-item>Add drawing</button>
+<button mat-menu-item>Make a copy</button>
+<button mat-menu-item>show checkboxes</button>
+</mat-menu>
+
+<mat-menu #Labelsmenu="matMenu">
+<div *ngFor="let label of notesLabel" (click)="LabelList(label)">
+<mat-checkbox >{{label.labels}}</mat-checkbox>
+</div>
+</mat-menu>
+
+<mat-menu #colorMenu="matMenu" class="colorCard">
+<div class="colorDiv">
+<button mat-menu-item (click)="setcolor('rgb(250, 250, 250)',card)" class="colorPalette" style="background-color:rgb(252, 252, 252)">
+<mat-icon></mat-icon>
+</button>
+</div>
+</mat-menu>
+</div>

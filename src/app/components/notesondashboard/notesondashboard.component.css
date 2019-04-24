@@ -1,0 +1,40 @@
+/* .note { */
+  
+    /* margin-right: 250px;
+      margin-left: 250px; */
+    /* width: 250px;
+    margin-top: 50px; */
+    /* -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3); */
+    /* outline: none; */
+  /* }
+  .loop{
+      width: fit-content;
+  } */
+  .grid{
+    margin-left: 12%;
+    flex-flow: row wrap;
+    box-sizing: border-box;
+    display: flex;
+
+  }
+  .grid .loop{
+      width: fit-content;
+  }
+  .grid .note{
+    width: 280px;
+    margin-top: 50px;
+  }
+  .list .note{
+    min-width: 602px;
+    border-radius: 10px;
+    margin-top: 2%;
+  }
+  .list{
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: center flex-start;
+    align-items: center;
+    margin-top: 8px;
+  }

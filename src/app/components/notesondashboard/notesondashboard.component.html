@@ -1,0 +1,28 @@
+<!-- 
+<div *ngFor="let note of notes">
+    <div>
+      <mat-card class="note">
+          <mat-card-title>
+        <h6>{{note.title}}</h6>
+      </mat-card-title>
+      
+        <mat-card-content>
+            <h6>{{note.description}}</h6>
+        </mat-card-content>
+        </mat-card>
+  </div>
+</div> -->
+<div [ngClass]="main"  fxLayoutGap='2%'>
+<div class="loop" *ngFor="let note of notes"  >
+    <mat-card class="note"> 
+<div>
+    <mat-card-title class="titleinput">{{note.title}}</mat-card-title>
+    </div>
+    <div>
+    <mat-card-content class="noteinput ">{{note.description}}</mat-card-content>
+    </div>
+    <app-iocns-on-note [card]="note"></app-iocns-on-note>
+  </mat-card>
+  
+  </div>
+</div>
