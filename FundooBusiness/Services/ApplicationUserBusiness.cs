@@ -14,6 +14,7 @@ namespace FundooBusiness.Services
     using Common.Model;
     using FundooBusiness.Interfaces;
     using FundooRepository.Interfaces;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
@@ -24,9 +25,7 @@ namespace FundooBusiness.Services
     /// </summary>
     /// <seealso cref="FundooBusiness.Interfaces.IApplicationUserBusiness" />
     public class ApplicationUserBusiness : IApplicationUserBusiness
-    {
-       
-
+    {     
         /// <summary>
         /// The application user context
         /// </summary>
@@ -41,12 +40,24 @@ namespace FundooBusiness.Services
         /// Initializes a new instance of the <see cref="ApplicationUserBusiness"/> class.
         /// </summary>
         /// <param name="context">The context.</param>
-        /// <param name="appSettings">The application settings.</param>
         /// <param name="emailSender">The email sender.</param>
         public ApplicationUserBusiness(IApplicationUserContextRepository context, IEmailSender emailSender)
         {
             this.applicationUserContext = context;          
             this.emailSender = emailSender;
+        }
+
+        /// <summary>
+        /// Finds the name of the by.
+        /// </summary>
+        /// <param name="userName">Name of the user.</param>
+        /// <returns>
+        /// returns response
+        /// </returns>
+        public Task<ApplicationUserDBModel> FindByName(string userName)
+        {
+            var result = this.applicationUserContext.FindByNameAsync(userName);
+            return result;
         }
 
         /// <summary>
@@ -58,7 +69,7 @@ namespace FundooBusiness.Services
         /// </returns>
         public bool ForgotPasswordAsync(ForgotPasswordModel model)
         {
-            var result = this.applicationUserContext.FindByEmailAsync(model);
+            var result = this.applicationUserContext.FindByEmailAsync(model.Email);
             if (result != null)
             {
                 var token = this.applicationUserContext.GeneratePasswordResetTokenAsync(model);
@@ -81,11 +92,36 @@ namespace FundooBusiness.Services
         /// </returns>
         public Task<string> LoginAsync(LoginModel model)
         {
-           var result= this.applicationUserContext.LoginAsync(model);
+           var result = this.applicationUserContext.LoginAsync(model);
             return result;
         }
 
- 
+        /// <summary>
+        /// Profiles the picture.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="email">The email.</param>
+        /// <returns>
+        /// returns response
+        /// </returns>
+        public string ProfilePicture(IFormFile file, string email)
+        {
+           var result = this.applicationUserContext.ProfilePicture(file, email);
+            return result;
+        }
+
+        /// <summary>
+        /// Profiles the URL.
+        /// </summary>
+        /// <param name="userid">The user id.</param>
+        /// <returns>
+        /// returns response
+        /// </returns>
+        public Task<string> ProfileUrl(string userid)
+        {
+            var result = this.applicationUserContext.ProfileUrl(userid);
+            return result;
+        }
 
         /// <summary>
         /// Registrations the asynchronous.
@@ -113,20 +149,18 @@ namespace FundooBusiness.Services
             return true;
         }
 
+        ///// <summary>
+        ///// Generates the json web token.
+        ///// </summary>
+        ///// <returns>returns string</returns>
+        ////private string GenerateJSONWebToken()
+        ////{
+        ////    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.appSettings.JWT_Secret));
+        ////    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-        /// <summary>
-        /// Generates the json web token.
-        /// </summary>
-        /// <returns>returns string</returns>
-        //private string GenerateJSONWebToken()
-        //{
-        //    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.appSettings.JWT_Secret));
-        //    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+        ////    var token = new JwtSecurityToken("localhost", "localhost", null, expires: DateTime.Now.AddMinutes(120), signingCredentials: credentials);
 
-        //    var token = new JwtSecurityToken("localhost", "localhost", null, expires: DateTime.Now.AddMinutes(120), signingCredentials: credentials);
-
-        //    return new JwtSecurityTokenHandler().WriteToken(token);
-        //}
+        ////    return new JwtSecurityTokenHandler().WriteToken(token);
+        ////}
     }
 }
-

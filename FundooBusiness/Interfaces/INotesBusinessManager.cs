@@ -10,6 +10,7 @@ namespace FundooBusiness.Interfaces
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Common.Model;
+    using Microsoft.AspNetCore.Http;
 
     /// <summary>
     /// This is an interface
@@ -50,5 +51,27 @@ namespace FundooBusiness.Interfaces
         /// <param name="userId">The user identifier.</param>
         /// <returns>returns list</returns>
         IList<NotesModel> GetNotes(Guid userId);
+
+        /// <summary>
+        /// Images the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>returns string value</returns>
+        string Image(IFormFile file, int id);
+
+        /// <summary>
+        /// Reminders the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>returns list</returns>
+        IList<NotesModel> Reminder(Guid userId);
+
+        /// <summary>
+        /// Archives the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>returns list</returns>
+        IList<NotesModel> Archive(Guid userId);
     }
 }

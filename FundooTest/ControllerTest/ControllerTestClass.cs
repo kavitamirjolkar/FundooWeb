@@ -13,7 +13,6 @@ namespace FundooTest.ControllerTest
     using FundooApi.Controllers;
     using FundooBusiness.Interfaces;
     using GenFu;
-    using Microsoft.AspNetCore.Mvc;
     using Moq;  
     using Xunit;
 
@@ -40,26 +39,26 @@ namespace FundooTest.ControllerTest
             var count = results.Count();
 
             ////assert
-            Assert.Equal(200, count);
+            Assert.Equal(5, count);
         }
 
         /// <summary>
         /// Tasks the add valid data return ok result.
         /// </summary>
         [Fact]
-        public  void Task_Add_ValidData_Return_OkResult()
+        public void Task_Add_ValidData_Return_OkResult()
         {
             ////arrange
             var service = new Mock<INotesBusinessManager>();
             var controller = new NotesController(service.Object);
             var notes = new NotesModel()
             {
-                Id=0,
+                Id = 0,
                 Title = "Title",
                 Description = "Description",
                 UserId = System.Guid.NewGuid(),
                 CreatedDate = DateTime.Now,
-                ModifiedDate=DateTime.Now
+                ModifiedDate = DateTime.Now
             };
 
             ////act
@@ -69,7 +68,9 @@ namespace FundooTest.ControllerTest
             Assert.NotNull(data);
         }
 
-
+        /// <summary>
+        /// Deletes this instance.
+        /// </summary>
         [Fact]
         public void Delete()
         {
@@ -82,6 +83,9 @@ namespace FundooTest.ControllerTest
             Assert.NotNull(data);
         }
 
+        /// <summary>
+        /// Updates this instance.
+        /// </summary>
         [Fact]
         public void Update()
         {
@@ -110,7 +114,7 @@ namespace FundooTest.ControllerTest
         private IEnumerable<NotesModel> GetFakeData()
         {
             var i = 1;
-            var notes = A.ListOf<NotesModel>(200);
+            var notes = A.ListOf<NotesModel>(2);
             notes.ForEach(x => x.Id = i++);
             return notes.Select(_ => _);
         }

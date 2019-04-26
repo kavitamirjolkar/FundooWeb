@@ -4,14 +4,16 @@ using FundooRepository.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FundooRepository.Migrations
 {
     [DbContext(typeof(AuthenticationContext))]
-    partial class AuthenticationContextModelSnapshot : ModelSnapshot
+    [Migration("20190426050619_Reminder")]
+    partial class Reminder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,10 +32,6 @@ namespace FundooRepository.Migrations
                     b.Property<string>("Description");
 
                     b.Property<string>("Image");
-
-                    b.Property<bool>("IsArchive");
-
-                    b.Property<bool>("IsTrash");
 
                     b.Property<DateTime?>("ModifiedDate");
 

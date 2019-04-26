@@ -8,6 +8,7 @@ namespace FundooBusiness.Interfaces
 {
     using System.Threading.Tasks;
     using Common.Model;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
@@ -27,7 +28,7 @@ namespace FundooBusiness.Interfaces
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>returns string</returns>
-       Task<string> LoginAsync(LoginModel model);
+        Task<string> LoginAsync(LoginModel model);
 
         /// <summary>
         /// Forgot the password asynchronous.
@@ -42,5 +43,27 @@ namespace FundooBusiness.Interfaces
         /// <param name="model">The model.</param>
         /// <returns>returns bool value</returns>
         bool ResetPassword(ResetPasswordModel model);
+
+        /// <summary>
+        /// Profiles the picture.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="email">The email.</param>
+        /// <returns>returns response</returns>
+        string ProfilePicture(IFormFile file, string email);
+
+        /// <summary>
+        /// Finds the name of the by.
+        /// </summary>
+        /// <param name="userName">Name of the user.</param>
+        /// <returns>returns response</returns>
+        Task<ApplicationUserDBModel> FindByName(string userName);
+
+        /// <summary>
+        /// Profiles the URL.
+        /// </summary>
+        /// <param name="userid">The user id.</param>
+        /// <returns>returns response</returns>
+        Task<string> ProfileUrl(string userid);
     }
 }

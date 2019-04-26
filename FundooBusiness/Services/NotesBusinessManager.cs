@@ -12,7 +12,8 @@ namespace FundooBusiness.Services
     using Common.Model;
     using FundooBusiness.Interfaces;
     using FundooRepository.Interfaces;
-    
+    using Microsoft.AspNetCore.Http;
+
     /// <summary>
     /// This class is implementing an interface
     /// </summary>
@@ -59,7 +60,7 @@ namespace FundooBusiness.Services
                 var result = this.notesRepository.Remove(id);
                 return result;           
         }
-
+      
         /// <summary>
         /// Gets all notes asynchronous.
         /// </summary>
@@ -89,6 +90,32 @@ namespace FundooBusiness.Services
         }
 
         /// <summary>
+        /// Images the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        /// returns string value
+        /// </returns>
+        public string Image(IFormFile file, int id)
+        {
+            var result = this.notesRepository.Image(file, id);
+            return result;
+        }
+
+        /// <summary>
+        /// Reminders the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>
+        /// returns list
+        /// </returns>
+        public IList<NotesModel> Reminder(Guid userId)
+        {
+            return this.notesRepository.Reminder(userId);
+        }
+
+        /// <summary>
         /// Updates the asynchronous.
         /// </summary>
         /// <param name="model">The model.</param>
@@ -101,6 +128,18 @@ namespace FundooBusiness.Services
             this.notesRepository.UpdateNotes(model, id);
            var result = this.notesRepository.SaveChangesAsync();
             return result;
+        }
+
+        /// <summary>
+        /// Archives the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>
+        /// returns list
+        /// </returns>
+        public IList<NotesModel> Archive(Guid userId)
+        {
+            return this.notesRepository.Archive(userId);
         }
     }
 }

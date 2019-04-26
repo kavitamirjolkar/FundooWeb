@@ -39,7 +39,11 @@ namespace FundooTest.RepositoryTest
             //// assert
             Assert.Equal(26, count);
         }
-        [Fact]
+
+        /// <summary>
+        /// Adds this instance.
+        /// </summary>
+        [Fact]   
         public void Add()
         {
             ////arrange

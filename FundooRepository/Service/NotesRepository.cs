@@ -10,16 +10,19 @@ namespace FundooRepository.Service
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using CloudinaryDotNet;
+    using CloudinaryDotNet.Actions;
     using Common.Model;
     using FundooRepository.DBContext;
     using FundooRepository.Interfaces;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    
+
     /// <summary>
     /// This class is implementing repository interface
     /// </summary>
     /// <seealso cref="FundooRepository.Interfaces.INotesRepository" />
-    public class NotesRepository : INotesRepository 
+    public class NotesRepository : INotesRepository
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="NotesRepository"/> class.
@@ -29,7 +32,7 @@ namespace FundooRepository.Service
         {
             this.Context = context;
         }
-        
+
         /// <summary>
         /// Gets the context.
         /// </summary>
@@ -37,20 +40,26 @@ namespace FundooRepository.Service
         /// The context.
         /// </value>
         public AuthenticationContext Context { get; }
-       
+
         /// <summary>
         /// Adds the specified notes.
         /// </summary>
         /// <param name="notes">The notes.</param>
+        /// <returns>
+        /// returns response
+        /// </returns>
         public string Add(NotesModel notes)
         {
             NotesModel note = new NotesModel()
             {
-                UserId = notes.UserId,      
+                UserId = notes.UserId,
                 Title = notes.Title,
-                Description = notes.Description
-            };            
-                var result = this.Context.Notes.Add(note);
+                Description = notes.Description,
+                Reminder = notes.Reminder,
+                IsArchive = notes.IsArchive,
+                IsTrash = notes.IsTrash,
+            };
+            var result = this.Context.Notes.Add(note);
             return null;
         }
 
@@ -126,6 +135,75 @@ namespace FundooRepository.Service
             NotesModel notes = this.Context.Notes.Where<NotesModel>(t => t.Id == id).FirstOrDefault();
             notes.Title = model.Title;
             notes.Description = model.Description;
+            notes.Reminder = model.Reminder;
+        }
+
+        /// <summary>
+        /// Images the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>returns string value
+        /// </returns>
+        public string Image(IFormFile file, int id)
+        {
+            var stream = file.OpenReadStream();
+            var name = file.FileName;
+            CloudinaryDotNet.Account account = new CloudinaryDotNet.Account("dhnj4wxml", "754358186258935", "4l9_c_lMhktpvRSpORFDFYHAbKg");
+            CloudinaryDotNet.Cloudinary cloudinary = new CloudinaryDotNet.Cloudinary(account);
+            var uploadParams = new ImageUploadParams()
+            {
+                File = new FileDescription(name, stream)
+            };
+            var uploadResult = cloudinary.Upload(uploadParams);
+            var data = this.Context.Notes.Where(t => t.Id == id).FirstOrDefault();
+            data.Image = uploadResult.Uri.ToString();
+            int result = 0;
+            try
+            {
+                result = this.Context.SaveChanges();
+                return data.Image;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        /// <summary>
+        /// Reminders the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>returns list</returns>
+        public IList<NotesModel> Reminder(Guid userId)
+        {
+            var list = new List<NotesModel>();
+            var notesData = from notes in this.Context.Notes where (notes.UserId == userId) && (notes.Reminder != null) select notes;
+            foreach (var data in notesData)
+            {
+                list.Add(data);
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Archives the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>
+        /// returns list
+        /// </returns>
+        public IList<NotesModel> Archive(Guid userId)
+        {
+            var list = new List<NotesModel>();
+            var notesData = from notes in this.Context.Notes where (notes.UserId == userId) && (notes.IsArchive == true) && (notes.IsTrash == false) select notes;
+            foreach (var data in notesData)
+            {
+                list.Add(data);
+            }
+
+            return list;
         }
     }
 }

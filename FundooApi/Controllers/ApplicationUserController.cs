@@ -10,6 +10,7 @@ namespace FundooApi.Controllers
     using System.Threading.Tasks;
     using Common.Model;
     using FundooBusiness.Interfaces;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
@@ -62,12 +63,17 @@ namespace FundooApi.Controllers
         /// <returns>returns response</returns>
         [HttpPost]
         [Route("login")]
-        public Task<string> Login(LoginModel model)
+        public async Task<IActionResult> Login(LoginModel model)
         {
-
-            var result = this.applicationUser.LoginAsync(model);
-         
-            return result;
+            var result = await this.applicationUser.LoginAsync(model);
+            if (result == "invalid user")
+            {
+                return this.BadRequest();
+            }
+            else
+            {
+                return this.Ok(new { result });
+            }
         }
 
         /// <summary>
@@ -102,6 +108,38 @@ namespace FundooApi.Controllers
                 Console.WriteLine(e.Message);
                 return this.BadRequest();
             }
+        }
+
+        /// <summary>
+        /// Profiles the picture.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="email">The email.</param>
+        /// <returns>returns response</returns>
+        [HttpPost]
+        [Route("profilepicture/{email}")]
+        public IActionResult ProfilePicture(IFormFile file, string email)
+        {
+            if (file == null)
+            {
+                return this.BadRequest("No file found");
+            }
+
+            var result = this.applicationUser.ProfilePicture(file, email);
+            return this.Ok(new { result });
+        }
+
+        /// <summary>
+        /// Profiles the URL.
+        /// </summary>
+        /// <param name="userid">The user id.</param>
+        /// <returns>returns response</returns>
+        [HttpGet]
+        [Route("url/{userid}")]
+       public Task<string> ProfileUrl(string userid)
+        {
+            var result = this.applicationUser.ProfileUrl(userid);
+            return result;
         }
     }
 }

@@ -41,6 +41,9 @@ namespace FundooTest.BusinessManagerTest
             Assert.Equal(200, count);
         }
 
+        /// <summary>
+        /// Adds this instance.
+        /// </summary>
         [Fact]
         public void Add()
         {
@@ -64,6 +67,9 @@ namespace FundooTest.BusinessManagerTest
             Assert.NotNull(data);
         }
 
+        /// <summary>
+        /// Deletes this instance.
+        /// </summary>
         [Fact]
         public void Delete()
         {
@@ -76,7 +82,9 @@ namespace FundooTest.BusinessManagerTest
             Assert.NotNull(data);
         }
 
-
+        /// <summary>
+        /// Updates this instance.
+        /// </summary>
         [Fact]
         public void Update()
         {
@@ -111,4 +119,3 @@ namespace FundooTest.BusinessManagerTest
         }
     }
 }
-

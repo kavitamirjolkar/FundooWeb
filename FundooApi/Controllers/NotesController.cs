@@ -12,6 +12,7 @@ namespace FundooApi.Controllers
     using Common.Model;
     using FundooBusiness.Interfaces;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
@@ -124,6 +125,61 @@ namespace FundooApi.Controllers
             }
 
             return this.Ok(notes);
+        }
+
+        /// <summary>
+        /// Images the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>returns response</returns>
+        [HttpPost]
+        [Route("image/{id}")]
+        public IActionResult Image(IFormFile file, int id)
+        {
+            if (file == null)
+            {
+                return this.NotFound("The file couldn't be found");
+            }
+
+            var result = this.notesBusiness.Image(file, id);
+            return this.Ok(new { result });
+        }
+
+        /// <summary>
+        /// Reminders the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>returns response</returns>
+        [HttpGet]
+        [Route("reminder/{userId}")]
+        public IActionResult Reminder(Guid userId)
+        {
+            IList<NotesModel> result = this.notesBusiness.Reminder(userId);
+            if (result == null)
+            {
+                return this.NotFound("no reminder");
+            }
+
+            return this.Ok(new { result });
+        }
+
+        /// <summary>
+        /// Reminders the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>returns response</returns>
+        [HttpGet]
+        [Route("archive/{userId}")]
+        public IActionResult Archive(Guid userId)
+        {
+            IList<NotesModel> result = this.notesBusiness.Archive(userId);
+            if (result == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.Ok(new { result });
         }
     }   
 }

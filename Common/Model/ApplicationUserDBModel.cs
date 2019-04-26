@@ -55,6 +55,14 @@ namespace Common.Model
         /// <value>
         /// The modified date.
         /// </value>
-        public DateTime? ModifiedDate { get; set; }      
+        public DateTime? ModifiedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the profile picture.
+        /// </summary>
+        /// <value>
+        /// The profile picture.
+        /// </value>
+        public string ProfilePicture { get; set; }
     }
 }

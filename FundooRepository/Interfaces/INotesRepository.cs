@@ -10,6 +10,7 @@ namespace FundooRepository.Interfaces
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Common.Model;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
@@ -21,6 +22,7 @@ namespace FundooRepository.Interfaces
         /// Adds the specified notes.
         /// </summary>
         /// <param name="notes">The notes.</param>
+        /// <returns>returns response</returns>
         string Add(NotesModel notes);
 
         /// <summary>
@@ -62,5 +64,27 @@ namespace FundooRepository.Interfaces
         /// <param name="model">The model.</param>
         /// <param name="id">The identifier.</param>
         void UpdateNotes([FromBody]NotesModel model, int id);
+
+        /// <summary>
+        /// Images the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>returns url</returns>
+        string Image(IFormFile file, int id);
+
+        /// <summary>
+        /// Reminders the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>returns list</returns>
+        IList<NotesModel> Reminder(Guid userId);
+
+        /// <summary>
+        /// Archives the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>returns list</returns>
+        IList<NotesModel> Archive(Guid userId);       
     }
 }
