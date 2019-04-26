@@ -10,6 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NotesComponent } from './components/notes/notes.component';
 import { NotesDisplayComponent } from './components/notes-display/notes-display.component';
 import { NotesondashboardComponent } from './components/notesondashboard/notesondashboard.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 
 const routes: Routes = [
@@ -32,15 +33,17 @@ children:[
 
   {path:'',redirectTo:'notes',pathMatch:'full'},
   { path: 'notes', component:NotesDisplayComponent},
-  { path: 'notesbyId', component:NotesondashboardComponent}
+  { path: 'notesbyId', component:NotesondashboardComponent},
+  { path: 'delete', component:NotesondashboardComponent}
 
 ]
 },
-  
+{ path: 'dialog', component:DialogComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  
 })
 export class AppRoutingModule { }

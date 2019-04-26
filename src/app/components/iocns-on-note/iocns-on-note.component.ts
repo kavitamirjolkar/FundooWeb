@@ -10,6 +10,7 @@ import { Notes } from 'src/app/models/notes.model';
 export class IocnsOnNoteComponent implements OnInit {
   notes: Notes[];
   @Input() card;
+  selectedFile: File;
   constructor(public notesService: NotesService) { }
   ngOnInit() {
   }
@@ -21,5 +22,13 @@ export class IocnsOnNoteComponent implements OnInit {
   //        this.notes = this.notes.filter(u => u !== card);
   //     })
   //  };
+}
+
+onFileChanged(event) {
+  this.selectedFile = event.target.files[0]
+}
+
+onUpload(){
+  
 }
 }

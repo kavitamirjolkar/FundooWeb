@@ -59,9 +59,8 @@ BaseURI=environment.BaseURI;
   {
     return this.http.post(this.BaseURI+'/ApplicationUser/resetpassword',formData);
   }
-  // addNotes(url,notes)
-  // {
-  //   console.log(notes);
-  //  return  this.http.post("https://localhost:44336/api/notes/"+url,notes);
-  // }
+
+  profile(UserId){
+return this.http.get("https://localhost:44300/api/applicationuser/url/"+UserId);
+}
 } 

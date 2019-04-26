@@ -31,4 +31,9 @@ export class NotesService {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };  
     return this.http.delete<number>(this.BaseURI+'/notes/'+noteId,httpOptions);
   }
+  reminder(){
+
+  }
+
+ 
 }

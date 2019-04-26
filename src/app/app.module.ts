@@ -30,6 +30,8 @@ import { NotesondashboardComponent } from './components/notesondashboard/noteson
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { IocnsOnNoteComponent } from './components/iocns-on-note/iocns-on-note.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ReminderComponent } from './components/reminder/reminder.component';
 
 
 @NgModule({
@@ -46,6 +48,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     NotesondashboardComponent,
     IocnsOnNoteComponent,
     DialogComponent,
+    ReminderComponent,
     
     
    
@@ -66,6 +69,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     MatCardModule,
     FlexLayoutModule,
     MatExpansionModule,
+    MatDialogModule,
     ToastrModule.forRoot({
       progressBar: true
     }),

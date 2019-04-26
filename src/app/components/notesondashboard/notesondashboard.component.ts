@@ -4,25 +4,36 @@ import { Router } from '@angular/router';
 import { NotesService } from 'src/app/service/notes.service';
 import { DataService } from 'src/app/service/data_service/data.service';
 import * as jwt_decode from "jwt-decode";
+import { MatDialog } from '@angular/material';
+import { DialogComponent } from '../dialog/dialog.component';
 
+// import { DialogComponent } from '../dialog/dialog.component';
+export interface DialogData {
+  description: any;
+  title: any;
+}
 @Component({
   selector: 'app-notesondashboard',
   templateUrl: './notesondashboard.component.html',
   styleUrls: ['./notesondashboard.component.css']
 })
+
+
 export class NotesondashboardComponent implements OnInit {
   notes:Notes[];
   message:boolean;
   id:any;
   @Input() cardAdded;
-  constructor(private router: Router, private notesService: NotesService,private data: DataService) { }
+  title: any;
+  description: any;
+  constructor(private router: Router, private notesService: NotesService,private data: DataService,public dialog: MatDialog) { }
 
   main={
     grid:false,
     list:true
   }
 
-
+  
   ngOnInit() {
   //   this.notesService.getNotes().subscribe(  
   //     data => {
@@ -57,9 +68,18 @@ export class NotesondashboardComponent implements OnInit {
          console.log(err);         
        };  
   }
-  // newMessage() {
-  //   this.data.changeMessage(false);
-  // } 
+  
 
+  openDialog(note): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      
+  // width: 'auto',
+  // height: 'auto',
+  
+      // data: {note}
+      data: {title: note.title, description: note.description,image:note.image}
+    });
+  }
+  
   
 }
