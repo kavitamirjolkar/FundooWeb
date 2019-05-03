@@ -1,3 +1,3 @@
-<app-notes (cardUpdate)="updateCards()"></app-notes>
-<app-notesondashboard></app-notesondashboard>
+<app-notes (AferCloseEvent)="closed($event)"></app-notes>
+<app-notesondashboard  (cardUpdate)="update($event)" [noteCards]='noteCards'></app-notesondashboard>
 

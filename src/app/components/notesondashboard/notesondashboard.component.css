@@ -46,3 +46,10 @@ element.style {
   height: auto;
   position: static;
 }
+.pin{
+  margin-left: 220px;
+}
+
+.buttonOutline{
+  outline: none;
+}

@@ -18,14 +18,14 @@
 
 <button mat-icon-button style="outline: none">
 <mat-icon class="mat-18" (click)="selectFile.click()">photo</mat-icon>
-<input style="display: none" type="file"  #selectFile (change)="onFileChanged($event)">
+<input style="display: none" type="file"  #selectFile (change)="onFileChanged($event,card)">
 </button>
 
-<button mat-icon-button *ngIf='type!="archive"' matTooltip="Archive" (click)="setArchive(card)" style="outline: none">
+<button mat-icon-button *ngIf='type!="archive"' matTooltip="Archive" (click)="archive(card)" style="outline: none">
 <mat-icon class="mat-18">archive</mat-icon>
 </button>
 
-<button mat-icon-button *ngIf='type=="archive"' matTooltip="Archive" (click)="doUnArchive(card)" style="outline: none">
+<button mat-icon-button *ngIf='type=="archive"' matTooltip="Archive" (click)="unArchive(card)" style="outline: none">
 <mat-icon class="mat-18">unarchive</mat-icon>
 </button>
 
@@ -34,7 +34,7 @@
 </button>
 
 <mat-menu #menu="matMenu">
-<button mat-menu-item (click)="delete(noteId)" style="outline: none">Delete note</button>
+<button mat-menu-item (click)="DeleteNote(card)" style="outline: none">Delete note</button>
 <button mat-menu-item [matMenuTriggerFor]="Labelsmenu" style="outline: none">Change lables</button>
 <button mat-menu-item style="outline: none">Add drawing</button>
 <button mat-menu-item style="outline: none">Make a copy</button>
@@ -42,31 +42,47 @@
 </mat-menu>
 
 <mat-menu #Labelsmenu="matMenu">
-<div *ngFor="let label of notesLabel" (click)="LabelList(label)">
-<mat-checkbox >{{label.labels}}</mat-checkbox>
+<div *ngFor="let label of notesLabel" >
+
+<div (click)="LabelList(label)">
+        <mat-checkbox >{{label.label}}</mat-checkbox>
+
+</div>
+
 </div>
 </mat-menu>
 
 <mat-menu #colorMenu="matMenu" class="colorCard">
 <div class="colorDiv">
-<button mat-menu-item (click)="setcolor('rgb(250, 250, 250)',card)" class="colorPalette" style="background-color:rgb(252, 252, 252);outline: none">
+<button mat-menu-item (click)="setcolor('rgb(250, 250, 250)',card)" class="colorPalette" style="background-color:rgb(250, 250, 250);outline: none">
 <mat-icon></mat-icon>
 </button>
-<button mat-menu-item (click)="setcolor('rgb(240, 255, 240)',card)" class="colorPalette" style="background-color:rgb(252, 252, 252);outline: none">
+<button mat-menu-item (click)="setcolor('rgb(240, 255, 240)',card)" class="colorPalette" style="background-color:rgb(240, 255, 240);outline: none">
 <mat-icon></mat-icon>
 </button>
-<button mat-menu-item (click)="setcolor('rgb(240, 251, 255)',card)" class="colorPalette" style="background-color:rgb(252, 252, 252);outline: none">
+<button mat-menu-item (click)="setcolor('rgb(240, 251, 255)',card)" class="colorPalette" style="background-color:rgb(240, 251, 255);outline: none">
 <mat-icon></mat-icon>
 </button>
 </div>
 <div class="colorDiv">
-<button mat-menu-item (click)="setcolor('rgb(255, 240, 247)',card)" class="colorPalette" style="background-color:rgb(252, 252, 252);outline: none">
+<button mat-menu-item (click)="setcolor('rgb(255, 240, 247)',card)" class="colorPalette" style="background-color:rgb(255, 240, 247);outline: none">
 <mat-icon></mat-icon>
 </button>
-<button mat-menu-item (click)="setcolor('rgb(164, 145, 224)',card)" class="colorPalette" style="background-color:rgb(252, 252, 252);outline: none">
+<button mat-menu-item (click)="setcolor('rgb(164, 145, 224)',card)" class="colorPalette" style="background-color:rgb(164, 145, 224);outline: none">
 <mat-icon></mat-icon>
  </button>
-<button mat-menu-item (click)="setcolor('rgb(201, 214, 85)',card)" class="colorPalette" style="background-color:rgb(252, 252, 252);outline: none">
+<button mat-menu-item (click)="setcolor('rgb(201, 214, 85)',card)" class="colorPalette" style="background-color:rgb(201, 214, 85);outline: none">
+<mat-icon></mat-icon>
+</button>
+</div>
+<div class="colorDiv">
+<button mat-menu-item (click)="setcolor('rgb(129, 130, 114)',card)" class="colorPalette" style="background-color:rgb(129, 130, 114);outline: none">
+<mat-icon></mat-icon>
+</button>
+<button mat-menu-item (click)="setcolor('rgb(60, 193, 56)',card)" class="colorPalette" style="background-color:rgb(60, 193, 56);outline: none">
+<mat-icon></mat-icon>
+</button>
+<button mat-menu-item (click)="setcolor('rgb(56, 140, 193)',card)" class="colorPalette" style="background-color:rgb(56, 140, 193);outline: none">
 <mat-icon></mat-icon>
 </button>
 </div>

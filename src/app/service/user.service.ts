@@ -60,7 +60,8 @@ BaseURI=environment.BaseURI;
     return this.http.post(this.BaseURI+'/ApplicationUser/resetpassword',formData);
   }
 
-  profile(UserId){
-return this.http.get("https://localhost:44300/api/applicationuser/url/"+UserId);
+ profile(UserId)
+ {
+return this.http.get(this.BaseURI+"applicationuser/url/"+UserId);
+ }
 }
-} 

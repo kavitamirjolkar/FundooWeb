@@ -1,0 +1,23 @@
+.colorCard {
+    left: 331px;
+    margin-top: -692px;
+    width: 144px;
+    padding: 3px;
+  }
+
+  .colorDiv {
+    margin-bottom: 5px;
+    display: flex;
+  }
+
+  .colorPalette {
+    border-radius: 100%;
+    outline: none;
+    border: none;
+    width: 0px;
+    height: 30px;
+  }
+
+  .icon{
+    width:240px;
+  }

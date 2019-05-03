@@ -12,15 +12,14 @@ export class DialogComponent implements OnInit {
   constructor(     public dialogRef: MatDialogRef<NotesondashboardComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { 
       console.log(data);
-    this.note=data;
+    this.note=data.note;
     console.log(this.note);
-    
-
     }
 
   ngOnInit() {
   }
-  onNoClick(): void {
-    this.dialogRef.close();
+  onNoClick()
+   {
+    this.dialogRef.close(this.note);
   }
 }

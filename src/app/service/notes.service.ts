@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Notes } from '../models/notes.model';
 import{environment} from "../../environments/environment";
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,26 +13,80 @@ export class NotesService {
   addNotes(url,notes)
   {
     console.log(notes);
-   return  this.http.post(this.BaseURI+'/notes/'+url,notes);
+   return  this.http.post(this.BaseURI+'notes/'+url,notes);
   }
   getNotes()
   {
-    return this.http.get<Notes[]>(this.BaseURI+'/notes/allnotes');
+    return this.http.get<Notes[]>(this.BaseURI+'notes/allnotes');
   }
   getNotesById(UserId)
   {
-    return this.http.get<Notes[]>(this.BaseURI+'/notes/notesbyId',{ params:{
+    return this.http.get<Notes[]>(this.BaseURI+'notes/notesbyId',{ params:{
       userId:UserId
       } });
   }
-
-  deleteNote(noteId:any): Observable<number>{
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };  
-    return this.http.delete<number>(this.BaseURI+'/notes/'+noteId,httpOptions);
+  deleteNote(result){
+    return this.http.delete(this.BaseURI+'notes/note/'+result.id,result);
   }
-  reminder(){
-
+  updateNotes(result)
+  {
+    return this.http.put(this.BaseURI+'notes/notes/'+result.id,result);
   }
 
- 
+  reminders(UserId)
+  {
+    return this.http.get(this.BaseURI+'notes/reminder/'+UserId);
+  }
+  imageOnNote(path,id)
+  {
+return this.http.post(this.BaseURI+'notes/image/'+id,path
+ ,{responseType:'text'});
+  }
+
+  archive(userId)
+  {
+    return this.http.get(this.BaseURI+'notes/archive/'+ userId)
+  }
+
+  getlabels(userId){
+    return this.http.get(this.BaseURI+'notes/label/'+userId)
+    
+    }
+    AddLabels(result)
+  {
+    return this.http.post(this.BaseURI+'notes/label', result)
+  }
+  deletelabel(lableid)
+  {
+    return this.http.delete(this.BaseURI+ 'notes/label/' + lableid)
+    
+  }
+
+  updateLabel(id,label)
+  {
+    console.log(label,"ts")
+    return this.http.put(this.BaseURI+'notes/label/' + id,
+    {
+      params:{
+        label:label
+      }
+    }
+    )
+  }
+
+    AddNotesLabels(notesLabel){
+      return this.http.post(this.BaseURI+'notes/noteslabel',notesLabel)
+
+    }
+    getNotesLabels(userid)
+  {
+    return this.http.get(this.BaseURI +'notes/noteslabel'+userid)
+    
+  }
+
+  deleteNotelabel(lableid)
+  {
+    return this.http.delete(this.BaseURI+ 'notes/noteslabel'+lableid)
+    
+  }
 }

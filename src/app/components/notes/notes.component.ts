@@ -15,33 +15,44 @@ export class NotesComponent implements OnInit {
   addNotes: FormGroup;
   token_id:any;
   
-  @Output() cardUpdate = new EventEmitter();
+  
+  noteColor: any;
   constructor(private router: Router, public service: NotesService) { }
   
   title=new FormControl('',[Validators.required]);
   take_a_note = new FormControl('',[Validators.required]);
-   
+  @Output() AferCloseEvent = new EventEmitter();
   ngOnInit() {
   var token=localStorage.getItem('token');
 var jwt_token=jwt_decode(token);
 console.log(jwt_token.UserID);
 localStorage.setItem("UserID",jwt_token.UserID)
- this.token_id=localStorage.getItem("UserID")
+this.token_id=localStorage.getItem("UserID")
 console.log(this.token_id);
-
   }
 
+
+  setcolor($event)
+  {
+    
+    console.log($event,"color")
+    this.noteColor=$event
+  }
   AddNotes() {
     var notes:Notes={
              UserId :this.token_id,
             Title:this.title.value,
-            Description:this.take_a_note.value
+            Description:this.take_a_note.value,
+            Color:this.noteColor
                  
           }
           if(this.title.value !="" && this.take_a_note.value!=""){
    this.service.addNotes('note',notes)
      .subscribe(data => {
-       this.cardUpdate.emit();     
+      this.title.reset();
+      this.take_a_note.reset();
+      this.AferCloseEvent.emit({});
+          
      });
     }
   }

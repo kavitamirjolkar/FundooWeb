@@ -1,0 +1,42 @@
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { NotesService } from 'src/app/service/notes.service';
+import { FormControl } from '@angular/forms';
+
+@Component({
+  selector: 'app-label',
+  templateUrl: './label.component.html',
+  styleUrls: ['./label.component.css']
+})
+export class LabelComponent implements OnInit {
+  notesLabel:any;
+  userId: any;
+
+  constructor(public dialogRef: MatDialogRef<LabelComponent>,private notesService: NotesService,@Inject(MAT_DIALOG_DATA) public data: any) { }
+  labels = new FormControl('');
+  ngOnInit() {
+    this.notesLabel=this.data
+  }
+  close() {
+    this.userId = localStorage.getItem('UserID')
+    var data ={
+      "Label":this.labels.value,
+      "UserId":this.userId
+    }
+    console.log(data);
+    this.dialogRef.close(data);
+  }
+  update(label)
+  {
+    console.log(label.label,"jgkldfgkdf");
+    this.notesService.updateLabel(label.id,label.label).subscribe(result =>
+      console.log(result)
+      )
+  }
+  delete(label)
+  {
+    this.notesService.deletelabel(label.id).subscribe(result =>
+      console.log(result) )
+  }
+
+}

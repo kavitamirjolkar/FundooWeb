@@ -32,7 +32,10 @@ import { IocnsOnNoteComponent } from './components/iocns-on-note/iocns-on-note.c
 import { DialogComponent } from './components/dialog/dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ReminderComponent } from './components/reminder/reminder.component';
-
+import { ArchiveComponent } from './components/archive/archive.component';
+import { LabelComponent } from './components/label/label.component';
+import { TrashComponent } from './components/trash/trash.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -49,6 +52,9 @@ import { ReminderComponent } from './components/reminder/reminder.component';
     IocnsOnNoteComponent,
     DialogComponent,
     ReminderComponent,
+    ArchiveComponent,
+    LabelComponent,
+    TrashComponent,
     
     
    
@@ -70,6 +76,7 @@ import { ReminderComponent } from './components/reminder/reminder.component';
     FlexLayoutModule,
     MatExpansionModule,
     MatDialogModule,
+    MatChipsModule,
     ToastrModule.forRoot({
       progressBar: true
     }),

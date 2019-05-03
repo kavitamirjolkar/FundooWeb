@@ -11,6 +11,11 @@ import { NotesComponent } from './components/notes/notes.component';
 import { NotesDisplayComponent } from './components/notes-display/notes-display.component';
 import { NotesondashboardComponent } from './components/notesondashboard/notesondashboard.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { ArchiveComponent } from './components/archive/archive.component';
+import { LabelComponent } from './components/label/label.component';
+import { ReminderComponent } from './components/reminder/reminder.component';
+import { TrashComponent } from './components/trash/trash.component';
+import { IocnsOnNoteComponent } from './components/iocns-on-note/iocns-on-note.component';
 
 
 const routes: Routes = [
@@ -19,13 +24,10 @@ const routes: Routes = [
     path: 'user', component: UserComponent,
     children: [
       { path: 'registration', component: RegistrationComponent },
-      { path: 'login', component: LoginComponent },
-      
-  { path: 'forgotpassword', component: ForgetPasswordComponent },
-  { path: 'resetpassword', component: ResetPasswordComponent },
-  
-    ]
-    
+      { path: 'login', component: LoginComponent },   
+      { path: 'forgotpassword', component: ForgetPasswordComponent },
+      { path: 'resetpassword', component: ResetPasswordComponent },
+   ] 
   },
   {path:'home',component:HomeComponent,canActivate:[AuthGuard]
 ,
@@ -33,8 +35,12 @@ children:[
 
   {path:'',redirectTo:'notes',pathMatch:'full'},
   { path: 'notes', component:NotesDisplayComponent},
-  { path: 'notesbyId', component:NotesondashboardComponent},
-  { path: 'delete', component:NotesondashboardComponent}
+  { path: 'notesbyId', component:NotesDisplayComponent},
+  { path: 'trash', component:TrashComponent},
+  {path:'archive',component:ArchiveComponent},
+  {path:'labels',component:LabelComponent},
+  {path:'reminder',component:ReminderComponent},
+  {path:'image',component:IocnsOnNoteComponent}
 
 ]
 },

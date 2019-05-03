@@ -4,59 +4,83 @@
   <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
 </nav> -->
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
-<mat-toolbar style="background-color: #e3f2fd;">
+  <mat-toolbar style="background-color: #e3f2fd;">
     <mat-toolbar-row>
-        <button mat-icon-button (click)="snav.toggle()" style="outline:none"><mat-icon >menu</mat-icon></button>
-        <img style="width:40px" src="../../assets/image/notes.png" />
+      <button mat-icon-button (click)="snav.toggle()" style="outline:none">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div>
+      <img style="width:40px" src="../../assets/image/notes.png" />
+      </div>
+      <div>         
+  <h1 class="example-app-name">{{headName}}</h1>            
+      </div>
+      <!-- <span style="padding-left: 20px"><b>Fundoo</b>Notes</span> -->
+      <input class="search" type="search" style="padding-left: 20px;outline: none" placeholder="Search..."
+        aria-label="Search">
+      <span class="example-spacer"></span>
+      <button mat-icon-button style="outline: none" (click)="refresh()">
+          <mat-icon>refresh</mat-icon>
+      </button>
+      <button mat-icon-button style="outline: none">
+        <mat-icon>
+          <img style="margin-bottom: 10px" src="../../assets/image/Grid.svg" *ngIf="islist" (click)="changeview()" />
+          <img style="margin-bottom: 10px" src="../../assets/image/list.svg" *ngIf="!islist" (click)="changeview()" />
+        </mat-icon>
+      </button>
+      <button mat-mini-fab style="background-color: #e3f2fd" [matMenuTriggerFor]="menu" style="outline:none">
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="onLogout()" style="outline:none">Logout</button>
+        </mat-menu>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56" style="border: 0px;">
+      <mat-nav-list>       
+        <div >
+            <a mat-button (click)="headName='FundooNotes'" routerLink= "."  >
+            <i class="material-icons" style="padding-right: 50px">lightbulb_outline</i>Notes </a>
+            </div>
+            <div>
+                <a mat-button (click)="headName='Reminders'" routerLink="/home/reminder" class="h1.example-app-name">
+                <i class="material-icons" style="padding-right: 50px">notifications</i>Reminder </a>
+                </div>
+        <mat-divider style="padding-bottom:20px"></mat-divider>
+        <label style="padding-left:20px">LABELS</label><br>
 
-        <span style="padding-left: 20px"><b>Fundoo</b>Notes</span>
-        
-        <input class="search" type="search" style="padding-left: 20px;outline: none" placeholder="Search..." aria-label="Search">
-        
-        <span class="example-spacer"></span>
-
-
-        <button mat-icon-button style="outline: none">
-         
-          <mat-icon >
-             
-          <img style="margin-bottom: 10px" src="../../assets/image/Grid.svg"  *ngIf="islist" (click)="changeview()"/>
-          <img style="margin-bottom: 10px" src="../../assets/image/list.svg"  *ngIf="!islist" (click)="changeview()"/>
-      </mat-icon>
+       <div *ngFor="let label of notesLabel">
+        <button mat-button class="sidebutton"  (click)="LabelRedirect(label)" >
+          <div  fxLayout="row" >
+          <div class="imageopac">
+            <img src="../../../assets/image/outline-label-24px.svg" />
+          </div>
+          <div class="button-r" style="margin-left:32px">{{label.labels}}</div>
+        </div>
         </button>
-      
-        <button mat-mini-fab style="background-color: #e3f2fd" [matMenuTriggerFor]="menu" style="outline:none">
-           
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="onLogout()" style="outline:none">Logout</button>
-                <!-- <button mat-menu-item>Item 2</button> -->
-              </mat-menu>
-          </button>
-      </mat-toolbar-row>
-</mat-toolbar>
-<mat-sidenav-container class="example-sidenav-container"
-                         [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56"  style="border: 0px;">
-      <mat-nav-list>
-        <a mat-list-item routerLink="nav.route" *ngFor="let nav of list"> 
-          <mat-icon style="padding-right: 50px" (click)="onClick()">{{nav.icon}}</mat-icon>{{nav.name}} 
-        </a>
-        <mat-divider style="padding-bottom:20px" ></mat-divider> 
-        <!-- <label for="let nav of lables" style="padding-left: 50px">Lables</label> -->
-        <a mat-list-item routerLink="nav.route" *ngFor="let nav of lables"> 
-          <mat-icon style="padding-right: 50px">{{nav.icon}}</mat-icon>{{nav.name}}   
-        </a>
-        <mat-divider style="padding-bottom:20px"
-        ></mat-divider> 
-        <a mat-list-item routerLink="nav.route" *ngFor="let nav of operation"> 
-            <mat-icon style="padding-right: 50px">{{nav.icon}}</mat-icon>{{nav.name}}   
-          </a>
+      </div>
+      <div>
+          <a mat-button (click)="openDialog()">
+          <i class="material-icons" style="padding-right: 50px;"> edit </i>Edit Label </a>
+          </div>
+        <mat-divider style="padding-bottom:20px"></mat-divider>
+       
+        <div>
+            <a mat-button (click)="headName='Archive'" routerLink="/home/archive">
+                    <i class="material-icons" style="padding-right: 50px">archive</i>Archive
+            </a>
+    </div>
+    <div>
+            <a mat-button (click)="headName='Trash'" routerLink="/home/trash">
+                    <i class="material-icons" style="padding-right: 50px"> delete </i> Trash
+            </a>
+    </div>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-        <router-outlet> 
-        </router-outlet>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
-  </div>
+      <router-outlet>
+      </router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

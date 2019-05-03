@@ -1,33 +1,116 @@
-<!-- 
-<div *ngFor="let note of notes">
-    <div>
-      <mat-card class="note">
-          <mat-card-title>
-        <h6>{{note.title}}</h6>
-      </mat-card-title>
-      
-        <mat-card-content>
-            <h6>{{note.description}}</h6>
-        </mat-card-content>
-        </mat-card>
-  </div>
-</div> -->
+<!-- pin -->
 <div [ngClass]="main"  fxLayoutGap='2%'  >
-<div class="loop" *ngFor="let note of notes" >
-    <mat-card class="note" > 
-<div (click)="openDialog(note)" class="element.style">
+<div class="loop" *ngFor="let note of noteCards" >
+    <mat-card *ngIf = "note.isPin == true " fxLayoutGap="20px" class="note" [style.background-color]=note.color> 
+<div  class="element.style">
+    <mat-icon class="pin" (click)='unpinnote(note)'>
+        <img src="../../../assets/image/pinAfterClick(1).svg"/>
+      </mat-icon>    
   <div> 
       <img src="{{note.image}}" class="notesImage" />
   </div>
   <div>
-    <mat-card-title class="titleinput">{{note.title}}</mat-card-title>
+    <mat-card-title (click)="openDialog(note)" class="titleinput">{{note.title}}</mat-card-title>
     </div>
     <div>
-    <mat-card-content class="noteinput ">{{note.description}}</mat-card-content>
+    <mat-card-content (click)="openDialog(note)" class="noteinput ">{{note.description}}</mat-card-content>
     </div>
+    <div *ngIf = "note.reminder != null"> 
+          <mat-chip-list>
+              <mat-chip [selectable]="selectable" [removable]="removable"  >
+                {{note.reminder | date:'medium'}} 
+                 <mat-icon matChipRemove (click)="removeReminder(note)">cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+      </div>
+      <div *ngFor="let notelables of notesLabels">
+          <div *ngIf= "notelables.noteId == note.id">
+            <div *ngFor= "let labels of allLabels">
+              <div *ngIf= "labels.id == notelables.lableId">
+                  <mat-chip-list>
+                      <mat-chip [selectable]="selectable" [removable]="removable"  >
+                        {{labels.label}} 
+                         <mat-icon matChipRemove (click)="remove(notelables.id)">cancel</mat-icon>
+                      </mat-chip>
+                    </mat-chip-list>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="cond=='trash'">
+            <button mat-icon-button  [matMenuTriggerFor]="trashmenu" class="buttonOutline" >
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #trashmenu="matMenu">
+                  <button mat-menu-item (click)="DeleteForever(note)" class="buttonOutline">Delete forever</button>
+                  <button mat-menu-item (click)="Restore(note)" class="buttonOutline">Restore</button>
+                </mat-menu>
+          </div>
+          <div *ngIf='cond!="trash"'>
+              <app-iocns-on-note [card]="note" (update)='updateCome($event)' [type]='type'></app-iocns-on-note>
     </div>
-    <app-iocns-on-note [card]="note"></app-iocns-on-note>
+            </div>
+   
   </mat-card>
-  
   </div>
 </div>
+
+
+<!-- unpin -->
+<div [ngClass]="main"  fxLayoutGap='2%'  >
+    <div class="loop" *ngFor="let note of noteCards" >
+
+        <mat-card *ngIf = "note.isPin == false" fxLayoutGap="20px" class="note" [style.background-color]=note.color> 
+    <div  class="element.style">
+        <mat-icon class="pin" (click)='pinnote(note)'>
+            <img src="../../../assets/image/pinBeforeClick.svg"/>
+          </mat-icon>    
+      <div> 
+          <img src="{{note.image}}" class="notesImage" />
+      </div>
+      <div>
+        <mat-card-title (click)="openDialog(note)" class="titleinput">{{note.title}}</mat-card-title>
+        </div>
+        <div>
+        <mat-card-content (click)="openDialog(note)" class="noteinput ">{{note.description}}</mat-card-content>
+        </div>
+        <div *ngIf = "note.reminder != null"> 
+              <mat-chip-list>
+                  <mat-chip [selectable]="selectable" [removable]="removable"  >
+                    {{note.reminder | date:'medium'}} 
+                     <mat-icon matChipRemove (click)="removeReminder(note)">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+          </div>
+          <div *ngFor="let notelables of notesLabels">
+              <div *ngIf= "notelables.noteId == note.id">
+                <div *ngFor= "let labels of allLabels">
+                  <div *ngIf= "labels.id == notelables.lableId">
+                    <mat-chip-list>
+                      <mat-chip [selectable]="selectable" [removable]="removable"  >
+                        {{labels.label}} 
+                         <mat-icon matChipRemove (click)="remove(notelables.id)">cancel</mat-icon>
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="cond=='trash'">
+                <button mat-icon-button  [matMenuTriggerFor]="trashmenu">
+                    <mat-icon >more_vert</mat-icon>
+                  </button>
+                  <mat-menu #trashmenu="matMenu">
+                      <button mat-menu-item (click)="DeleteForever(note)">Delete forever</button>
+                      <button mat-menu-item (click)="Restore(note)">Restore</button>
+                    </mat-menu>
+              </div>
+              <div *ngIf='cond!="trash"'>
+          <app-iocns-on-note [card]="note" (update)='updateCome($event)' [type]='type'></app-iocns-on-note>
+       </div>
+        </div>
+       
+      </mat-card>
+      </div>
+    </div>
+    

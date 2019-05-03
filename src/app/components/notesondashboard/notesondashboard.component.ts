@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
 import { Notes } from 'src/app/models/notes.model';
 import { Router } from '@angular/router';
 import { NotesService } from 'src/app/service/notes.service';
@@ -6,6 +6,7 @@ import { DataService } from 'src/app/service/data_service/data.service';
 import * as jwt_decode from "jwt-decode";
 import { MatDialog } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
+
 
 // import { DialogComponent } from '../dialog/dialog.component';
 export interface DialogData {
@@ -24,32 +25,30 @@ export class NotesondashboardComponent implements OnInit {
   message:boolean;
   id:any;
   @Input() cardAdded;
+  @Input() noteCards;
+  @Input() type;
   title: any;
   description: any;
+  @Input() search;
+ 
+ 
+  @Output() cardUpdate = new EventEmitter();
+  @Input() cond;
+  cards: any;
   constructor(private router: Router, private notesService: NotesService,private data: DataService,public dialog: MatDialog) { }
 
   main={
     grid:false,
     list:true
   }
-
-  
-  ngOnInit() {
-  //   this.notesService.getNotes().subscribe(  
-  //     data => {
-  //       console.log(data);
-  //       this.notes = data 
-  //     }
-  // ),err=>{
-  //          console.log(err);         
-  //        };  
+ 
+  ngOnInit() { 
   console.log('notes  '+this.notes);
   this.data.currentMessage.subscribe(message => {
     console.log('message in notes',message);
 
     this.main.grid=!message;
-    this.main.list=message;
-    
+    this.main.list=message;   
   });
 
   var token=localStorage.getItem('token');
@@ -58,28 +57,132 @@ export class NotesondashboardComponent implements OnInit {
   localStorage.setItem("UserID",jwt_token.UserID)
    this.id=localStorage.getItem("UserID")
   console.log(this.id);
-  
-  this.notesService.getNotesById(this.id).subscribe(  
-    data => {
-      console.log(data);
-      this.notes=data;
-    }
-),err=>{
-         console.log(err);         
-       };  
+  // this.getAllNotes();
+//   this.notesService.getNotesById(this.id).subscribe(  
+//     data => {
+//       console.log(data);
+//       this.notes=data;
+//     }
+// ),err=>{
+//          console.log(err);         
+//        };  
   }
-  
+ 
+  getAllNotes()
+  {
+    this.notesService.getNotesById(this.id).subscribe(  
+      data => {
+        console.log(data);
+        this.notes=data;
+        this.noteCards=[];
+      this.cards=data[0];
+      console.log(this.cards);
+      this.cards.forEach(element => {
+        if(element.isArchive || element.isTrash){
+          return;
+        }
+        else
+        this.noteCards.push(element);
 
-  openDialog(note): void {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      
-  // width: 'auto',
-  // height: 'auto',
-  
-      // data: {note}
-      data: {title: note.title, description: note.description,image:note.image}
-    });
+        
+      });
+      console.log(this.cards);
+
+      }
+  ),err=>{
+           console.log(err);         
+         };
   }
-  
-  
+  openDialog(note): void {
+    console.log(note);
+    const dialogRef = this.dialog.open(DialogComponent, {
+
+      data: {note}
+    }
+    );
+    dialogRef.afterClosed().subscribe(result=>{    
+      console.log(result.id);
+      this.notesService.updateNotes(result).subscribe(reult=>
+        {
+          console.log(result);
+          
+        },err =>{
+          console.log(err);         
+        }
+        )     
+    })
+  } 
+  DeleteForever(note) {
+
+    this.notesService.deleteNote(note).subscribe(data => {
+      console.log(note);
+      this.cardUpdate.emit({})
+    }, err => {
+      console.log(err);
+    })
+  }
+  Restore(card) {
+    card.delete = false;
+    card.isTrash = card.delete;
+    this.notesService.updateNotes(card).subscribe(data => {
+      console.log(data);
+      this.cardUpdate.emit({})
+    }, err => {
+      console.log(err);
+    })
+  }
+
+  updateCome(value) {
+    this.cardUpdate.emit({});
+  }
+  removeReminder(note)
+  {
+    note.reminder=null;
+    this.notesService.updateNotes(note).subscribe(data =>{
+      console.log(data);
+    },err =>{
+      console.log(err);
+    })
+  }
+  remove(id) {
+    console.log(id, "lable");
+    this.notesService.deleteNotelabel(id).subscribe(result =>
+       { 
+      console.log(result);
+    }, err => {
+      console.log(err);
+    })
+  }
+  pinnote(note)
+  {
+    note.isPin = true;
+    note.isPin = note.isPin;
+    this.notesService.updateNotes(note).subscribe(data =>{
+      console.log(data);
+    },err =>{
+      console.log(err);
+    })
+  }
+
+  unpinnote(note)
+  {
+    note.isPin = false;
+    note.isPin = note.isPin;
+    this.notesService.updateNotes(note).subscribe(data =>{
+      console.log(data);
+    },err =>{
+      console.log(err);
+    })
+  }
+  update(value){
+    console.log(value,'event');
+    this.getAllNotes();
+    
+  }
+  closed(value){
+    console.log(value,"from take note");
+    this.getAllNotes();
+  }
+
+ 
 }
