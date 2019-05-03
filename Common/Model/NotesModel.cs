@@ -94,5 +94,15 @@ namespace Common.Model
         ///   <c>true</c> if this instance is trash; otherwise, <c>false</c>.
         /// </value>
         public bool IsTrash { get; set; }
+
+        public bool IsPin { get; set; }
+
+        /// <summary>
+        /// Gets or sets the color.
+        /// </summary>
+        /// <value>
+        /// The color.
+        /// </value>
+        public string Color { get; set; }
     }
 }

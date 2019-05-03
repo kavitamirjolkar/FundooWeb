@@ -45,6 +45,30 @@ namespace FundooRepository.DBContext
         public DbSet<NotesModel> Notes { get; set; }
 
         /// <summary>
+        /// Gets or sets the labels.
+        /// </summary>
+        /// <value>
+        /// The labels.
+        /// </value>
+        public DbSet<LabelModel> Labels { get; set; }
+
+        /// <summary>
+        /// Gets or sets the note label.
+        /// </summary>
+        /// <value>
+        /// The note label.
+        /// </value>
+        public DbSet<NoteLabelModel> NoteLabel { get; set; }
+
+        /// <summary>
+        /// Gets or sets the collaborator.
+        /// </summary>
+        /// <value>
+        /// The collaborator.
+        /// </value>
+        public DbSet<CollaboratorModel> Collaborator { get; set; }
+
+        /// <summary>
         /// Asynchronously saves all changes made in this context to the database.
         /// </summary>
         /// <param name="acceptAllChangesOnSuccess">Indicates whether <see cref="M:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.AcceptAllChanges" /> is called after the changes have

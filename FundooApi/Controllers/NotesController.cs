@@ -95,7 +95,9 @@ namespace FundooApi.Controllers
         /// <param name="id">The identifier.</param>
         /// <returns>returns response</returns>
         [HttpPut]
+        [Route("notes/{id}")]
         public async Task<IActionResult> UpdateNotes(NotesModel model, int id)
+
         {
             try
             {
@@ -124,7 +126,7 @@ namespace FundooApi.Controllers
                 return this.NotFound("The note couldn't be found.");
             }
 
-            return this.Ok(notes);
+            return this.Ok( notes);
         }
 
         /// <summary>
@@ -180,6 +182,136 @@ namespace FundooApi.Controllers
             }
 
             return this.Ok(new { result });
+        }
+
+        [HttpPost]
+        [Route("label")]
+        public IActionResult AddLabels(LabelModel label)
+        {
+             var result=this.notesBusiness.AddLabels(label);
+            if (result == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.Ok(new { result });
+        }
+
+        [HttpGet]
+        [Route("label/{userId}")]
+        public IActionResult GetLabel(Guid userId)
+        {
+            IList<LabelModel> result = this.notesBusiness.GetLabels(userId);
+            if (result == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.Ok(new { result });
+        }
+
+        [HttpPut]
+        [Route("label/{id}")]
+        public IActionResult UpdateLabel(int id, string newlabel)
+        {
+            var result = this.notesBusiness.UpdateLabels(id, newlabel);
+            if (result == null)
+            {
+                return this.NotFound();
+            }
+
+            return Ok(new { result });
+        }
+
+        [HttpDelete]
+        [Route("label/{id}")]
+        public IActionResult Deletelabel(int id)
+        {
+           var result= this.notesBusiness.DeleteLabel(id);
+            if (result == null)
+            {
+                return this.NotFound();
+            }
+
+            return Ok(new { result });
+        }
+
+        [HttpPost]
+        [Route("notelabel")]
+        public IActionResult AddNoteLabel(NoteLabelModel label)
+        {
+            var result = this.notesBusiness.AddNotesLabel(label);
+            if (result == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.Ok(new { result });
+        }
+
+        [HttpGet]
+        [Route("notelabel/{userId}")]
+        public IActionResult GetNoteLabel(Guid userId)
+        {
+            IList<NoteLabelModel> result = this.notesBusiness.GetNotesLabel(userId);
+            if (result == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.Ok(new { result });
+        }
+
+        [HttpDelete]
+        [Route("notelabel/{id}")]
+        public IActionResult DeleteNotelabel(int id)
+        {
+            var result = this.notesBusiness.DeleteNotesLabel(id);
+            if (result == null)
+            {
+                return this.NotFound();
+            }
+
+            return Ok(new { result });
+        }
+
+        [HttpPost]
+        [Route("collaborator")]
+       public IActionResult AddCollaboratorToNote(CollaboratorModel model)
+       {
+            var result = this.notesBusiness.AddCollaboratorToNote(model);
+            if (result == null)
+            {
+                return this.NotFound();
+            }
+
+            return Ok(new { result });
+       }
+
+        [HttpDelete]
+        [Route("collaborator/{id}")]
+        public IActionResult RemoveCollaboratorToNote(int id)
+        {
+            var result = this.notesBusiness.RemoveCollaboratorToNote(id);
+            if (result == null)
+            {
+                return this.NotFound();
+            }
+
+            return Ok(new { result });
+        }
+
+        [HttpGet]
+        [Route("collaborator/{receiverEmail}")]
+        public IActionResult CollaboratorNote(string receiverEmail)
+        {
+            var result = this.notesBusiness.CollaboratorNote(receiverEmail);
+            if (result == null)
+            {
+                return this.NotFound();
+            }
+
+            return Ok(new { result });
         }
     }   
 }

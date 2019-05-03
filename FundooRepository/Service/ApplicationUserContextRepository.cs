@@ -20,6 +20,7 @@ namespace FundooRepository
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Distributed;
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
 
@@ -40,6 +41,11 @@ namespace FundooRepository
         private readonly AuthenticationContext context;
 
         /// <summary>
+        /// The distributedcache/
+        /// </summary>
+        private readonly IDistributedCache distributedcache;
+
+        /// <summary>
         /// The user manager
         /// </summary>
         private UserManager<ApplicationUserDBModel> usermanager;
@@ -50,11 +56,12 @@ namespace FundooRepository
         /// <param name="userManager">The user manager.</param>
         /// <param name="appSettings">The application settings.</param>
         /// <param name="context">The context.</param>
-        public ApplicationUserContextRepository(UserManager<ApplicationUserDBModel> userManager, IOptions<ApplicationSettings> appSettings, AuthenticationContext context)
+        public ApplicationUserContextRepository(UserManager<ApplicationUserDBModel> userManager, IOptions<ApplicationSettings> appSettings, AuthenticationContext context, IDistributedCache distributedcache)
         {
             this.usermanager = userManager;
             this.appSettings = appSettings.Value;
             this.context = context;
+            this.distributedcache = distributedcache;
         }
 
         /// <summary>
@@ -152,6 +159,9 @@ namespace FundooRepository
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var securityToken = tokenHandler.CreateToken(tokenDescriptor);
                 var token = tokenHandler.WriteToken(securityToken);
+                var cacheKey = token;
+                this.distributedcache.GetString(cacheKey);
+                this.distributedcache.SetString(cacheKey, token);
                 return token;
             }
 

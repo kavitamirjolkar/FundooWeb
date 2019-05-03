@@ -73,5 +73,19 @@ namespace FundooBusiness.Interfaces
         /// <param name="userId">The user identifier.</param>
         /// <returns>returns list</returns>
         IList<NotesModel> Archive(Guid userId);
+
+        string AddLabels(LabelModel label);
+
+        List<LabelModel> GetLabels(Guid UserId);
+
+        string UpdateLabels(int id, string newlabel);
+        string DeleteLabel(int id);
+
+        string AddNotesLabel(NoteLabelModel model);
+        List<NoteLabelModel> GetNotesLabel(Guid userId);
+        string DeleteNotesLabel(int id);
+        string AddCollaboratorToNote(CollaboratorModel model);
+        string RemoveCollaboratorToNote(int id);
+        string CollaboratorNote(string receiverEmail);
     }
 }

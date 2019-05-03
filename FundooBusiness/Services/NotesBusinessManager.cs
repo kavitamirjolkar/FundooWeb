@@ -141,5 +141,60 @@ namespace FundooBusiness.Services
         {
             return this.notesRepository.Archive(userId);
         }
+
+       public string AddLabels(LabelModel label)
+       {
+            var result=this.notesRepository.AddLabels(label);
+            return result;
+       }
+
+        public List<LabelModel> GetLabels(Guid userId)
+        {
+            return this.notesRepository.GetLabels(userId);
+        }
+
+        public string UpdateLabels(int id, string newlabel)
+        {
+            return this.notesRepository.UpdateLabels(id, newlabel);
+        }
+
+        public string DeleteLabel(int id)
+        {
+           return this.notesRepository.DeleteLabel(id);
+        }
+
+        public string AddNotesLabel(NoteLabelModel model)
+        {
+            var result = this.notesRepository.AddNotesLabel(model);
+            return result;
+        }
+
+        public List<NoteLabelModel> GetNotesLabel(Guid userId)
+        {
+            return this.notesRepository.GetNotesLabel(userId);
+        }
+
+        public string DeleteNotesLabel(int id)
+        {
+           return this.notesRepository.DeleteNotesLabel(id);
+        }
+
+        public string AddCollaboratorToNote(CollaboratorModel model)
+        {
+            var result = this.notesRepository.AddCollaboratorToNote(model);
+            return result;
+        }
+
+        public string RemoveCollaboratorToNote(int id)
+        {
+            var result = this.notesRepository.RemoveCollaboratorToNote(id);
+            return result;
+        }
+
+        public string CollaboratorNote(string receiverEmail)
+        {
+            var result = this.notesRepository.CollaboratorNote(receiverEmail);
+            return result;
+        }
     }
 }

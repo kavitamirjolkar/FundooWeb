@@ -58,6 +58,8 @@ namespace FundooRepository.Service
                 Reminder = notes.Reminder,
                 IsArchive = notes.IsArchive,
                 IsTrash = notes.IsTrash,
+                IsPin=notes.IsPin,
+                Color=notes.Color,                
             };
             var result = this.Context.Notes.Add(note);
             return null;
@@ -122,7 +124,7 @@ namespace FundooRepository.Service
                 list.Add(item);
             }
 
-            return note.ToArray();
+            return note.ToArray();                       
         }
 
         /// <summary>
@@ -136,6 +138,10 @@ namespace FundooRepository.Service
             notes.Title = model.Title;
             notes.Description = model.Description;
             notes.Reminder = model.Reminder;
+            notes.Color = model.Color;
+            notes.IsArchive = model.IsArchive;
+            notes.IsTrash = model.IsTrash;
+            notes.IsPin = model.IsPin;
         }
 
         /// <summary>
@@ -204,6 +210,221 @@ namespace FundooRepository.Service
             }
 
             return list;
+        }
+
+       public string AddLabels([FromBody] LabelModel label)
+       {
+            var addLabel = new LabelModel()
+            {
+                UserId = label.UserId,
+                Label = label.Label
+            };
+            try
+            {
+                this.Context.Labels.Add(addLabel);
+               var result = this.Context.SaveChanges();
+                return result.ToString();
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+       }
+
+       public List<LabelModel> GetLabels(Guid UserId)
+       {
+            try
+            {
+                var list = new List<LabelModel>();
+                var labels = from t in this.Context.Labels where t.UserId == UserId select t;
+                foreach (var items in labels)
+                {
+                    list.Add(items);
+                }
+
+                return list;
+            }
+            catch(Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+       }
+
+       public string UpdateLabels(int id, string newlabel)
+       {
+            LabelModel labels = Context.Labels.Where(t => t.Id == id).FirstOrDefault();
+            labels.Label = newlabel;
+            try
+            {
+               var result = this.Context.SaveChanges();
+                return result.ToString();
+            }
+            catch(Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+       }
+
+       public string DeleteLabel(int id)
+       {
+            LabelModel label = Context.Labels.Where(t => t.Id == id).FirstOrDefault();           
+            try
+            {
+                this.Context.Labels.Remove(label);
+               var result = Context.SaveChanges();
+                return result.ToString();
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+        }
+
+        public string AddNotesLabel([FromBody] NoteLabelModel model)
+        {
+            try
+            {
+                var labelData = from t in Context.NoteLabel where t.UserId == model.UserId select t;
+                foreach (var datas in labelData.ToList())
+                {
+                    if (datas.NoteId == model.NoteId && datas.LableId == model.LableId)
+                    {
+                        return false.ToString();
+                    }
+                }
+
+                var data = new NoteLabelModel
+                {
+                    LableId = model.LableId,
+                    NoteId = model.NoteId,
+                    UserId = model.UserId
+                };
+                int result = 0;
+                Context.NoteLabel.Add(data);
+                result = Context.SaveChanges();
+                return result.ToString();
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+        }
+
+        public List<NoteLabelModel> GetNotesLabel(Guid userId)
+        {
+            var list = new List<NoteLabelModel>();
+            var Labeldata = from t in Context.NoteLabel where t.UserId == userId select t;
+            try
+            {
+                foreach (var data in Labeldata)
+                {
+                    list.Add(data);
+                }
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+            return list;
+        }
+
+        public string DeleteNotesLabel(int id)
+        {
+            var label = Context.NoteLabel.Where<NoteLabelModel>(t => t.Id == id).First();
+            
+            try
+            {
+                Context.NoteLabel.Remove(label);
+               var result = Context.SaveChanges();
+                return result.ToString();
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+        }
+
+        public string AddCollaboratorToNote([FromBody] CollaboratorModel model)
+        {
+            try
+            {
+                var data = from t in Context.Collaborator where t.UserId == model.UserId select t;
+                foreach (var item in data.ToList())
+                {
+                    if (item.NoteId == model.NoteId && item.ReceiverEmail == model.ReceiverEmail)
+                    {
+                        return false.ToString();
+                    }
+                }
+                var newdata = new CollaboratorModel()
+                {
+                    UserId = model.UserId,
+                    NoteId = model.NoteId,
+                    SenderEmail = model.SenderEmail,
+                    ReceiverEmail = model.ReceiverEmail,
+
+                };               
+                Context.Collaborator.Add(newdata);
+               var result = Context.SaveChanges();
+                return result.ToString();
+            }
+            catch(Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+        }
+
+        public string RemoveCollaboratorToNote(int id)
+        {
+            try
+            {
+                var data = Context.Collaborator.Where<CollaboratorModel>(t => t.Id == id).FirstOrDefault();                
+                Context.Collaborator.Remove(data);
+               var result = Context.SaveChanges();
+                return result.ToString();
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+        }
+
+       public string CollaboratorNote(string receiverEmail)
+        {
+            try
+            {
+                var collaboratorData = new List<NotesModel>();
+                var sharednotes = new List<SharedNotes>();
+                var data = from coll in this.Context.Collaborator
+                           where coll.ReceiverEmail == receiverEmail
+                           select new
+                           {
+                               coll.SenderEmail,
+                               coll.NoteId
+                           };
+                foreach (var result in data)
+                {
+                    var collnotes = from notes in this.Context.Notes
+                                    where notes.Id == result.NoteId
+                                    select new SharedNotes
+                                    {
+                                        noteId = notes.Id,
+                                        Title = notes.Title,
+                                        TakeANote = notes.Description,
+
+                                    };
+                    foreach (var collaborator in collnotes)
+                    {
+                        sharednotes.Add(collaborator);
+                    }
+                }
+
+                return sharednotes.ToString();
+            }
+            catch(Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
         }
     }
 }

@@ -68,6 +68,9 @@ namespace FundooApi
             services.AddTransient<INotesBusinessManager, NotesBusinessManager>();
             services.AddTransient<INotesRepository, NotesRepository>();
 
+            services.AddTransient<ILabelsBusiness, LabelBusiness>();
+            services.AddTransient<ILabelsRepository, LabelsRepository>();
+
             services.AddDefaultIdentity<ApplicationUserDBModel>()
                 .AddEntityFrameworkStores<AuthenticationContext>();
             services.Configure<EmailSettings>(this.Configuration.GetSection("EmailSettings"));
