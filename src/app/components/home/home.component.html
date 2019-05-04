@@ -48,15 +48,15 @@
                 <i class="material-icons" style="padding-right: 50px">notifications</i>Reminder </a>
                 </div>
         <mat-divider style="padding-bottom:20px"></mat-divider>
-        <label style="padding-left:20px">LABELS</label><br>
+        <label style="padding-left:20px">Labels</label><br>
 
        <div *ngFor="let label of notesLabel">
-        <button mat-button class="sidebutton"  (click)="LabelRedirect(label)" >
+        <button mat-button class="sidebutton"  >
           <div  fxLayout="row" >
           <div class="imageopac">
             <img src="../../../assets/image/outline-label-24px.svg" />
           </div>
-          <div class="button-r" style="margin-left:32px">{{label.labels}}</div>
+          <div class="button-r" style="margin-left:32px">{{label.label}}</div>
         </div>
         </button>
       </div>

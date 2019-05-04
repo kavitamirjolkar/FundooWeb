@@ -53,11 +53,11 @@ BaseURI=environment.BaseURI;
 
   forgetPassword(Email)
   {
-    return this.http.post(this.BaseURI +'/applicationuser/forgotpassword',Email);
+    return this.http.post(this.BaseURI +'applicationuser/forgotpassword',Email);
   }
   resetPassword(formData)
   {
-    return this.http.post(this.BaseURI+'/ApplicationUser/resetpassword',formData);
+    return this.http.post(this.BaseURI+'ApplicationUser/resetpassword',formData);
   }
 
  profile(UserId)

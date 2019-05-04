@@ -35,7 +35,25 @@ export class NotesondashboardComponent implements OnInit {
   @Output() cardUpdate = new EventEmitter();
   @Input() cond;
   cards: any;
-  constructor(private router: Router, private notesService: NotesService,private data: DataService,public dialog: MatDialog) { }
+  userId: any;
+  allLabels: any;
+  notesLabels: any;
+  constructor(private router: Router, private notesService: NotesService,private data: DataService,public dialog: MatDialog) { 
+    this.userId = localStorage.getItem("UserID")
+    this.notesService.getlabels(this.userId).subscribe(responselabels => {
+      this.allLabels = responselabels['result'];
+      console.log(this.allLabels, "all labels")
+    }, err => {
+      console.log(err);
+    })
+
+    this.notesService.getNotesLabels(this.userId).subscribe(response => {
+      this.notesLabels = response['result'];
+      console.log(this.notesLabels, "notes labels")
+    }, err => {
+      console.log(err);
+    })
+  }
 
   main={
     grid:false,

@@ -10,7 +10,7 @@ import { NotesService } from 'src/app/service/notes.service';
 export class ArchiveComponent implements OnInit {
   token: string;
   decodedToken: any;
-  archiveCards: [];
+  archiveCards: any;
   userId:any;
   archive='archive'
 

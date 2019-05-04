@@ -45,48 +45,43 @@ return this.http.post(this.BaseURI+'notes/image/'+id,path
 
   archive(userId)
   {
-    return this.http.get(this.BaseURI+'notes/archive/'+ userId)
+    return this.http.get(this.BaseURI+'notes/archive/'+ userId);
   }
 
   getlabels(userId){
-    return this.http.get(this.BaseURI+'notes/label/'+userId)
+    return this.http.get(this.BaseURI+'notes/label/'+userId);
     
     }
-    AddLabels(result)
+    AddLabels(label)
   {
-    return this.http.post(this.BaseURI+'notes/label', result)
+    return this.http.post(this.BaseURI+'notes/label', label);
   }
   deletelabel(lableid)
   {
-    return this.http.delete(this.BaseURI+ 'notes/label/' + lableid)
+    return this.http.delete(this.BaseURI+ 'notes/label/' + lableid);
     
   }
 
   updateLabel(id,label)
   {
     console.log(label,"ts")
-    return this.http.put(this.BaseURI+'notes/label/' + id,
-    {
-      params:{
-        label:label
-      }
-    }
-    )
+    return this.http.put(this.BaseURI+'notes/label/' + id,{
+      "Label":label
+    });
   }
 
     AddNotesLabels(notesLabel){
-      return this.http.post(this.BaseURI+'notes/noteslabel',notesLabel)
-
+      return this.http.post(this.BaseURI+'notes/notelabel',notesLabel);
     }
     getNotesLabels(userid)
   {
-    return this.http.get(this.BaseURI +'notes/noteslabel'+userid)
+    return this.http.get(this.BaseURI +'notes/notelabel/'+userid);
     
   }
 
   deleteNotelabel(lableid)
   {
-    return this.http.delete(this.BaseURI+ 'notes/noteslabel'+lableid)
+    return this.http.delete(this.BaseURI+ 'notes/notelabel/'+lableid);
     
   }
 }

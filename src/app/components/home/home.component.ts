@@ -21,18 +21,18 @@ export class HomeComponent implements OnInit,OnDestroy {
   
   private _mobileQueryListener: () => void;
  
-  list=[
-    {name:"Notes",icon:"lightbulb_outline"},
-    {name:"Reminders",icon:"notifications_none"}
-   ]
+  // list=[
+  //   {name:"Notes",icon:"lightbulb_outline"},
+  //   {name:"Reminders",icon:"notifications_none"}
+  //  ]
 
-   lables=[
-    {name:"Edit labels",icon:"create"}
-   ]
-   operation=[
-    {name:"Archive",icon:"archive"},
-    {name:"Trash",icon:"delete_outline"}
-   ]
+  //  lables=[
+  //   {name:"Edit labels",icon:"create"}
+  //  ]
+  //  operation=[
+  //   {name:"Archive",icon:"archive"},
+  //   {name:"Trash",icon:"delete_outline"}
+  //  ]
   islist: boolean=false;
   isClicked: boolean;
   notesLabel: any;
@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit,OnDestroy {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+    
     this.token = localStorage.getItem('token');
     this.payLoad = jwt_decode(this.token);
     this.notes.getlabels(this.payLoad.UserID).subscribe(responselabels => {
@@ -94,9 +95,9 @@ export class HomeComponent implements OnInit,OnDestroy {
   
       });
       dialogRef.afterClosed().subscribe(result => {
-        console.log(result, "dash");
-        if (result.labels != '' && result.labels != null) {
-          this.notes.AddLabels(result).subscribe((data: any) => {
+        console.log(result.result, "dash");
+        if (result.label != '' && result.label != null) {
+          this.notes.AddNotesLabels(result).subscribe((data: any) => {
             console.log(data)
           }, err => {
             console.log(err);

@@ -20,6 +20,7 @@ export class TrashComponent implements OnInit {
    this.decodedToken =  jwt_decode(this.token)
    this.getAllTrashcards()
   }
+  
   getAllTrashcards(){
     console.log("archive");
     this.notes.getNotesById(this.decodedToken.UserID).subscribe(data =>{

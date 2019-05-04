@@ -1,18 +1,22 @@
-<div class="dialog">
+<div class="labeldialog">
   <h6 mat-dialog-title>Edit labels</h6>
   <div>
-    <input matInput placeholder="create new lable" [formControl]="labels">
+    <input matInput placeholder="create new lable" [formControl]="label">
   </div>
   <mat-divider></mat-divider>
   <div *ngFor="let label of notesLabel">
     <div fxLayout="row">
-        <i class="material-icons" (click)="delete(label)">delete </i>
-    <input mat-input [(ngModel)]=label.labels>
-    <mat-icon (click)="update(label)">done</mat-icon>
+      <button mat-button (click)="delete(label)">
+        <i class="material-icons" >delete </i>
+        </button>
+    <input mat-input [(ngModel)]=label.label>
+    <button mat-button (click)="update(label)">
+    <mat-icon >done</mat-icon>
+    </button>
       
   </div>
   </div>
   <div mat-dialog-actions>
-    <button class = "button" mat-button (click)='close()' cdkFocusInitial>Done</button>
+    <button class = "labelbutton" mat-button (click)='close()' cdkFocusInitial>Done</button>
   </div>
   </div>

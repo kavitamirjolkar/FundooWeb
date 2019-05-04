@@ -82,19 +82,19 @@ export class IocnsOnNoteComponent implements OnInit {
   {
     console.log(label.id);
     console.log(this.card.id);
-    // this.userId = localStorage.getItem('UserID')
-    // var notesLabel = {
-    //   "LableId":label.id,
-    //   "NoteId":this.card.id,
-    //   "UserId":this.userId
-    // }
-    // console.log(notesLabel);
-    // this.notesService.AddNotesLabels(notesLabel).subscribe(data => {
-    //   console.log(data);
-    // },err =>{
-    //   console.log(err);
-    // }
-    // )
+    this.userId = localStorage.getItem('UserID')
+    var notesLabel = {
+      "LableId":label.id,
+      "NoteId":this.card.id,
+      "UserId":this.userId
+    }
+    console.log(notesLabel);
+    this.notesService.AddNotesLabels(notesLabel).subscribe(data => {
+      console.log(data);
+    },err =>{
+      console.log(err);
+    }
+    )
   }
 
 

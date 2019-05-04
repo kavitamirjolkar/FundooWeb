@@ -13,17 +13,21 @@ export class LabelComponent implements OnInit {
   userId: any;
 
   constructor(public dialogRef: MatDialogRef<LabelComponent>,private notesService: NotesService,@Inject(MAT_DIALOG_DATA) public data: any) { }
-  labels = new FormControl('');
+  label = new FormControl('');
   ngOnInit() {
+    this.userId = localStorage.getItem('UserID')
     this.notesLabel=this.data
   }
   close() {
-    this.userId = localStorage.getItem('UserID')
+    
     var data ={
-      "Label":this.labels.value,
+      "Label":this.label.value,
       "UserId":this.userId
     }
     console.log(data);
+    this.notesService.AddLabels(data).subscribe(result=>
+      console.log(data)          
+      )
     this.dialogRef.close(data);
   }
   update(label)

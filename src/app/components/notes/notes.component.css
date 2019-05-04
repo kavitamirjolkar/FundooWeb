@@ -2,3 +2,9 @@
     left:12cm;
    top:35px
 }
+
+.pinIcon{
+    border: none;
+    resize: none;
+     outline: none
+}

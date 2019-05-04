@@ -37,6 +37,7 @@ import { LabelComponent } from './components/label/label.component';
 import { TrashComponent } from './components/trash/trash.component';
 import { MatChipsModule } from '@angular/material/chips';
 
+
 @NgModule({
   declarations: [
     AppComponent,
