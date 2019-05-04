@@ -250,10 +250,10 @@ namespace FundooRepository.Service
             }
        }
 
-       public string UpdateLabels(int id, string newlabel)
+       public string UpdateLabels([FromBody] LabelModel label, int id)
        {
             LabelModel labels = Context.Labels.Where(t => t.Id == id).FirstOrDefault();
-            labels.Label = newlabel;
+            labels.Label = label.Label;
             try
             {
                var result = this.Context.SaveChanges();
@@ -330,7 +330,7 @@ namespace FundooRepository.Service
 
         public string DeleteNotesLabel(int id)
         {
-            var label = Context.NoteLabel.Where<NoteLabelModel>(t => t.Id == id).First();
+            var label = Context.NoteLabel.Where<NoteLabelModel>(t => t.Id == id).FirstOrDefault();
             
             try
             {

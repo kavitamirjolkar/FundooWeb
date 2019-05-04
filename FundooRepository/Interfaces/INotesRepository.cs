@@ -90,7 +90,7 @@ namespace FundooRepository.Interfaces
         string AddLabels([FromBody] LabelModel label);
 
         List<LabelModel> GetLabels(Guid UserId);
-        string UpdateLabels(int id, string newlabel);
+        string UpdateLabels([FromBody] LabelModel label, int id);
         string DeleteLabel(int id);
 
         string AddNotesLabel([FromBody]NoteLabelModel model);

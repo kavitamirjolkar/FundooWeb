@@ -78,7 +78,7 @@ namespace FundooBusiness.Interfaces
 
         List<LabelModel> GetLabels(Guid UserId);
 
-        string UpdateLabels(int id, string newlabel);
+        string UpdateLabels(LabelModel label, int id);
         string DeleteLabel(int id);
 
         string AddNotesLabel(NoteLabelModel model);

@@ -212,9 +212,9 @@ namespace FundooApi.Controllers
 
         [HttpPut]
         [Route("label/{id}")]
-        public IActionResult UpdateLabel(int id, string newlabel)
+        public IActionResult UpdateLabel(LabelModel label, int id)
         {
-            var result = this.notesBusiness.UpdateLabels(id, newlabel);
+            var result = this.notesBusiness.UpdateLabels(label,id);
             if (result == null)
             {
                 return this.NotFound();
@@ -239,6 +239,7 @@ namespace FundooApi.Controllers
         [HttpPost]
         [Route("notelabel")]
         public IActionResult AddNoteLabel(NoteLabelModel label)
+
         {
             var result = this.notesBusiness.AddNotesLabel(label);
             if (result == null)

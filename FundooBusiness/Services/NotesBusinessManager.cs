@@ -153,9 +153,9 @@ namespace FundooBusiness.Services
             return this.notesRepository.GetLabels(userId);
         }
 
-        public string UpdateLabels(int id, string newlabel)
+        public string UpdateLabels(LabelModel label, int id)
         {
-            return this.notesRepository.UpdateLabels(id, newlabel);
+            return this.notesRepository.UpdateLabels(label,id);
         }
 
         public string DeleteLabel(int id)
