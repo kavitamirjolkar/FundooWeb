@@ -1,34 +1,11 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="FundooNotes.cs" company="Bridgelabz">
-//   Copyright © 2018 Company
-// </copyright>
-// <creator Name="Kavita Mirjolkar"/>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+
 namespace FundooRepository.Migrations
 {
-    using System;
-    using Microsoft.EntityFrameworkCore.Metadata;
-    using Microsoft.EntityFrameworkCore.Migrations;
-
-    /// <summary>
-    /// This is migration file
-    /// </summary>
-    /// <seealso cref="Microsoft.EntityFrameworkCore.Migrations.Migration" />
-    public partial class FundooNotes : Migration
+    public partial class dat : Migration
     {
-        /// <summary>
-        /// <para>
-        /// Builds the operations that will migrate the database 'up'.
-        /// </para>
-        /// <para>
-        /// That is, builds the operations that will take the database from the state left in by the
-        /// previous migration so that it is up-to-date with regard to this migration.
-        /// </para>
-        /// <para>
-        /// This method must be overridden in each class the inherits from <see cref="T:Microsoft.EntityFrameworkCore.Migrations.Migration" />.
-        /// </para>
-        /// </summary>
-        /// <param name="migrationBuilder">The <see cref="T:Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder" /> that will build the operations.</param>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -69,11 +46,57 @@ namespace FundooRepository.Migrations
                     LastName = table.Column<string>(type: "nvarchar(20)", nullable: true),
                     Token = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: true),
-                    ModifiedDate = table.Column<DateTime>(nullable: true)
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    ProfilePicture = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Collaborator",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<Guid>(nullable: false),
+                    NoteId = table.Column<int>(nullable: false),
+                    SenderEmail = table.Column<string>(nullable: true),
+                    ReceiverEmail = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Collaborator", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Labels",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<Guid>(nullable: false),
+                    Label = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Labels", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NoteLabel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    LableId = table.Column<int>(nullable: false),
+                    NoteId = table.Column<int>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NoteLabel", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,7 +109,13 @@ namespace FundooRepository.Migrations
                     Title = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: true),
-                    ModifiedDate = table.Column<DateTime>(nullable: true)
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    Image = table.Column<string>(nullable: true),
+                    Reminder = table.Column<string>(nullable: true),
+                    IsArchive = table.Column<bool>(nullable: false),
+                    IsTrash = table.Column<bool>(nullable: false),
+                    IsPin = table.Column<bool>(nullable: false),
+                    Color = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -239,21 +268,6 @@ namespace FundooRepository.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
         }
 
-        /// <summary>
-        /// <para>
-        /// Builds the operations that will migrate the database 'down'.
-        /// </para>
-        /// <para>
-        /// That is, builds the operations that will take the database from the state left in by
-        /// this migration so that it returns to the state that it was in before this migration was applied.
-        /// </para>
-        /// <para>
-        /// This method must be overridden in each class the inherits from <see cref="T:Microsoft.EntityFrameworkCore.Migrations.Migration" /> if
-        /// both 'up' and 'down' migrations are to be supported. If it is not overridden, then calling it
-        /// will throw and it will not be possible to migrate in the 'down' direction.
-        /// </para>
-        /// </summary>
-        /// <param name="migrationBuilder">The <see cref="T:Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder" /> that will build the operations.</param>
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
@@ -270,6 +284,15 @@ namespace FundooRepository.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Collaborator");
+
+            migrationBuilder.DropTable(
+                name: "Labels");
+
+            migrationBuilder.DropTable(
+                name: "NoteLabel");
 
             migrationBuilder.DropTable(
                 name: "Notes");

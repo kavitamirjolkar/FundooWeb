@@ -30,6 +30,8 @@ namespace FundooBusiness.Interfaces
         /// <returns>returns string</returns>
         Task<string> LoginAsync(LoginModel model);
 
+        Task<string> FaceBookLoginAsync(string email);
+
         /// <summary>
         /// Forgot the password asynchronous.
         /// </summary>

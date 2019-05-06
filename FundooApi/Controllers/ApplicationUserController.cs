@@ -76,6 +76,21 @@ namespace FundooApi.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("fblogin")]
+        public async Task<IActionResult> FaceBookLogin(string email)
+        {
+            var result = await this.applicationUser.FaceBookLoginAsync(email);
+            if (result == "invalid user")
+            {
+                return this.BadRequest();
+            }
+            else
+            {
+                return this.Ok(new { result });
+            }
+        }
+
         /// <summary>
         /// forget password function
         /// </summary>

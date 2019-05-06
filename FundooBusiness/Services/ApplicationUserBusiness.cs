@@ -96,6 +96,12 @@ namespace FundooBusiness.Services
             return result;
         }
 
+       public Task<string> FaceBookLoginAsync(string email)
+        {
+            var result = this.applicationUserContext.FaceBookLoginAsync(email);
+            return result;
+        }
+
         /// <summary>
         /// Profiles the picture.
         /// </summary>

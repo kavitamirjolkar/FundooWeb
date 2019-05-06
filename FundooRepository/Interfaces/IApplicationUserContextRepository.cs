@@ -67,6 +67,13 @@ namespace FundooRepository.Interfaces
         Task<string> LoginAsync(LoginModel model);
 
         /// <summary>
+        /// Faces the book login asynchronous.
+        /// </summary>
+        /// <param name="userName">Name of the user.</param>
+        /// <returns>returns response</returns>
+        Task<string> FaceBookLoginAsync(string email);
+
+        /// <summary>
         /// Profiles the picture.
         /// </summary>
         /// <param name="file">The file.</param>

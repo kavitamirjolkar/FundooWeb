@@ -8,6 +8,7 @@ namespace Common.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Text;
 
     /// <summary>
@@ -21,6 +22,7 @@ namespace Common.Model
         /// <value>
         /// The name of the user.
         /// </value>
+         
         public string UserName { get; set; }
 
         /// <summary>

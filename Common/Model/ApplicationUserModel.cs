@@ -48,6 +48,7 @@ namespace Common.Model
         /// The email.
         /// </value>
         [EmailAddress]
+        [Required(ErrorMessage = "* Mendatory Field", AllowEmptyStrings = false)]
         [Display(Name = "Email Address: ")]
         public string Email { get; set; }
 

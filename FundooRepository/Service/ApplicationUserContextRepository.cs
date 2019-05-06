@@ -159,7 +159,7 @@ namespace FundooRepository
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var securityToken = tokenHandler.CreateToken(tokenDescriptor);
                 var token = tokenHandler.WriteToken(securityToken);
-                var cacheKey = token;
+                var cacheKey = model.UserName;
                 this.distributedcache.GetString(cacheKey);
                 this.distributedcache.SetString(cacheKey, token);
                 return token;
@@ -167,6 +167,33 @@ namespace FundooRepository
 
             return "invalid user";
         }
+
+        public async Task<string> FaceBookLoginAsync(string email)
+        {
+            var user = await this.usermanager.FindByEmailAsync(email);
+            if (user != null)
+            {
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[]
+                        {
+                        new Claim("UserID", user.Id.ToString())
+                        }),
+                    Expires = DateTime.UtcNow.AddDays(1),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                var token = tokenHandler.WriteToken(securityToken);
+                var cacheKey = email;
+                this.distributedcache.GetString(cacheKey);
+                this.distributedcache.SetString(cacheKey, token);
+                return token;
+            }
+
+            return "invalid user";
+        }
+
 
         /// <summary>
         /// Profiles the picture.

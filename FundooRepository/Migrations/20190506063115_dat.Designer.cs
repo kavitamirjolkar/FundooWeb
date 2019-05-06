@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FundooRepository.Migrations
 {
     [DbContext(typeof(AuthenticationContext))]
-    [Migration("20190502044523_Label")]
-    partial class Label
+    [Migration("20190506063115_dat")]
+    partial class dat
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,25 @@ namespace FundooRepository.Migrations
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Common.Model.CollaboratorModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("NoteId");
+
+                    b.Property<string>("ReceiverEmail");
+
+                    b.Property<string>("SenderEmail");
+
+                    b.Property<Guid>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Collaborator");
+                });
 
             modelBuilder.Entity("Common.Model.LabelModel", b =>
                 {
@@ -34,6 +53,23 @@ namespace FundooRepository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Labels");
+                });
+
+            modelBuilder.Entity("Common.Model.NoteLabelModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("LableId");
+
+                    b.Property<int>("NoteId");
+
+                    b.Property<Guid>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NoteLabel");
                 });
 
             modelBuilder.Entity("Common.Model.NotesModel", b =>
@@ -51,6 +87,8 @@ namespace FundooRepository.Migrations
                     b.Property<string>("Image");
 
                     b.Property<bool>("IsArchive");
+
+                    b.Property<bool>("IsPin");
 
                     b.Property<bool>("IsTrash");
 
