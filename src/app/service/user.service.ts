@@ -46,6 +46,9 @@ BaseURI=environment.BaseURI;
   login(formData) {
     return this.http.post('https://localhost:44300/api/applicationuser/login', formData);
   }
+  fbLogin(email){
+    return this.http.post(this.BaseURI +'applicationuser/fblogin?email='+email,'')
+  }
 
   // getUserProfile() {
   //   return this.http.get(this.BaseURI +'/UserProfile');

@@ -16,8 +16,12 @@
   <h1 class="example-app-name">{{headName}}</h1>            
       </div>
       <!-- <span style="padding-left: 20px"><b>Fundoo</b>Notes</span> -->
-      <input class="search" type="search" style="padding-left: 20px;outline: none" placeholder="Search..."
-        aria-label="Search">
+      <!-- <input class="search" type="search" style="padding-left: 20px;outline: none" placeholder="Search..."
+        aria-label="Search"> -->
+        
+        <input  class="search"  style="padding-left: 20px;outline: none" fxFlex="90" [(ngModel)]="value"  (keyup)="lookfor()" (click)='goSearch()'matInput placeholder="Search"
+    [style.fontSize.px]="16" autocomplete="off">
+   
       <span class="example-spacer"></span>
       <button mat-icon-button style="outline: none" (click)="refresh()">
           <mat-icon>refresh</mat-icon>
@@ -28,7 +32,8 @@
           <img style="margin-bottom: 10px" src="../../assets/image/list.svg" *ngIf="!islist" (click)="changeview()" />
         </mat-icon>
       </button>
-      <button mat-mini-fab style="background-color: #e3f2fd" [matMenuTriggerFor]="menu" style="outline:none">
+      
+      <button mat-mini-fab  style="background-color: #e3f2fd" [matMenuTriggerFor]="menu" style="outline:none">
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="onLogout()" style="outline:none">Logout</button>
         </mat-menu>

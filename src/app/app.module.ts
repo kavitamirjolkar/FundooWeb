@@ -16,7 +16,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import 'hammerjs';
-import { MatButtonModule, MatCheckboxModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule ,MatFormFieldModule} from '@angular/material';
 import{MatIconModule}from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -36,8 +36,23 @@ import { ArchiveComponent } from './components/archive/archive.component';
 import { LabelComponent } from './components/label/label.component';
 import { TrashComponent } from './components/trash/trash.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { AuthServiceConfig, FacebookLoginProvider, SocialLoginModule } from 'angular-6-social-login';
+import { AuthGuard } from './auth/auth.guard';
+import { CollaborationComponent } from './components/collaboration/collaboration.component';
+import { SearchComponent } from './components/search/search.component';
+import { SearchPipe } from './pipe/search.pipe';
 
-
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+      [
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider("2465798696765815")
+        },
+      ]
+  );
+  return config;
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +71,9 @@ import { MatChipsModule } from '@angular/material/chips';
     ArchiveComponent,
     LabelComponent,
     TrashComponent,
+    CollaborationComponent,
+    SearchComponent,
+    SearchPipe,
     
     
    
@@ -78,15 +96,22 @@ import { MatChipsModule } from '@angular/material/chips';
     MatExpansionModule,
     MatDialogModule,
     MatChipsModule,
+    SocialLoginModule,
+    MatFormFieldModule,
     ToastrModule.forRoot({
       progressBar: true
     }),
     FormsModule
   ],
-  providers: [UserService, {
+  providers: [AuthGuard,UserService, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
+
     multi: true
+  },
+  {
+    provide: AuthServiceConfig,
+    useFactory: getAuthServiceConfigs
   }],
   bootstrap: [AppComponent]
 })

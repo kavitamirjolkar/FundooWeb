@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit,OnDestroy {
   notesLabel: any;
   token: string;
   payLoad: any;
+  value;
  
   constructor(private router: Router, private service: UserService,changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,private data: DataService,public dialog: MatDialog,private notes:NotesService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -76,6 +77,12 @@ export class HomeComponent implements OnInit,OnDestroy {
   onClick(){
     this.router.navigate(['/home/notes']);
   }
+  lookfor(){
+    this.data.changeMsg(this.value)
+      }
+      goSearch(){
+        this.router.navigate(['/home/search'])
+      }
 
   refresh(){
     location.reload();

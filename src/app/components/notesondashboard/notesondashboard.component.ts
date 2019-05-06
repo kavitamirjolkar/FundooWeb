@@ -6,7 +6,7 @@ import { DataService } from 'src/app/service/data_service/data.service';
 import * as jwt_decode from "jwt-decode";
 import { MatDialog } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
-
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 // import { DialogComponent } from '../dialog/dialog.component';
 export interface DialogData {
@@ -201,6 +201,12 @@ export class NotesondashboardComponent implements OnInit {
     console.log(value,"from take note");
     this.getAllNotes();
   }
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.noteCards, event.previousIndex, event.currentIndex);
+    console.log(event.previousIndex,"previousss");
+    console.log(event.currentIndex,"currenttt");
+    console.log(event.container);
 
+  }
  
 }

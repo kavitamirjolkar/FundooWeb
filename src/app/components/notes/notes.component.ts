@@ -23,10 +23,10 @@ export class NotesComponent implements OnInit {
   take_a_note = new FormControl('',[Validators.required]);
   @Output() AferCloseEvent = new EventEmitter();
   ngOnInit() {
-  var token=localStorage.getItem('token');
-var jwt_token=jwt_decode(token);
-console.log(jwt_token.UserID);
-localStorage.setItem("UserID",jwt_token.UserID)
+//   var token=localStorage.getItem('token');
+// var jwt_token=jwt_decode(token);
+// console.log(jwt_token.UserID);
+// localStorage.setItem("UserID",jwt_token.UserID)
 this.token_id=localStorage.getItem("UserID")
 console.log(this.token_id);
   }

@@ -2,6 +2,7 @@ import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import { NotesService } from 'src/app/service/notes.service';
 import { Notes } from 'src/app/models/notes.model';
 import { MatDialog, MatDialogConfig } from '@angular/material';
+import { CollaborationComponent } from '../collaboration/collaboration.component';
 
 @Component({
   selector: 'app-iocns-on-note',
@@ -97,7 +98,6 @@ export class IocnsOnNoteComponent implements OnInit {
     )
   }
 
-
 onFileChanged(event,card) {
   this.selectedFile = event.target.files[0];
   let uploadData=new FormData();
@@ -152,5 +152,10 @@ Tomorrow(card)
     })
   }
 
+  openDialog(): void {
+    const dialogConfig = new MatDialogConfig();
+    let dialogRef = this.dialog.open(CollaborationComponent, {
 
+    });
+  }
 }

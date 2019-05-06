@@ -42,5 +42,5 @@ export class LabelComponent implements OnInit {
     this.notesService.deletelabel(label.id).subscribe(result =>
       console.log(result) )
   }
-
+  
 }

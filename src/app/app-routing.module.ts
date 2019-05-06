@@ -16,6 +16,8 @@ import { LabelComponent } from './components/label/label.component';
 import { ReminderComponent } from './components/reminder/reminder.component';
 import { TrashComponent } from './components/trash/trash.component';
 import { IocnsOnNoteComponent } from './components/iocns-on-note/iocns-on-note.component';
+import { CollaborationComponent } from './components/collaboration/collaboration.component';
+import { SearchComponent } from './components/search/search.component';
 
 
 const routes: Routes = [
@@ -40,7 +42,9 @@ children:[
   {path:'archive',component:ArchiveComponent},
   {path:'labels',component:LabelComponent},
   {path:'reminder',component:ReminderComponent},
-  {path:'image',component:IocnsOnNoteComponent}
+  {path:'image',component:IocnsOnNoteComponent},
+  {path:'collaborator',component:CollaborationComponent},
+  {path:'search',component:SearchComponent}
 
 ]
 },

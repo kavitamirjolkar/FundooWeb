@@ -1,6 +1,6 @@
 <!-- pin -->
-<div [ngClass]="main"  fxLayoutGap='2%'  >
-<div class="loop" *ngFor="let note of noteCards" >
+<div [ngClass]="main"  fxLayoutGap='2%' cdkDropList  (cdkDropListDropped)="drop($event)" >
+<div class="loop" *ngFor="let note of noteCards|search:search " cdkDrag>
     <mat-card *ngIf = "note.isPin == true && note.isArchive == false" fxLayoutGap="20px" class="note" [style.background-color]=note.color> 
 <div  class="element.style">
     <mat-icon class="pin" (click)='unpinnote(note)'>
@@ -57,8 +57,8 @@
 
 
 <!-- unpin -->
-<div [ngClass]="main"  fxLayoutGap='2%'  >
-    <div class="loop" *ngFor="let note of noteCards" >
+<div [ngClass]="main"  fxLayoutGap='2%' cdkDropList  (cdkDropListDropped)="drop($event)" >
+    <div class="loop" *ngFor="let note of noteCards |search:search " cdkDrag >
 
         <mat-card *ngIf = "note.isPin == false" fxLayoutGap="20px" class="note" [style.background-color]=note.color> 
     <div  class="element.style">
