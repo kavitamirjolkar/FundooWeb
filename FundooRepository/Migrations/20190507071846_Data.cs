@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FundooRepository.Migrations
 {
-    public partial class dat : Migration
+    public partial class Data : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -66,13 +66,14 @@ namespace FundooApi.Controllers
         public async Task<IActionResult> Login(LoginModel model)
         {
             var result = await this.applicationUser.LoginAsync(model);
+            var user = await this.applicationUser.FindByName(model.UserName);
             if (result == "invalid user")
             {
                 return this.BadRequest();
             }
             else
             {
-                return this.Ok(new { result });
+                return this.Ok(new { result,user });
             }
         }
 
@@ -80,7 +81,7 @@ namespace FundooApi.Controllers
         [Route("fblogin")]
         public async Task<IActionResult> FaceBookLogin(string email)
         {
-            var result = await this.applicationUser.FaceBookLoginAsync(email);
+            var result = await this.applicationUser.FaceBookLoginAsync(email);           
             if (result == "invalid user")
             {
                 return this.BadRequest();
@@ -140,7 +141,7 @@ namespace FundooApi.Controllers
                 return this.BadRequest("No file found");
             }
 
-            var result = this.applicationUser.ProfilePicture(file, email);
+            var result = this.applicationUser.ProfilePicture(file, email);          
             return this.Ok(new { result });
         }
 

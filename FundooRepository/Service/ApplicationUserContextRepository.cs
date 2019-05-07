@@ -17,6 +17,7 @@ namespace FundooRepository
     using Common.Model;
     using FundooRepository.DBContext;
     using FundooRepository.Interfaces;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -45,6 +46,7 @@ namespace FundooRepository
         /// </summary>
         private readonly IDistributedCache distributedcache;
 
+
         /// <summary>
         /// The user manager
         /// </summary>
@@ -62,6 +64,7 @@ namespace FundooRepository
             this.appSettings = appSettings.Value;
             this.context = context;
             this.distributedcache = distributedcache;
+
         }
 
         /// <summary>
@@ -214,7 +217,7 @@ namespace FundooRepository
                 File = new FileDescription(name, stream)
             };
             var uploadResult = cloudinary.Upload(uploadParams);
-           
+            cloudinary.Api.UrlImgUp.Transform(new Transformation().Height(99).Width(60).Crop("limit"));
             var data = this.context.ApplicationUsers.Where(t => t.Email == email).FirstOrDefault();
             data.ProfilePicture = uploadResult.Uri.ToString();
 
