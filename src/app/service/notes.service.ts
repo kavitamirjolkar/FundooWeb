@@ -84,4 +84,15 @@ return this.http.post(this.BaseURI+'notes/image/'+id,path
     return this.http.delete(this.BaseURI+ 'notes/notelabel/'+lableid);
     
   }
+
+  addcollaborator(data){
+    return this.http.post(this.BaseURI+'notes/collaborator',data);
+  }
+
+  removeCollaborator(id){
+   return this.http.delete(this.BaseURI+'notes/collaborator/'+id);
+  }
+  getCollaboratorNote(receiverEmail){
+    return this.http.get(this.BaseURI+'notes/collaborator/'+receiverEmail);
+  }
 }

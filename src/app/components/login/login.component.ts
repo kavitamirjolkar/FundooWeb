@@ -34,11 +34,15 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', result.result);
         
         var token=localStorage.getItem('token');
-        // var jwt_token=jwt_decode(token);
-        // console.log(jwt_token.UserID);
-        localStorage.setItem("UserID",result.result.UserID)
+        var jwt_token=jwt_decode(token);
+        console.log(jwt_token.UserID);
+        localStorage.setItem("UserID",jwt_token.UserID)
         
         this.userId=localStorage.getItem("UserID")
+        localStorage.setItem('Email', result.user.email);
+        localStorage.setItem('FirstName', result.user.firstName);
+        localStorage.setItem('LastName', result.user.lastName);
+        //  localStorage.setItem('Profile',result.user.profilePicture); 
         console.log(this.userId);
         this.router.navigateByUrl('/home');
          this.toastr.error(' login succsessful');
@@ -76,10 +80,10 @@ export class LoginComponent implements OnInit {
           
           // console.log(data.token);
           localStorage.setItem('token', data.result);
-          // localStorage.setItem('email', data.user.email);
-          // localStorage.setItem('firstname', data.user.firstName);
-          // localStorage.setItem('lastname', data.user.lastName);
-          // localStorage.setItem('profile',data.profile);        
+          localStorage.setItem('Email', data.user.email);
+        localStorage.setItem('FirstName', data.user.firstName);
+        localStorage.setItem('LastName', data.user.lastName);
+        //  localStorage.setItem('Profile',data.user.profilePicture);      
            this.token = localStorage.getItem('token')
            this.payLoad = jwt_decode(this.token)
           // console.log(this.payLoad.UserID);

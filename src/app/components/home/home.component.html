@@ -14,11 +14,7 @@
       </div>
       <div>         
   <h1 class="example-app-name">{{headName}}</h1>            
-      </div>
-      <!-- <span style="padding-left: 20px"><b>Fundoo</b>Notes</span> -->
-      <!-- <input class="search" type="search" style="padding-left: 20px;outline: none" placeholder="Search..."
-        aria-label="Search"> -->
-        
+      </div>      
         <input  class="search"  style="padding-left: 20px;outline: none" fxFlex="90" [(ngModel)]="value"  (keyup)="lookfor()" (click)='goSearch()'matInput placeholder="Search"
     [style.fontSize.px]="16" autocomplete="off">
    
@@ -33,11 +29,18 @@
         </mat-icon>
       </button>
       
-      <button mat-mini-fab  style="background-color: #e3f2fd" [matMenuTriggerFor]="menu" style="outline:none">
+      <!-- <button mat-mini-fab  style="background-color: #e3f2fd" [matMenuTriggerFor]="menu" style="outline:none"> -->
+          <div fxFlex fxLayout='row' fxLayoutAlign="end center" >
+            <div>
+        <button class="profile" mat-fab [matMenuTriggerFor]="menu" color='disabled' style="outline:none" [ngStyle]="{'background-image': 'url(' + photo + ')'}">
         <mat-menu #menu="matMenu">
+            <input type="file" style="display:none"  #file (change)="onFileChanged($event)"  id="selectedFile" >
+            <button class="profile" [ngStyle]="{'background-image': 'url(' + photo + ')'}" (click)="file.click()" mat-fab></button>
           <button mat-menu-item (click)="onLogout()" style="outline:none">Logout</button>
         </mat-menu>
       </button>
+      </div>
+      </div>
     </mat-toolbar-row>
   </mat-toolbar>
   <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">

@@ -152,10 +152,12 @@ Tomorrow(card)
     })
   }
 
-  openDialog(): void {
+  openDialog(note): void {
+    localStorage.setItem('noteId',note.id);
     const dialogConfig = new MatDialogConfig();
     let dialogRef = this.dialog.open(CollaborationComponent, {
-
+     
     });
+   
   }
 }

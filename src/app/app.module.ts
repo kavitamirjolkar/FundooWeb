@@ -41,6 +41,9 @@ import { AuthGuard } from './auth/auth.guard';
 import { CollaborationComponent } from './components/collaboration/collaboration.component';
 import { SearchComponent } from './components/search/search.component';
 import { SearchPipe } from './pipe/search.pipe';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -98,6 +101,9 @@ export function getAuthServiceConfigs() {
     MatChipsModule,
     SocialLoginModule,
     MatFormFieldModule,
+    DragDropModule,
+    MatDatepickerModule,
+  
     ToastrModule.forRoot({
       progressBar: true
     }),

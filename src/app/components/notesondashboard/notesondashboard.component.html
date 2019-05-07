@@ -1,5 +1,5 @@
 <!-- pin -->
-<div [ngClass]="main"  fxLayoutGap='2%' cdkDropList  (cdkDropListDropped)="drop($event)" >
+<div [ngClass]="main"  fxLayoutGap='2%'  >
 <div class="loop" *ngFor="let note of noteCards|search:search " cdkDrag>
     <mat-card *ngIf = "note.isPin == true && note.isArchive == false" fxLayoutGap="20px" class="note" [style.background-color]=note.color> 
 <div  class="element.style">
@@ -23,6 +23,15 @@
               </mat-chip>
             </mat-chip-list>
       </div>
+
+      <!-- <div>
+      <mat-chip-list>
+          <mat-chip [selectable]="selectable" [removable]="removable"  >
+            {{receiverEmail}}
+            <mat-icon matChipRemove (click)="removeCollab(note)">cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </div> -->
       <div *ngFor="let notelables of notesLabels">
           <div *ngIf= "notelables.noteId == note.id">
             <div *ngFor= "let labels of allLabels">
@@ -82,6 +91,14 @@
                   </mat-chip>
                 </mat-chip-list>
           </div>
+          <div>
+              <mat-chip-list>
+                  <mat-chip [selectable]="selectable" [removable]="removable"  >
+                    {{receiverEmail}}
+                    <mat-icon matChipRemove (click)="removeCollab(note)">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
           <div *ngFor="let notelables of notesLabels">
               <div *ngIf= "notelables.noteId == note.id">
                 <div *ngFor= "let labels of allLabels">
@@ -108,8 +125,7 @@
               <div *ngIf='cond!="trash"'>
           <app-iocns-on-note [card]="note" (update)='updateCome($event)' [type]='type'></app-iocns-on-note>
        </div>
-        </div>
-       
+        </div>       
       </mat-card>
       </div>
     </div>

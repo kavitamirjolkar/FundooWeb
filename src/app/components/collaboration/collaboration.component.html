@@ -10,10 +10,10 @@
       </button>
       <div fxLayout="column">
         <div class="usernameStyle">
-          {{firstname}} {{lastname}}<span style="font-style: italic">(Owner)</span>
+          {{FirstName}} {{LastName}}<span style="font-style: italic">(Owner)</span>
         </div>
         <div class="emailStyle">
-          {{email}}
+          {{Email}}
         </div>
       </div>
     </span>
@@ -26,12 +26,12 @@
       </button>
     </div>
     <div >
-      <input mat-input placeholder="email to share">
+      <input mat-input placeholder="email to share"  [formControl]="ReceiverEmail">
     </div>
   </div>
 
   <div mat-dialog-actions class="actionDialog">
     <button mat-raised-button class="actionButton" [mat-dialog-close]>Cancel</button>
-    <button mat-raised-button class="actionButton" [mat-dialog-close]>Save</button>
+    <button mat-raised-button class="actionButton" (click)="add()" [mat-dialog-close]>Save</button>
   </div>
 </div>

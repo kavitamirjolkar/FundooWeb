@@ -20,26 +20,15 @@ export class HomeComponent implements OnInit,OnDestroy {
   mobileQuery: MediaQueryList;
   
   private _mobileQueryListener: () => void;
- 
-  // list=[
-  //   {name:"Notes",icon:"lightbulb_outline"},
-  //   {name:"Reminders",icon:"notifications_none"}
-  //  ]
-
-  //  lables=[
-  //   {name:"Edit labels",icon:"create"}
-  //  ]
-  //  operation=[
-  //   {name:"Archive",icon:"archive"},
-  //   {name:"Trash",icon:"delete_outline"}
-  //  ]
   islist: boolean=false;
   isClicked: boolean;
   notesLabel: any;
   token: string;
   payLoad: any;
   value;
- 
+  photo;
+  selectedFile: File;
+  email: string;
   constructor(private router: Router, private service: UserService,changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,private data: DataService,public dialog: MatDialog,private notes:NotesService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -60,11 +49,13 @@ export class HomeComponent implements OnInit,OnDestroy {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
   ngOnInit() {
+    this.photo=localStorage.getItem('profile');
+    console.log(this.photo);
     
     this.data.currentMessage.subscribe(message => this.message = message);
     islist: true;
     isClicked: false;
-
+    this.email = localStorage.getItem("Email")
     
   }
   shouldRun =true;
@@ -115,5 +106,18 @@ export class HomeComponent implements OnInit,OnDestroy {
     
 }
 
-
+onFileChanged(event) {
+  this.selectedFile = event.target.files[0];
+  let uploadData=new FormData();
+  uploadData.append('file',this.selectedFile,'file');
+  console.log(uploadData);
+  
+  this.service.profilePicture(uploadData,this.email).subscribe(data=>{
+    let obj=JSON.parse(data)
+    localStorage.setItem('profile',obj.result)
+  },err=>{
+    console.log(err);
+  }
+    )
+}  
 }

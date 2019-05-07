@@ -67,4 +67,9 @@ BaseURI=environment.BaseURI;
  {
 return this.http.get(this.BaseURI+"applicationuser/url/"+UserId);
  }
+ profilePicture(path,email)
+  {
+return this.http.post(this.BaseURI+'applicationuser/profilepicture/'+email,path
+ ,{responseType:'text'});
+  }
 }

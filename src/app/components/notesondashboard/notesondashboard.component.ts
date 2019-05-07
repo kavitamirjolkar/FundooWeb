@@ -38,6 +38,7 @@ export class NotesondashboardComponent implements OnInit {
   userId: any;
   allLabels: any;
   notesLabels: any;
+  receiverEmail: string;
   constructor(private router: Router, private notesService: NotesService,private data: DataService,public dialog: MatDialog) { 
     this.userId = localStorage.getItem("UserID")
     this.notesService.getlabels(this.userId).subscribe(responselabels => {
@@ -75,6 +76,7 @@ export class NotesondashboardComponent implements OnInit {
   localStorage.setItem("UserID",jwt_token.UserID)
    this.id=localStorage.getItem("UserID")
   console.log(this.id);
+  this.receiverEmail=localStorage.getItem('receiverEmail')
   // this.getAllNotes();
 //   this.notesService.getNotesById(this.id).subscribe(  
 //     data => {
@@ -162,6 +164,17 @@ export class NotesondashboardComponent implements OnInit {
       console.log(err);
     })
   }
+
+  removeCollab(id){
+   this.notesService.removeCollaborator(id).subscribe(result=>
+    {
+      console.log(result);
+      
+    },err=>{
+      console.log(err);
+    }
+    )
+  }
   remove(id) {
     console.log(id, "lable");
     this.notesService.deleteNotelabel(id).subscribe(result =>
@@ -203,10 +216,6 @@ export class NotesondashboardComponent implements OnInit {
   }
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.noteCards, event.previousIndex, event.currentIndex);
-    console.log(event.previousIndex,"previousss");
-    console.log(event.currentIndex,"currenttt");
-    console.log(event.container);
-
   }
  
 }
