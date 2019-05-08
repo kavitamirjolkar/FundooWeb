@@ -144,7 +144,7 @@ namespace FundooBusiness.Services
 
        public string AddLabels(LabelModel label)
        {
-            var result=this.notesRepository.AddLabels(label);
+            var result = this.notesRepository.AddLabels(label);
             return result;
        }
 
@@ -155,7 +155,7 @@ namespace FundooBusiness.Services
 
         public string UpdateLabels(LabelModel label, int id)
         {
-            return this.notesRepository.UpdateLabels(label,id);
+            return this.notesRepository.UpdateLabels(label, id);
         }
 
         public string DeleteLabel(int id)

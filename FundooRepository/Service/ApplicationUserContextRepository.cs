@@ -46,7 +46,6 @@ namespace FundooRepository
         /// </summary>
         private readonly IDistributedCache distributedcache;
 
-
         /// <summary>
         /// The user manager
         /// </summary>
@@ -196,7 +195,6 @@ namespace FundooRepository
 
             return "invalid user";
         }
-
 
         /// <summary>
         /// Profiles the picture.

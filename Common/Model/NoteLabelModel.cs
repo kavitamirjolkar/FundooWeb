@@ -1,10 +1,10 @@
-﻿
-
-namespace Common.Model
+﻿namespace Common.Model
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
+   
+    /// <summary>
+    /// this is nodel label model
+    /// </summary>
     public class NoteLabelModel
     {
         /// <summary>

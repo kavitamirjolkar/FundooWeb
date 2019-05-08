@@ -23,7 +23,7 @@ namespace FundooRepository.Service
     /// </summary>
     /// <seealso cref="FundooRepository.Interfaces.INotesRepository" />
     public class NotesRepository : INotesRepository
-    {
+    {        
         /// <summary>
         /// Initializes a new instance of the <see cref="NotesRepository"/> class.
         /// </summary>
@@ -58,8 +58,9 @@ namespace FundooRepository.Service
                 Reminder = notes.Reminder,
                 IsArchive = notes.IsArchive,
                 IsTrash = notes.IsTrash,
-                IsPin=notes.IsPin,
-                Color=notes.Color,                
+                IsPin = notes.IsPin,
+                Color = notes.Color, 
+                IsCollaborate=notes.IsCollaborate
             };
             var result = this.Context.Notes.Add(note);
             return null;
@@ -123,7 +124,6 @@ namespace FundooRepository.Service
             {
                 list.Add(item);
             }
-
             return note.ToArray();                       
         }
 
@@ -142,6 +142,7 @@ namespace FundooRepository.Service
             notes.IsArchive = model.IsArchive;
             notes.IsTrash = model.IsTrash;
             notes.IsPin = model.IsPin;
+            notes.IsCollaborate = model.IsCollaborate;
         }
 
         /// <summary>
@@ -244,7 +245,7 @@ namespace FundooRepository.Service
 
                 return list;
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw new Exception(exception.Message);
             }
@@ -252,14 +253,14 @@ namespace FundooRepository.Service
 
        public string UpdateLabels([FromBody] LabelModel label, int id)
        {
-            LabelModel labels = Context.Labels.Where(t => t.Id == id).FirstOrDefault();
+            LabelModel labels = this.Context.Labels.Where(t => t.Id == id).FirstOrDefault();
             labels.Label = label.Label;
             try
             {
                var result = this.Context.SaveChanges();
                 return result.ToString();
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw new Exception(exception.Message);
             }
@@ -267,11 +268,11 @@ namespace FundooRepository.Service
 
        public string DeleteLabel(int id)
        {
-            LabelModel label = Context.Labels.Where(t => t.Id == id).FirstOrDefault();           
+            LabelModel label = this.Context.Labels.Where(t => t.Id == id).FirstOrDefault();           
             try
             {
                 this.Context.Labels.Remove(label);
-               var result = Context.SaveChanges();
+               var result = this.Context.SaveChanges();
                 return result.ToString();
             }
             catch (Exception exception)
@@ -284,7 +285,7 @@ namespace FundooRepository.Service
         {
             try
             {
-                var labelData = from t in Context.NoteLabel where t.UserId == model.UserId select t;
+                var labelData = from t in this.Context.NoteLabel where t.UserId == model.UserId select t;
                 foreach (var datas in labelData.ToList())
                 {
                     if (datas.NoteId == model.NoteId && datas.LableId == model.LableId)
@@ -300,8 +301,8 @@ namespace FundooRepository.Service
                     UserId = model.UserId
                 };
                 int result = 0;
-                Context.NoteLabel.Add(data);
-                result = Context.SaveChanges();
+                this.Context.NoteLabel.Add(data);
+                result = this.Context.SaveChanges();
                 return result.ToString();
             }
             catch (Exception exception)
@@ -313,7 +314,7 @@ namespace FundooRepository.Service
         public List<NoteLabelModel> GetNotesLabel(Guid userId)
         {
             var list = new List<NoteLabelModel>();
-            var Labeldata = from t in Context.NoteLabel where t.UserId == userId select t;
+            var Labeldata = from t in this.Context.NoteLabel where t.UserId == userId select t;
             try
             {
                 foreach (var data in Labeldata)
@@ -330,12 +331,12 @@ namespace FundooRepository.Service
 
         public string DeleteNotesLabel(int id)
         {
-            var label = Context.NoteLabel.Where<NoteLabelModel>(t => t.Id == id).FirstOrDefault();
+            var label = this.Context.NoteLabel.Where<NoteLabelModel>(t => t.Id == id).FirstOrDefault();
             
             try
             {
-                Context.NoteLabel.Remove(label);
-               var result = Context.SaveChanges();
+                this.Context.NoteLabel.Remove(label);
+               var result = this.Context.SaveChanges();
                 return result.ToString();
             }
             catch (Exception exception)
@@ -343,15 +344,15 @@ namespace FundooRepository.Service
                 throw new Exception(exception.Message);
             }
         }
-
+   
         public string AddCollaboratorToNote([FromBody] CollaboratorModel model)
         {
             try
             {
-                var data = from t in Context.Collaborator where t.UserId == model.UserId select t;
+                var data = from t in this.Context.Collaborator where t.UserId == model.UserId select t;
                 foreach (var item in data.ToList())
                 {
-                    if (item.NoteId == model.NoteId && item.ReceiverEmail == model.ReceiverEmail)
+                    if (item.NoteId.Equals(model.NoteId) && item.ReceiverEmail.Equals(model.ReceiverEmail))
                     {
                         return false.ToString();
                     }
@@ -364,11 +365,11 @@ namespace FundooRepository.Service
                     ReceiverEmail = model.ReceiverEmail,
 
                 };               
-                Context.Collaborator.Add(newdata);
-               var result = Context.SaveChanges();
+                this.Context.Collaborator.Add(newdata);
+               var result = this.Context.SaveChanges();
                 return result.ToString();
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw new Exception(exception.Message);
             }
@@ -378,9 +379,9 @@ namespace FundooRepository.Service
         {
             try
             {
-                var data = Context.Collaborator.Where<CollaboratorModel>(t => t.Id == id).FirstOrDefault();                
-                Context.Collaborator.Remove(data);
-               var result = Context.SaveChanges();
+                var data = this.Context.Collaborator.Where<CollaboratorModel>(t => t.Id == id).FirstOrDefault();                
+                this.Context.Collaborator.Remove(data);
+               var result = this.Context.SaveChanges();
                 return result.ToString();
             }
             catch (Exception exception)
@@ -411,7 +412,6 @@ namespace FundooRepository.Service
                                         noteId = notes.Id,
                                         Title = notes.Title,
                                         TakeANote = notes.Description,
-
                                     };
                     foreach (var collaborator in collnotes)
                     {
@@ -421,7 +421,7 @@ namespace FundooRepository.Service
 
                 return sharednotes.ToString();
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw new Exception(exception.Message);
             }

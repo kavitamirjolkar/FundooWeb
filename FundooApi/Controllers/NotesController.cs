@@ -126,7 +126,7 @@ namespace FundooApi.Controllers
                 return this.NotFound("The note couldn't be found.");
             }
 
-            return this.Ok( notes);
+            return this.Ok(notes);
         }
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace FundooApi.Controllers
 
             return this.Ok(new { result });
         }
-
+        
         /// <summary>
         /// Reminders the specified user identifier.
         /// </summary>
@@ -184,11 +184,16 @@ namespace FundooApi.Controllers
             return this.Ok(new { result });
         }
 
+        /// <summary>
+        /// Adds the labels.
+        /// </summary>
+        /// <param name="label">The label.</param>
+        /// <returns>returns result</returns>
         [HttpPost]
         [Route("label")]
         public IActionResult AddLabels(LabelModel label)
         {
-             var result=this.notesBusiness.AddLabels(label);
+             var result = this.notesBusiness.AddLabels(label);
             if (result == null)
             {
                 return this.NotFound();
@@ -197,6 +202,11 @@ namespace FundooApi.Controllers
             return this.Ok(new { result });
         }
 
+        /// <summary>
+        /// Gets the label.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>returns result</returns>
         [HttpGet]
         [Route("label/{userId}")]
         public IActionResult GetLabel(Guid userId)
@@ -210,32 +220,48 @@ namespace FundooApi.Controllers
             return this.Ok(new { result });
         }
 
+        /// <summary>
+        /// Updates the label.
+        /// </summary>
+        /// <param name="label">The label.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>returns result</returns>
         [HttpPut]
         [Route("label/{id}")]
         public IActionResult UpdateLabel(LabelModel label, int id)
         {
-            var result = this.notesBusiness.UpdateLabels(label,id);
+            var result = this.notesBusiness.UpdateLabels(label, id);
             if (result == null)
             {
                 return this.NotFound();
             }
 
-            return Ok(new { result });
+            return this.Ok(new { result });
         }
 
+        /// <summary>
+        /// Deletelabels the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>returns result</returns>
         [HttpDelete]
         [Route("label/{id}")]
         public IActionResult Deletelabel(int id)
         {
-           var result= this.notesBusiness.DeleteLabel(id);
+           var result = this.notesBusiness.DeleteLabel(id);
             if (result == null)
             {
                 return this.NotFound();
             }
 
-            return Ok(new { result });
+            return this.Ok(new { result });
         }
 
+        /// <summary>
+        /// Adds the note label.
+        /// </summary>
+        /// <param name="label">The label.</param>
+        /// <returns>returns result</returns>
         [HttpPost]
         [Route("notelabel")]
         public IActionResult AddNoteLabel(NoteLabelModel label)
@@ -250,6 +276,11 @@ namespace FundooApi.Controllers
             return this.Ok(new { result });
         }
 
+        /// <summary>
+        /// Gets the note label.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>returns result</returns>
         [HttpGet]
         [Route("notelabel/{userId}")]
         public IActionResult GetNoteLabel(Guid userId)
@@ -263,6 +294,11 @@ namespace FundooApi.Controllers
             return this.Ok(new { result });
         }
 
+        /// <summary>
+        /// Deletes the notelabel.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>returns result</returns>
         [HttpDelete]
         [Route("notelabel/{id}")]
         public IActionResult DeleteNotelabel(int id)
@@ -273,9 +309,14 @@ namespace FundooApi.Controllers
                 return this.NotFound();
             }
 
-            return Ok(new { result });
+            return this.Ok(new { result });
         }
 
+        /// <summary>
+        /// Adds the collaborator to note.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>returns result</returns>
         [HttpPost]
         [Route("collaborator")]
        public IActionResult AddCollaboratorToNote(CollaboratorModel model)
@@ -286,9 +327,14 @@ namespace FundooApi.Controllers
                 return this.NotFound();
             }
 
-            return Ok(new { result });
+            return this.Ok(new { result });
        }
 
+        /// <summary>
+        /// Removes the collaborator to note.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>returns result</returns>
         [HttpDelete]
         [Route("collaborator/{id}")]
         public IActionResult RemoveCollaboratorToNote(int id)
@@ -299,9 +345,14 @@ namespace FundooApi.Controllers
                 return this.NotFound();
             }
 
-            return Ok(new { result });
+            return this.Ok(new { result });
         }
 
+        /// <summary>
+        /// Collaborators the note.
+        /// </summary>
+        /// <param name="receiverEmail">The receiver email.</param>
+        /// <returns>returns result</returns>
         [HttpGet]
         [Route("collaborator/{receiverEmail}")]
         public IActionResult CollaboratorNote(string receiverEmail)
@@ -312,7 +363,7 @@ namespace FundooApi.Controllers
                 return this.NotFound();
             }
 
-            return Ok(new { result });
+            return this.Ok(new { result });
         }
     }   
 }

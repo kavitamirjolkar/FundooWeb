@@ -46,7 +46,7 @@ namespace FundooTest.ControllerTest
         /// Tasks the add valid data return ok result.
         /// </summary>
         [Fact]
-        public void Task_Add_ValidData_Return_OkResult()
+        public void AddNotes()
         {
             ////arrange
             var service = new Mock<INotesBusinessManager>();
@@ -106,7 +106,40 @@ namespace FundooTest.ControllerTest
             ////assert
             Assert.NotNull(data);
         }
-       
+
+        /// <summary>
+        /// Adds the note label.
+        /// </summary>
+        [Fact]
+        public void AddNoteLabel()
+        {
+            var service = new Mock<INotesBusinessManager>();
+            var notes = new NotesController(service.Object);
+            var addNotes = new NoteLabelModel()
+            {
+                NoteId = 1,
+                LableId = 0
+            };
+            var data = notes.AddNoteLabel(addNotes);
+            Assert.NotNull(data);
+
+        }
+
+        /// <summary>
+        /// Deletes the note label.
+        /// </summary>
+        [Fact]
+        public void DeleteNoteLabel()
+        {
+            ////arrange
+            var service = new Mock<INotesBusinessManager>();
+            var notes = new NotesController(service.Object);
+            ////act
+            var data = notes.DeleteNotelabel(2);
+            ////assert
+            Assert.NotNull(data);
+        }
+
         /// <summary>
         /// Gets the fake data.
         /// </summary>
@@ -114,7 +147,7 @@ namespace FundooTest.ControllerTest
         private IEnumerable<NotesModel> GetFakeData()
         {
             var i = 1;
-            var notes = A.ListOf<NotesModel>(2);
+            var notes = A.ListOf<NotesModel>(5);
             notes.ForEach(x => x.Id = i++);
             return notes.Select(_ => _);
         }

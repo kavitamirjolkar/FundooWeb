@@ -73,7 +73,7 @@ namespace FundooApi.Controllers
             }
             else
             {
-                return this.Ok(new { result,user });
+                return this.Ok(new { result, user });
             }
         }
 

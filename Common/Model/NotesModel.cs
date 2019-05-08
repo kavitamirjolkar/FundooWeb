@@ -7,6 +7,7 @@
 namespace Common.Model
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
 
     /// <summary>
@@ -95,6 +96,12 @@ namespace Common.Model
         /// </value>
         public bool IsTrash { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is pin.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is pin; otherwise, <c>false</c>.
+        /// </value>
         public bool IsPin { get; set; }
 
         /// <summary>
@@ -104,5 +111,7 @@ namespace Common.Model
         /// The color.
         /// </value>
         public string Color { get; set; }
+
+       public bool IsCollaborate { get; set; }
     }
 }

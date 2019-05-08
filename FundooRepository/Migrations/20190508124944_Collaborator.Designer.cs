@@ -4,14 +4,16 @@ using FundooRepository.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FundooRepository.Migrations
 {
     [DbContext(typeof(AuthenticationContext))]
-    partial class AuthenticationContextModelSnapshot : ModelSnapshot
+    [Migration("20190508124944_Collaborator")]
+    partial class Collaborator
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,6 +78,8 @@ namespace FundooRepository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CollabModelId");
+
                     b.Property<string>("Color");
 
                     b.Property<DateTime?>("CreatedDate");
@@ -85,8 +89,6 @@ namespace FundooRepository.Migrations
                     b.Property<string>("Image");
 
                     b.Property<bool>("IsArchive");
-
-                    b.Property<bool>("IsCollaborate");
 
                     b.Property<bool>("IsPin");
 
@@ -101,6 +103,8 @@ namespace FundooRepository.Migrations
                     b.Property<Guid>("UserId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CollabModelId");
 
                     b.ToTable("Notes");
                 });
@@ -296,6 +300,13 @@ namespace FundooRepository.Migrations
                     b.ToTable("ApplicationUserDBModel");
 
                     b.HasDiscriminator().HasValue("ApplicationUserDBModel");
+                });
+
+            modelBuilder.Entity("Common.Model.NotesModel", b =>
+                {
+                    b.HasOne("Common.Model.CollaboratorModel", "CollabModel")
+                        .WithMany()
+                        .HasForeignKey("CollabModelId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

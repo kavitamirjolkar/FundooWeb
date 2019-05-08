@@ -1,10 +1,13 @@
-﻿using System;
-
-
-namespace Common.Model
+﻿namespace Common.Model
 {
     public class SharedNotes
     {
+        /// <summary>
+        /// Gets or sets the note identifier.
+        /// </summary>
+        /// <value>
+        /// The note identifier.
+        /// </value>
         public int noteId { get; set; }
 
         /// <summary>

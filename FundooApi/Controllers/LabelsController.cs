@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using Common.Model;
-using FundooBusiness.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-
-namespace FundooApi.Controllers
+﻿namespace FundooApi.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using Common.Model;
+    using FundooBusiness.Interfaces;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("api/[controller]")]
     [ApiController]
     public class LabelsController : ControllerBase
@@ -52,7 +52,7 @@ namespace FundooApi.Controllers
                 return this.NotFound();
             }
 
-            return Ok(new { result });
+            return this.Ok(new { result });
         }
 
         [HttpDelete]
@@ -65,7 +65,7 @@ namespace FundooApi.Controllers
                 return this.NotFound();
             }
 
-            return Ok(new { result });
+            return this.Ok(new { result });
         }
     }
 }

@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace FundooRepository.Migrations
+﻿namespace FundooRepository.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore.Metadata;
+    using Microsoft.EntityFrameworkCore.Migrations;
     public partial class Data : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
