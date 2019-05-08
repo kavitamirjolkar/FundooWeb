@@ -13,10 +13,13 @@ export class CollaborationComponent implements OnInit {
   LastName: string;
   Email: string;
   userId: any;
-  notesid: string;
+  notesid: any;
+  receiveremail: void;
 
   constructor(public dialogRef: MatDialogRef<CollaborationComponent>, private notes: NotesService,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any) { 
+      
+    }
  
     ReceiverEmail = new FormControl('',Validators.email);    
   ngOnInit() {
@@ -24,7 +27,7 @@ export class CollaborationComponent implements OnInit {
     this.LastName = localStorage.getItem("LastName");
     this.Email = localStorage.getItem("Email");
     this.userId = localStorage.getItem('UserID');
-    this.getcollab();
+   
   }
   add(){
     var values ={     
@@ -33,9 +36,12 @@ export class CollaborationComponent implements OnInit {
       "senderEmail": this.Email,
       "receiverEmail":this.ReceiverEmail.value       
     }
+    this.receiveremail=localStorage.setItem('receiverEmail',this.ReceiverEmail.value)
     this.notes.addcollaborator(values).subscribe(result=>
-      console.log(values)          
+      console.log(values) 
+    
       )
+      this.getcollab(); 
       this.dialogRef.close(values);
   }
   getcollab(){

@@ -32,6 +32,10 @@
           </mat-chip>
         </mat-chip-list>
       </div> -->
+
+        <div>
+          <mat-icon class="material-icons" matTooltip={{receiverEmail}}>account_circle</mat-icon>
+        </div>
       <div *ngFor="let notelables of notesLabels">
           <div *ngIf= "notelables.noteId == note.id">
             <div *ngFor= "let labels of allLabels">
@@ -58,8 +62,7 @@
           <div *ngIf='cond!="trash"'>
               <app-iocns-on-note [card]="note" (update)='updateCome($event)' [type]='type'></app-iocns-on-note>
     </div>
-            </div>
-   
+  </div> 
   </mat-card>
   </div>
 </div>
@@ -75,7 +78,7 @@
             <img src="../../../assets/image/pinBeforeClick.svg"/>
           </mat-icon>    
       <div> 
-          <img src="{{note.image}}" class="notesImage" />
+          <img src="{{note.image}}" class="notesImage"/>
       </div>
       <div>
         <mat-card-title (click)="openDialog(note)" class="titleinput">{{note.title}}</mat-card-title>
@@ -90,14 +93,9 @@
                      <mat-icon matChipRemove (click)="removeReminder(note)">cancel</mat-icon>
                   </mat-chip>
                 </mat-chip-list>
-          </div>
-          <div>
-              <mat-chip-list>
-                  <mat-chip [selectable]="selectable" [removable]="removable"  >
-                    {{receiverEmail}}
-                    <mat-icon matChipRemove (click)="removeCollab(note)">cancel</mat-icon>
-                  </mat-chip>
-                </mat-chip-list>
+          </div>         
+              <div  >
+                <mat-icon class="material-icons" matTooltip={{receiverEmail}}>account_circle</mat-icon>
               </div>
           <div *ngFor="let notelables of notesLabels">
               <div *ngIf= "notelables.noteId == note.id">

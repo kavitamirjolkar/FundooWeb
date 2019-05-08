@@ -19,7 +19,7 @@ export class IocnsOnNoteComponent implements OnInit {
   userId: string;
   notesLabel: any;
   constructor(public notesService: NotesService,private dialog: MatDialog) { }
-  ngOnInit() {
+  ngOnInit() { 
     this.userId = localStorage.getItem('UserID')
     this.notesService.getlabels(this.userId).subscribe(responselabels => {
       this.notesLabel = responselabels['result'];
@@ -156,7 +156,7 @@ Tomorrow(card)
     localStorage.setItem('noteId',note.id);
     const dialogConfig = new MatDialogConfig();
     let dialogRef = this.dialog.open(CollaborationComponent, {
-     
+      data: {note}
     });
    
   }

@@ -9,7 +9,7 @@ import { NotesondashboardComponent, DialogData } from '../notesondashboard/notes
 })
 export class DialogComponent implements OnInit {
   note:any;
-  constructor(     public dialogRef: MatDialogRef<NotesondashboardComponent>,
+  constructor(public dialogRef: MatDialogRef<NotesondashboardComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { 
       console.log(data);
     this.note=data.note;

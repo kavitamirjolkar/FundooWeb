@@ -43,7 +43,8 @@ import { SearchComponent } from './components/search/search.component';
 import { SearchPipe } from './pipe/search.pipe';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { CollaboratorDialogComponent } from './components/collaborator-dialog/collaborator-dialog.component';
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -77,6 +78,7 @@ export function getAuthServiceConfigs() {
     CollaborationComponent,
     SearchComponent,
     SearchPipe,
+    CollaboratorDialogComponent,
     
     
    
@@ -103,7 +105,7 @@ export function getAuthServiceConfigs() {
     MatFormFieldModule,
     DragDropModule,
     MatDatepickerModule,
-  
+    MatTooltipModule,
     ToastrModule.forRoot({
       progressBar: true
     }),
