@@ -142,11 +142,11 @@ namespace FundooBusiness.Services
             return this.notesRepository.Archive(userId);
         }
 
-       public string AddLabels(LabelModel label)
-       {
+        public string AddLabels(LabelModel label)
+        {
             var result = this.notesRepository.AddLabels(label);
             return result;
-       }
+        }
 
         public List<LabelModel> GetLabels(Guid userId)
         {
@@ -160,7 +160,7 @@ namespace FundooBusiness.Services
 
         public string DeleteLabel(int id)
         {
-           return this.notesRepository.DeleteLabel(id);
+            return this.notesRepository.DeleteLabel(id);
         }
 
         public string AddNotesLabel(NoteLabelModel model)
@@ -176,8 +176,9 @@ namespace FundooBusiness.Services
 
         public string DeleteNotesLabel(int id)
         {
-           return this.notesRepository.DeleteNotesLabel(id);
+            return this.notesRepository.DeleteNotesLabel(id);
         }
+
 
         public string AddCollaboratorToNote(CollaboratorModel model)
         {

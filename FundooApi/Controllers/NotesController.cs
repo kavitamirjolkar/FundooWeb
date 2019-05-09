@@ -193,7 +193,7 @@ namespace FundooApi.Controllers
         [Route("label")]
         public IActionResult AddLabels(LabelModel label)
         {
-             var result = this.notesBusiness.AddLabels(label);
+            var result = this.notesBusiness.AddLabels(label);
             if (result == null)
             {
                 return this.NotFound();
@@ -248,7 +248,7 @@ namespace FundooApi.Controllers
         [Route("label/{id}")]
         public IActionResult Deletelabel(int id)
         {
-           var result = this.notesBusiness.DeleteLabel(id);
+            var result = this.notesBusiness.DeleteLabel(id);
             if (result == null)
             {
                 return this.NotFound();
@@ -311,6 +311,7 @@ namespace FundooApi.Controllers
 
             return this.Ok(new { result });
         }
+
 
         /// <summary>
         /// Adds the collaborator to note.

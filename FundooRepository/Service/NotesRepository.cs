@@ -60,7 +60,7 @@ namespace FundooRepository.Service
                 IsTrash = notes.IsTrash,
                 IsPin = notes.IsPin,
                 Color = notes.Color, 
-                IsCollaborate=notes.IsCollaborate
+               
             };
             var result = this.Context.Notes.Add(note);
             return null;
@@ -142,7 +142,7 @@ namespace FundooRepository.Service
             notes.IsArchive = model.IsArchive;
             notes.IsTrash = model.IsTrash;
             notes.IsPin = model.IsPin;
-            notes.IsCollaborate = model.IsCollaborate;
+            
         }
 
         /// <summary>
@@ -213,8 +213,8 @@ namespace FundooRepository.Service
             return list;
         }
 
-       public string AddLabels([FromBody] LabelModel label)
-       {
+        public string AddLabels([FromBody] LabelModel label)
+        {
             var addLabel = new LabelModel()
             {
                 UserId = label.UserId,
@@ -223,17 +223,17 @@ namespace FundooRepository.Service
             try
             {
                 this.Context.Labels.Add(addLabel);
-               var result = this.Context.SaveChanges();
+                var result = this.Context.SaveChanges();
                 return result.ToString();
             }
             catch (Exception exception)
             {
                 throw new Exception(exception.Message);
             }
-       }
+        }
 
-       public List<LabelModel> GetLabels(Guid UserId)
-       {
+        public List<LabelModel> GetLabels(Guid UserId)
+        {
             try
             {
                 var list = new List<LabelModel>();
@@ -249,30 +249,30 @@ namespace FundooRepository.Service
             {
                 throw new Exception(exception.Message);
             }
-       }
+        }
 
-       public string UpdateLabels([FromBody] LabelModel label, int id)
-       {
+        public string UpdateLabels([FromBody] LabelModel label, int id)
+        {
             LabelModel labels = this.Context.Labels.Where(t => t.Id == id).FirstOrDefault();
             labels.Label = label.Label;
             try
             {
-               var result = this.Context.SaveChanges();
+                var result = this.Context.SaveChanges();
                 return result.ToString();
             }
             catch (Exception exception)
             {
                 throw new Exception(exception.Message);
             }
-       }
+        }
 
-       public string DeleteLabel(int id)
-       {
-            LabelModel label = this.Context.Labels.Where(t => t.Id == id).FirstOrDefault();           
+        public string DeleteLabel(int id)
+        {
+            LabelModel label = this.Context.Labels.Where(t => t.Id == id).FirstOrDefault();
             try
             {
                 this.Context.Labels.Remove(label);
-               var result = this.Context.SaveChanges();
+                var result = this.Context.SaveChanges();
                 return result.ToString();
             }
             catch (Exception exception)
@@ -332,11 +332,11 @@ namespace FundooRepository.Service
         public string DeleteNotesLabel(int id)
         {
             var label = this.Context.NoteLabel.Where<NoteLabelModel>(t => t.Id == id).FirstOrDefault();
-            
+
             try
             {
                 this.Context.NoteLabel.Remove(label);
-               var result = this.Context.SaveChanges();
+                var result = this.Context.SaveChanges();
                 return result.ToString();
             }
             catch (Exception exception)
@@ -344,7 +344,8 @@ namespace FundooRepository.Service
                 throw new Exception(exception.Message);
             }
         }
-   
+
+
         public string AddCollaboratorToNote([FromBody] CollaboratorModel model)
         {
             try

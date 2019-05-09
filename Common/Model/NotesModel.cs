@@ -112,6 +112,6 @@ namespace Common.Model
         /// </value>
         public string Color { get; set; }
 
-       public bool IsCollaborate { get; set; }
+
     }
 }
