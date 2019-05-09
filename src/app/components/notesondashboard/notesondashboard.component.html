@@ -67,7 +67,6 @@
   </div>
 </div>
 
-
 <!-- unpin -->
 <div [ngClass]="main"  fxLayoutGap='2%' cdkDropList  (cdkDropListDropped)="drop($event)" >
     <div class="loop" *ngFor="let note of noteCards |search:search " cdkDrag >
@@ -94,7 +93,7 @@
                   </mat-chip>
                 </mat-chip-list>
           </div>         
-              <div  >
+              <div>
                 <mat-icon class="material-icons" matTooltip={{receiverEmail}}>account_circle</mat-icon>
               </div>
           <div *ngFor="let notelables of notesLabels">
@@ -104,7 +103,7 @@
                     <mat-chip-list>
                       <mat-chip [selectable]="selectable" [removable]="removable"  >
                         {{labels.label}} 
-                         <mat-icon matChipRemove (click)="remove(notelables.id)">cancel</mat-icon>
+                        <mat-icon matChipRemove (click)="remove(notelables.id)">cancel</mat-icon>
                       </mat-chip>
                     </mat-chip-list>
                   </div>
@@ -127,4 +126,3 @@
       </mat-card>
       </div>
     </div>
-    

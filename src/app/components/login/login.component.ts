@@ -78,11 +78,11 @@ export class LoginComponent implements OnInit {
           console.log(data.result);
           console.log(data['result']);
           
-          // console.log(data.token);
-          localStorage.setItem('token', data.result);
-          localStorage.setItem('Email', data.user.email);
-        localStorage.setItem('FirstName', data.user.firstName);
-        localStorage.setItem('LastName', data.user.lastName);
+           console.log(data.token);
+           localStorage.setItem('token', data.result);
+        //   localStorage.setItem('Email', data.user.email);
+        // localStorage.setItem('FirstName', data.user.firstName);
+        // localStorage.setItem('LastName', data.user.lastName);
         //  localStorage.setItem('Profile',data.user.profilePicture);      
            this.token = localStorage.getItem('token')
            this.payLoad = jwt_decode(this.token)
