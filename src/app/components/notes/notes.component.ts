@@ -17,6 +17,9 @@ export class NotesComponent implements OnInit {
   
   
   noteColor: any;
+  notes: Notes[];
+  noteCards: any[];
+  cards: Notes;
   constructor(private router: Router, public service: NotesService) { }
   
   title=new FormControl('',[Validators.required]);
@@ -51,9 +54,8 @@ console.log(this.token_id);
      .subscribe(data => {
       this.title.reset();
       this.take_a_note.reset();
-      this.AferCloseEvent.emit({});
-          
+      this.AferCloseEvent.emit({});       
      });
-    }
+    }  
   }
 }

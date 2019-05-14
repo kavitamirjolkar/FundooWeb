@@ -25,11 +25,13 @@ export class LabelComponent implements OnInit {
       "UserId":this.userId
     }
     console.log(data);
+    if(this.label.value !=""){
     this.notesService.AddLabels(data).subscribe(result=>
       console.log(data)          
       )
     this.dialogRef.close(data);
   }
+}
   update(label)
   {
     console.log(label.label,"jgkldfgkdf");
@@ -40,7 +42,7 @@ export class LabelComponent implements OnInit {
   delete(label)
   {
     this.notesService.deletelabel(label.id).subscribe(result =>
-      console.log(result) )
+      console.log(result) )     
   }
   
 }

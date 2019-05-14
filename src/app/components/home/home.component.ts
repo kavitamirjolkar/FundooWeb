@@ -29,6 +29,8 @@ export class HomeComponent implements OnInit,OnDestroy {
   photo;
   selectedFile: File;
   email: string;
+  Email: string;
+  FirstName: string;
   constructor(private router: Router, private service: UserService,changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,private data: DataService,public dialog: MatDialog,private notes:NotesService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -51,6 +53,8 @@ export class HomeComponent implements OnInit,OnDestroy {
   ngOnInit() {
     this.photo=localStorage.getItem('profile');
     console.log(this.photo);
+    this.Email = localStorage.getItem("Email");
+    this.FirstName = localStorage.getItem("FirstName");
     
     this.data.currentMessage.subscribe(message => this.message = message);
     islist: true;

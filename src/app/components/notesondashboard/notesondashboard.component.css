@@ -29,6 +29,8 @@
     min-width: 602px;
     border-radius: 10px;
     margin-top: 2%;
+    margin-bottom: 2%;
+    max-width: 600px;
   }
   .list{
     flex-direction: column;
@@ -42,14 +44,19 @@
 element.style {
   max-width: 600px;
   pointer-events: auto;
-  width: auto;
+  width: 50px;
   height: auto;
   position: static;
 }
 .pin{
-  margin-left: 220px;
+  margin-left: 95%;
 }
 
 .buttonOutline{
   outline: none;
+}
+.image{
+  width: 100%;
+  
+  background-size: cover;
 }

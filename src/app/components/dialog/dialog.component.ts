@@ -21,5 +21,5 @@ export class DialogComponent implements OnInit {
   onNoClick()
    {
     this.dialogRef.close(this.note);
-  }
+   }
 }

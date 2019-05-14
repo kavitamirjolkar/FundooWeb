@@ -3,9 +3,9 @@
  
   <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
 </nav> -->
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
-  <mat-toolbar style="background-color: #e3f2fd;">
-    <mat-toolbar-row>
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun" >
+  <mat-toolbar  fxLayout="row">
+    <mat-toolbar-row style="background-color:white">
       <button mat-icon-button (click)="snav.toggle()" style="outline:none">
         <mat-icon>menu</mat-icon>
       </button>
@@ -30,27 +30,46 @@
       </button>
       
       <!-- <button mat-mini-fab  style="background-color: #e3f2fd" [matMenuTriggerFor]="menu" style="outline:none"> -->
-          <div fxFlex fxLayout='row' fxLayoutAlign="end center" >
-            <div>
-        <button class="profile" mat-fab [matMenuTriggerFor]="menu" color='disabled' style="outline:none" [ngStyle]="{'background-image': 'url(' + photo + ')'}">
-        <mat-menu #menu="matMenu">
+        
+            
+        <button class="profile" mat-fab [matMenuTriggerFor]="menu" color='disabled' style="outline:none" [ngStyle]="{'background-image': 'url(' + photo + ')','background-size':'cover'}"  [matMenuTriggerFor]="menu1" colour="basic" matTooltip=" Fundoo Account user: {{FirstName}}, email: {{Email}}"
+        [matTooltipClass]="'my-tooltip'" fxLayout="row" fxLayoutAlign="end center">
+        <!-- <mat-menu #menu="matMenu"> -->
+            <mat-menu id="selectedFile" #menu="matMenu" class="menu-button" fxLayout="row" fxLayoutAlign="end start">
+          <div class="backgroundimage">
             <input type="file" style="display:none"  #file (change)="onFileChanged($event)"  id="selectedFile" >
-            <button class="profile" [ngStyle]="{'background-image': 'url(' + photo + ')'}" (click)="file.click()" mat-fab></button>
-          <button mat-menu-item (click)="onLogout()" style="outline:none">Logout</button>
+            <button   class="profile" [ngStyle]="{'background-image': 'url(' + photo + ')' ,'background-size':'cover','width':'75px','height':'75px'}" (click)="file.click()" mat-fab>
+            <div mat-raised-button class="changeProfile" fxLayoutAlign="end center">change</div>
+            </button>
+            <div>
+            <div class="profileName">
+              {{FirstName}}
+            </div>
+            <div class="profileEmail">
+              {{Email}}
+            </div>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <button class="signout" mat-flat-button (click)="onLogout()">
+            Sign out
+          </button> 
         </mat-menu>
       </button>
-      </div>
-      </div>
+      
+      
     </mat-toolbar-row>
   </mat-toolbar>
+  <div  class="divider"></div>
   <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56" style="border: 0px;">
       <mat-nav-list>       
-        <div >
+        <div>
             <a mat-button (click)="headName='FundooNotes'" routerLink= "."  >
             <i class="material-icons" style="padding-right: 50px">lightbulb_outline</i>Notes </a>
             </div>
+            
             <div>
                 <a mat-button (click)="headName='Reminders'" routerLink="/home/reminder" class="h1.example-app-name">
                 <i class="material-icons" style="padding-right: 50px">notifications</i>Reminder </a>
@@ -59,8 +78,8 @@
         <label style="padding-left:20px">Labels</label><br>
 
        <div *ngFor="let label of notesLabel">
-        <button mat-button class="sidebutton"  >
-          <div  fxLayout="row" >
+        <button mat-button class="sidebutton">
+          <div  fxLayout="row">
           <div class="imageopac">
             <img src="../../../assets/image/outline-label-24px.svg" />
           </div>
@@ -86,7 +105,7 @@
     </div>
       </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content>
+    <mat-sidenav-content >
       <router-outlet>
       </router-outlet>
     </mat-sidenav-content>

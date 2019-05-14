@@ -123,8 +123,8 @@ flex: 1 1 auto;
   }
   
   h1.example-app-name {
-    margin-left: 8px;
-    background-color: #e3f2fd;
+    margin-left: 8%;
+    background-color:white;
     
   }
   
@@ -135,6 +135,15 @@ flex: 1 1 auto;
     background-color: white;  
      
   }
+
+  .divider{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 1px;
+    background-color:rgb(95, 99, 99);
+    opacity: 0.5;
+    }
   
   .example-is-mobile .example-sidenav-container.side {
     /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
@@ -150,7 +159,7 @@ flex: 1 1 auto;
     margin-right: 180px;
     margin-left: 200px;
     width: 500px;
-    background-color:white;
+    background-color:whitesmoke;
     color:black;
     border: 0px solid white;
     border-radius: 20px;
@@ -184,8 +193,7 @@ textarea {
 }
 
 .take_a_note{
-  /* margin-right: 180px;
-  margin-left: 200px; */
+ 
   width: 500px;
   background-color:white;
   color:black;
@@ -196,11 +204,14 @@ textarea {
 }
 
 .icon{
-  outline: none;  
+  outline: none; 
+  width:100%;
+
 }
 
 .material-icons{
     outline: none;
+   
 }
 
 .mat-18{
