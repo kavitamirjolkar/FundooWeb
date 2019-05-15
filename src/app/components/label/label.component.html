@@ -1,7 +1,8 @@
+
 <div class="labeldialog">
   <h6 mat-dialog-title>Edit labels</h6>
   <div>
-    <input matInput placeholder="create new lable" [formControl]="label">
+    <input style="border: 0px;outline: none"matInput placeholder="create new lable" [formControl]="label">
   </div>
   <mat-divider></mat-divider>
   <div *ngFor="let label of notesLabel">
@@ -9,7 +10,7 @@
       <button mat-button (click)="delete(label)">
         <i class="material-icons" >delete </i>
         </button>
-    <input mat-input [(ngModel)]=label.label>
+    <input style="border: 0px;outline: none;justify-content: center" mat-input [(ngModel)]=label.label>
     <button mat-button (click)="update(label)">
     <mat-icon >done</mat-icon>
     </button>     
@@ -19,3 +20,4 @@
     <button class = "labelbutton" mat-button (click)='close()' cdkFocusInitial>Done</button>
   </div>
   </div>
+  

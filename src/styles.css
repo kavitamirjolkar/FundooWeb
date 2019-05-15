@@ -156,9 +156,9 @@ flex: 1 1 auto;
     
   }
   .search{
-    margin-right: 180px;
-    margin-left: 200px;
-    width: 500px;
+    /* margin-right: 180px;
+    margin-left: 200px; */
+    /* width: 500px; */
     background-color:whitesmoke;
     color:black;
     border: 0px solid white;
@@ -168,8 +168,8 @@ flex: 1 1 auto;
 
 .example-card {
   
-  margin-right: 250px;
-    margin-left: 250px;
+  /* margin-right: 250px;
+    margin-left: 250px; */
   width: 600px;
   margin-top: 50px;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
@@ -182,7 +182,11 @@ flex: 1 1 auto;
     align-items: center;
     margin-top: 8px; */
 }
-
+@media only screen and (max-width: 600px) {
+  .example-card { 
+width: 100%;
+  }
+}
 textarea {
   border-style: none;
   border-color: Transparent;
@@ -202,6 +206,7 @@ textarea {
   font-size: 0.9rem;
  
 }
+
 
 .icon{
   outline: none; 

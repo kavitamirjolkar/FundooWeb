@@ -60,3 +60,88 @@ element.style {
   
   background-size: cover;
 }
+
+@media only screen and (max-width: 600px) {
+  .grid{
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: center flex-start;
+    align-items: center;
+    margin-top: 8px;
+    margin-left: 0%;
+
+
+  }
+  .grid .loop{
+      width: fit-content;
+  }
+  .grid .note{
+    border-radius: 10px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 500px;
+    /* min-width: 500px; */
+    margin-left: 1%;
+    
+  }
+}
+@media only screen and (max-width: 510px) {
+  .grid{
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: center flex-start;
+    align-items: center;
+    margin-top: 8px;
+    margin-left: 1%;
+
+
+  }
+  .grid .loop{
+      width: fit-content;
+  }
+  .grid .note{
+    border-radius: 10px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 300px;
+   
+    margin-left: 1%;   
+  }
+}
+@media only screen and (max-width: 600px) {
+  .list .note{
+    
+    border-radius: 10px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 500px;
+  }
+  .list{
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: center flex-start;
+    align-items: center;
+    margin-top: 8px;
+  }
+}
+@media only screen and (max-width: 425px) {
+  .list .note{
+    
+    border-radius: 10px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 400px;
+  }
+  .list{
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: center flex-start;
+    align-items: center;
+    margin-top: 8px;
+  }
+}
+

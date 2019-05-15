@@ -1,7 +1,9 @@
 .labeldialog{
-    min-width: 250px;
-    min-height: 185px;
+    /* min-width: 10%; */
+    /* min-height: 50%; */
+    width:100%
 }
 .labelbutton{
-    margin-left: 150px;
+    margin-left: 50%;
+    outline: none;
 }

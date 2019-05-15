@@ -27,8 +27,10 @@ export class LabelComponent implements OnInit {
     console.log(data);
     if(this.label.value !=""){
     this.notesService.AddLabels(data).subscribe(result=>
-      console.log(data)          
+      console.log(data)  
+             
       )
+     
     this.dialogRef.close(data);
   }
 }

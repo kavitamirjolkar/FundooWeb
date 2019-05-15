@@ -92,7 +92,7 @@ export class HomeComponent implements OnInit,OnDestroy {
     openDialog(): void {
       const dialogConfig = new MatDialogConfig();
       let dialogRef = this.dialog.open(LabelComponent, {
-        width: '600px',
+       
         data: this.notesLabel
   
       });
@@ -101,6 +101,7 @@ export class HomeComponent implements OnInit,OnDestroy {
         if (result.label != '' && result.label != null) {
           this.notes.AddNotesLabels(result).subscribe((data: any) => {
             console.log(data)
+           
           }, err => {
             console.log(err);
       

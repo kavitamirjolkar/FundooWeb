@@ -14,15 +14,17 @@
       </div>
       <div>         
   <h1 class="example-app-name">{{headName}}</h1>            
-      </div>      
-        <input  class="search"  style="padding-left: 20px;outline: none" fxFlex="90" [(ngModel)]="value"  (keyup)="lookfor()" (click)='goSearch()'matInput placeholder="Search"
+      </div>   
+      
+    <div fxFlexOffset='20' fxHide.xs=true fxFlexOffset.md='15' fxFlexOffset.sm='10'  fxFlex='40'>
+        <input  class="search"   style="padding-left: 20px;outline: none" fxFlex="100" [(ngModel)]="value"  (keyup)="lookfor()" (click)='goSearch()'matInput placeholder="Search"
     [style.fontSize.px]="16" autocomplete="off">
-   
+  </div>
       <span class="example-spacer"></span>
       <button mat-icon-button style="outline: none" (click)="refresh()">
           <mat-icon>refresh</mat-icon>
       </button>
-      <button mat-icon-button style="outline: none">
+      <button mat-icon-button style="outline: none" fxHide.xs=true>
         <mat-icon>
           <img style="margin-bottom: 10px" src="../../assets/image/Grid.svg" *ngIf="islist" (click)="changeview()" />
           <img style="margin-bottom: 10px" src="../../assets/image/list.svg" *ngIf="!islist" (click)="changeview()" />
@@ -51,7 +53,7 @@
             </div>
           </div>
           <mat-divider></mat-divider>
-          <button class="signout" mat-flat-button (click)="onLogout()">
+          <button class="signout" mat-button (click)="onLogout()">
             Sign out
           </button> 
         </mat-menu>

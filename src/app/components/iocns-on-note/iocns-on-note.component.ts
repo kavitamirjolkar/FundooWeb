@@ -107,6 +107,7 @@ onFileChanged(event,card) {
   this.notesService.imageOnNote(uploadData,card.id).subscribe(data=>{
     console.log(data);
     localStorage.setItem('image',data)
+   
   },err=>{
     console.log(err);
   }

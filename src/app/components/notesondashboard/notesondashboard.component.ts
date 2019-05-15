@@ -78,7 +78,8 @@ export class NotesondashboardComponent implements OnInit {
     console.log('message in notes',message);
 
     this.main.grid=!message;
-    this.main.list=message;   
+    this.main.list=message;  
+    this.getAllNotes(); 
   });
 
   var token=localStorage.getItem('token');
@@ -97,19 +98,16 @@ export class NotesondashboardComponent implements OnInit {
         console.log(data);
         this.notes=data;
         this.noteCards=[];
-      this.cards=data[0];
+      this.cards=data;
       console.log(this.cards);
       this.cards.forEach(element => {
         if(element.isArchive || element.isTrash){
           return;
         }
         else
-        this.noteCards.push(element);
-
-        
+        this.noteCards.push(element);       
       });
       console.log(this.cards);
-
       }
   ),err=>{
            console.log(err);         
