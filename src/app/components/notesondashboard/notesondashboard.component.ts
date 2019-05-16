@@ -30,8 +30,6 @@ export class NotesondashboardComponent implements OnInit {
   title: any;
   description: any;
   @Input() search;
- 
- 
   @Output() cardUpdate = new EventEmitter();
   @Input() cond;
   cards: any;
@@ -65,6 +63,7 @@ export class NotesondashboardComponent implements OnInit {
       
     }
       )
+     
   }
 
   main={
@@ -79,13 +78,13 @@ export class NotesondashboardComponent implements OnInit {
 
     this.main.grid=!message;
     this.main.list=message;  
-    this.getAllNotes(); 
+    //  this.getAllNotes(); 
   });
 
-  var token=localStorage.getItem('token');
-  var jwt_token=jwt_decode(token);
-  console.log(jwt_token.UserID);
-  localStorage.setItem("UserID",jwt_token.UserID)
+  // var token=localStorage.getItem('token');
+  // var jwt_token=jwt_decode(token);
+  // console.log(jwt_token.UserID);
+  // localStorage.setItem("UserID",jwt_token.UserID)
    this.id=localStorage.getItem("UserID")
   console.log(this.id);
   this.receiverEmail=localStorage.getItem('receiverEmail')
@@ -93,6 +92,7 @@ export class NotesondashboardComponent implements OnInit {
  
   getAllNotes()
   {
+    this.id=localStorage.getItem("UserID")
     this.notesService.getNotesById(this.id).subscribe(  
       data => {
         console.log(data);
@@ -133,6 +133,7 @@ export class NotesondashboardComponent implements OnInit {
     })
   } 
   DeleteForever(note) {
+console.log('all trash note',this.noteCards);
 
     this.notesService.deleteNote(note).subscribe(data => {
       console.log(note);
@@ -205,15 +206,15 @@ export class NotesondashboardComponent implements OnInit {
       console.log(err);
     })
   }
-  update(value){
-    console.log(value,'event');
-    this.getAllNotes();
+  // update(value){
+  //   console.log(value,'event');
+  //   this.getAllNotes();
     
-  }
-  closed(value){
-    console.log(value,"from take note");
-    this.getAllNotes();
-  }
+  // }
+  // closed(value){
+  //   console.log(value,"from take note");
+  //   this.getAllNotes();
+  // }
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.noteCards, event.previousIndex, event.currentIndex);
   }

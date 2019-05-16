@@ -21,7 +21,7 @@
     [style.fontSize.px]="16" autocomplete="off">
   </div>
       <span class="example-spacer"></span>
-      <button mat-icon-button style="outline: none" (click)="refresh()">
+      <button mat-icon-button matTooltip="Refresh"  style="outline: none" (click)="refresh()">
           <mat-icon>refresh</mat-icon>
       </button>
       <button mat-icon-button style="outline: none" fxHide.xs=true>
@@ -34,13 +34,13 @@
       <!-- <button mat-mini-fab  style="background-color: #e3f2fd" [matMenuTriggerFor]="menu" style="outline:none"> -->
         
             
-        <button class="profile" mat-fab [matMenuTriggerFor]="menu" color='disabled' style="outline:none" [ngStyle]="{'background-image': 'url(' + photo + ')','background-size':'cover'}"  [matMenuTriggerFor]="menu1" colour="basic" matTooltip=" Fundoo Account user: {{FirstName}}, email: {{Email}}"
+        <button class="profile" mat-mini-fab [matMenuTriggerFor]="menu" color='disabled' style="outline:none" [ngStyle]="{'background-image': 'url(' + photo + ')','background-size':'cover'}"  [matMenuTriggerFor]="menu1" colour="basic" matTooltip=" Fundoo Account user: {{FirstName}}, email: {{Email}}"
         [matTooltipClass]="'my-tooltip'" fxLayout="row" fxLayoutAlign="end center">
         <!-- <mat-menu #menu="matMenu"> -->
             <mat-menu id="selectedFile" #menu="matMenu" class="menu-button" fxLayout="row" fxLayoutAlign="end start">
           <div class="backgroundimage">
             <input type="file" style="display:none"  #file (change)="onFileChanged($event)"  id="selectedFile" >
-            <button   class="profile" [ngStyle]="{'background-image': 'url(' + photo + ')' ,'background-size':'cover','width':'75px','height':'75px'}" (click)="file.click()" mat-fab>
+            <button   class="profile" [ngStyle]="{'background-image': 'url(' + photo + ')' ,'background-size':'cover','width':'75px','height':'75px'}" (click)="file.click()" mat-mini-fab>
             <div mat-raised-button class="changeProfile" fxLayoutAlign="end center">change</div>
             </button>
             <div>
@@ -80,12 +80,12 @@
         <label style="padding-left:20px">Labels</label><br>
 
        <div *ngFor="let label of notesLabel">
-        <button mat-button class="sidebutton">
+        <button mat-button style="outline:none">
           <div  fxLayout="row">
           <div class="imageopac">
             <img src="../../../assets/image/outline-label-24px.svg" />
           </div>
-          <div class="button-r" style="margin-left:32px">{{label.label}}</div>
+          <div style="margin-left:32px">{{label.label}}</div>
         </div>
         </button>
       </div>

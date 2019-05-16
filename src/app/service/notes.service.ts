@@ -21,6 +21,7 @@ export class NotesService {
   }
   getNotesById(UserId)
   {
+    console.log(UserId)
     return this.http.get<Notes[]>(this.BaseURI+'notes/notesbyId',{ params:{
       userId:UserId
       } });

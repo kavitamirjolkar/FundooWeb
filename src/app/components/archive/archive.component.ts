@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import * as jwt_decode from "jwt-decode";
 import { NotesService } from 'src/app/service/notes.service';
 
@@ -13,7 +13,7 @@ export class ArchiveComponent implements OnInit {
   archiveCards: any;
   userId:any;
   archive='archive'
-
+  @Output() cardUpdate = new EventEmitter();
   constructor(private notesService:NotesService) { }
 
   ngOnInit() {

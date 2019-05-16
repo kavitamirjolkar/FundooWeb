@@ -1,5 +1,6 @@
-<div class = "iconlist">
-<button mat-icon-button [matMenuTriggerFor]="menureminder" style="outline: none">
+
+<div class = "iconlist" style="opacity: 0;">
+<button mat-icon-button matTooltip="Reminder" [matMenuTriggerFor]="menureminder" style="outline: none">
 <mat-icon class="material-icons" >add_alert</mat-icon>
 </button>
 <mat-menu #menureminder="matMenu">
@@ -8,15 +9,15 @@
 <button mat-menu-item (click)="nextWeek(card)" style="outline: none">Next Week 8:00AM</button>
 <button mat-menu-item style="outline: none">Pick date & time</button>
 </mat-menu>
-<button mat-icon-button (click)="openDialog(card)" style="outline: none">
+<button mat-icon-button matTooltip="Collaborator" (click)="openDialog(card)" style="outline: none">
 <mat-icon class="mat-18">person_add</mat-icon>
 </button>
 
-<button mat-icon-button [matMenuTriggerFor]="colorMenu" style="outline: none">
+<button mat-icon-button matTooltip="Change color" [matMenuTriggerFor]="colorMenu" style="outline: none">
 <mat-icon class="mat-18">palette</mat-icon>
 </button>
 
-<button mat-icon-button style="outline: none">
+<button mat-icon-button matTooltip="Archive"  style="outline: none">
 <mat-icon class="mat-18" (click)="selectFile.click()">photo</mat-icon>
 <input style="display: none" type="file"  #selectFile (change)="onFileChanged($event,card)">
 </button>
@@ -25,11 +26,11 @@
 <mat-icon class="mat-18">archive</mat-icon>
 </button>
 
-<button mat-icon-button *ngIf='type=="archive"' matTooltip="Archive" (click)="unArchive(card)" style="outline: none">
+<button mat-icon-button *ngIf='type=="archive"' matTooltip="Unarchive" (click)="unArchive(card)" style="outline: none">
 <mat-icon class="mat-18">unarchive</mat-icon>
 </button>
 
-<button mat-icon-button [matMenuTriggerFor]="menu" style="outline: none">
+<button mat-icon-button matTooltip="more"  [matMenuTriggerFor]="menu" style="outline: none">
 <i class="material-icons">more_vert</i>
 </button>
 

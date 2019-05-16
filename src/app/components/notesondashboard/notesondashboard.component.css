@@ -48,9 +48,7 @@ element.style {
   height: auto;
   position: static;
 }
-.pin{
-  margin-left: 95%;
-}
+
 
 .buttonOutline{
   outline: none;
@@ -145,3 +143,17 @@ element.style {
   }
 }
 
+.pin{
+  margin-left: 95%;
+}
+.unpin{
+
+  margin-left: 95%;
+}
+.pin:hover{
+  opacity: 1 !important;
+}
+.unpin:hover{
+opacity: 1 !important;
+
+}

@@ -28,8 +28,7 @@ export class LabelComponent implements OnInit {
     if(this.label.value !=""){
     this.notesService.AddLabels(data).subscribe(result=>
       console.log(data)  
-             
-      )
+     )
      
     this.dialogRef.close(data);
   }
@@ -45,6 +44,5 @@ export class LabelComponent implements OnInit {
   {
     this.notesService.deletelabel(label.id).subscribe(result =>
       console.log(result) )     
-  }
-  
+  }  
 }

@@ -11,6 +11,7 @@ export class TrashComponent implements OnInit {
   cards;
   trashCards=[];
   token:any;
+  all=[]
   decodedToken : any;
   trash='trash'
   constructor(private notes:NotesService) { }

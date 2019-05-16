@@ -28,7 +28,12 @@ export class NotesDisplayComponent implements OnInit {
   localStorage.setItem("UserID",jwt_token.UserID)
    this.id=localStorage.getItem("UserID")
   console.log(this.id);
-  
+
+ this.getAllNotes();
+ 
+}
+
+getAllNotes(){
   this.notesService.getNotesById(this.id).subscribe(  
     data => {
       console.log(data);
@@ -50,21 +55,13 @@ export class NotesDisplayComponent implements OnInit {
 ),err=>{
          console.log(err);         
        };  
-  //  this.getAllNotes();
 }
-// getAllNotes()
-// {
-//   this.notesService.getNotesById(this.userId).subscribe(  
-//     data => {
-//       console.log(data);
-//       this.notes=data;
-//     }
-// ),err=>{
-//          console.log(err);         
-//        };
-// }
 
-
+closed(event){
+  console.log('event from take note');
+  this.getAllNotes();
+  
+}
 }
 
 

@@ -1,7 +1,8 @@
 <!-- {{note.title}} -->
 
 <div > 
-        <img style="width: 100%; width:100%" src="{{note.image}}" class="notesImage" />
+  <div>
+        <img style="width: 100%" src="{{note.image}}" class="notesImage" />
     </div>
       <div>
         <textarea  placeholder="Title" class="dialog" [(ngModel)]="note.title" ></textarea>
@@ -11,6 +12,6 @@
         <textarea  placeholder="Take a note" class="dialog" [(ngModel)]="note.description" ></textarea>
       </div>
       <div>
-        <button mat-button  (click)="isOpen=false"  class="closeButton" (click)="  onNoClick()">close</button>
+        <button mat-button  (click)="isOpen=false"  class="dialogButton" (click)="  onNoClick()">close</button>
       <app-iocns-on-note [card]="note"></app-iocns-on-note>
     </div>    

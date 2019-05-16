@@ -2,11 +2,11 @@
 <div [ngClass]="main"  fxLayoutGap='2%'  >
 <div class="loop" *ngFor="let note of noteCards|search:search " cdkDrag>
     <mat-card  *ngIf = "note.isPin == true && note.isArchive == false" fxLayoutGap="20px" class="note" [style.background-color]=note.color> 
-<div  class="element.style">
-    <mat-icon class="pin" (click)='unpinnote(note)'>
+<div  class="element.style" >
+    <mat-icon class="unpin" style="opacity: 0" (click)='unpinnote(note)'>
         <img src="../../../assets/image/pinAfterClick(1).svg"/>
       </mat-icon>    
-  <div > 
+  <div> 
       <img style="width: 100%"  src="{{note.image}}" />
   </div>
   <div>
@@ -51,12 +51,12 @@
           </div>
         </div>
         <div *ngIf="cond=='trash'">
-            <button mat-icon-button  [matMenuTriggerFor]="trashmenu" class="buttonOutline" >
+            <button mat-icon-button style="margin-left: 80%;outline: none" [matMenuTriggerFor]="trashmenu" class="buttonOutline" >
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #trashmenu="matMenu">
-                  <button mat-menu-item (click)="DeleteForever(note)" class="buttonOutline">Delete forever</button>
-                  <button mat-menu-item (click)="Restore(note)" class="buttonOutline">Restore</button>
+                  <button mat-menu-item  style="outline:none"(click)="DeleteForever(note)" class="buttonOutline">Delete forever</button>
+                  <button mat-menu-item style="outline:none" (click)="Restore(note)" class="buttonOutline">Restore</button>
                 </mat-menu>
           </div>
           <div *ngIf='cond!="trash"'>
@@ -73,7 +73,7 @@
 
         <mat-card  *ngIf = "note.isPin == false" fxLayoutGap="20px" class="note" [style.background-color]=note.color> 
     <div  class="element.style">
-        <mat-icon class="pin" (click)='pinnote(note)'>
+        <mat-icon class="pin" style="opacity: 0" (click)='pinnote(note)'>
             <img src="../../../assets/image/pinBeforeClick.svg"/>
           </mat-icon>    
       <div class="image"> 
@@ -95,13 +95,14 @@
           </div>         
               <div>
                 <mat-icon class="material-icons" matTooltip={{receiverEmail}}>account_circle</mat-icon>
+                
               </div>
           <div *ngFor="let notelables of notesLabels">
               <div *ngIf= "notelables.noteId == note.id">
                 <div *ngFor= "let labels of allLabels">
                   <div *ngIf= "labels.id == notelables.lableId">
                     <mat-chip-list>
-                      <mat-chip [selectable]="selectable" [removable]="removable"  >
+                      <mat-chip [selectable]="selectable" [removable]="removable">
                         {{labels.label}} 
                         <mat-icon matChipRemove (click)="remove(notelables.id)">cancel</mat-icon>
                       </mat-chip>
@@ -111,12 +112,12 @@
               </div>
             </div>
             <div *ngIf="cond=='trash'">
-                <button mat-icon-button  [matMenuTriggerFor]="trashmenu">
+                <button style="margin-left: 80%;outline: none"mat-icon-button  [matMenuTriggerFor]="trashmenu">
                     <mat-icon >more_vert</mat-icon>
                   </button>
                   <mat-menu #trashmenu="matMenu">
-                      <button mat-menu-item (click)="DeleteForever(note)">Delete forever</button>
-                      <button mat-menu-item (click)="Restore(note)">Restore</button>
+                      <button mat-menu-item style="outline:none" (click)="DeleteForever(note)">Delete forever</button>
+                      <button mat-menu-item style="outline:none" (click)="Restore(note)">Restore</button>
                     </mat-menu>
               </div>
               <div *ngIf='cond!="trash"'>

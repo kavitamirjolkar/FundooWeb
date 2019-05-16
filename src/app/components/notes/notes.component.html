@@ -10,9 +10,9 @@
 
 <textarea   [formControl]=" take_a_note"  [style.background-color]=noteColor style="width: 560px; outline: none" placeholder="Take a note..." ></textarea>
 <div>
-
+ <app-iocns-on-note (setcolortoNote)="setcolor($event)"></app-iocns-on-note>
 <button mat-button  (click)="isOpen=false"  class="closeButton" (click)="AddNotes()">close</button>
-<app-iocns-on-note (setcolortoNote)="setcolor($event)"></app-iocns-on-note>
+
 </div>
 </div> 
 </mat-card>
