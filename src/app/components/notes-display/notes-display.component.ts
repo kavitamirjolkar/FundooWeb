@@ -24,11 +24,8 @@ export class NotesDisplayComponent implements OnInit {
    this.userId = localStorage.getItem("UserId");
    var token=localStorage.getItem('token');
   var jwt_token=jwt_decode(token);
-  console.log(jwt_token.UserID);
   localStorage.setItem("UserID",jwt_token.UserID)
    this.id=localStorage.getItem("UserID")
-  console.log(this.id);
-
  this.getAllNotes();
  
 }
@@ -36,21 +33,16 @@ export class NotesDisplayComponent implements OnInit {
 getAllNotes(){
   this.notesService.getNotesById(this.id).subscribe(  
     data => {
-      console.log(data);
       this.notes=data;
       this.noteCards=[];
       this.cards=this.notes;
-      console.log(this.cards);
       this.cards.forEach(element => {
         if(element.isArchive || element.isTrash){
           return;
         }
         else
-        this.noteCards.push(element);
-
-        
+        this.noteCards.push(element);       
       });
-      console.log(this.cards);
     }
 ),err=>{
          console.log(err);         
@@ -58,9 +50,11 @@ getAllNotes(){
 }
 
 closed(event){
-  console.log('event from take note');
   this.getAllNotes();
   
+}
+update(event){
+  this.getAllNotes();
 }
 }
 

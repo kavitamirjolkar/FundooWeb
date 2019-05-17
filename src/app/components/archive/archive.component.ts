@@ -20,6 +20,7 @@ export class ArchiveComponent implements OnInit {
     this.userId = localStorage.getItem("UserID")
     this.getAllArchivecards()
   }
+  
   getAllArchivecards(){
     
     this.notesService.archive(this.userId).subscribe(data =>{
@@ -32,8 +33,10 @@ export class ArchiveComponent implements OnInit {
     
   })
 }
+
 Archived($event){
+  console.log("archive event");
+  
   this.getAllArchivecards();
 }
-
 }

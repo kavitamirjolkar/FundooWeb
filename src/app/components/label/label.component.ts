@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NotesService } from 'src/app/service/notes.service';
 import { FormControl } from '@angular/forms';
@@ -11,7 +11,7 @@ import { FormControl } from '@angular/forms';
 export class LabelComponent implements OnInit {
   notesLabel:any;
   userId: any;
-
+  @Output() AfterAddEvent = new EventEmitter();
   constructor(public dialogRef: MatDialogRef<LabelComponent>,private notesService: NotesService,@Inject(MAT_DIALOG_DATA) public data: any) { }
   label = new FormControl('');
   ngOnInit() {
@@ -27,10 +27,11 @@ export class LabelComponent implements OnInit {
     console.log(data);
     if(this.label.value !=""){
     this.notesService.AddLabels(data).subscribe(result=>
-      console.log(data)  
+      console.log(data) 
+      
      )
-     
     this.dialogRef.close(data);
+    this.AfterAddEvent.emit({});
   }
 }
   update(label)

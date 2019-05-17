@@ -14,7 +14,8 @@ export class IocnsOnNoteComponent implements OnInit {
   @Input() card;
   @Input() type;
   @Output() update =new EventEmitter();
-  @Output() setcolortoNote = new EventEmitter()
+  @Output() setcolortoNote = new EventEmitter();
+
   selectedFile: File;
   userId: string;
   notesLabel: any;
@@ -23,7 +24,7 @@ export class IocnsOnNoteComponent implements OnInit {
     this.userId = localStorage.getItem('UserID')
     this.notesService.getlabels(this.userId).subscribe(responselabels => {
       this.notesLabel = responselabels['result'];
-      console.log(this.notesLabel)
+   
     },err=>{
       console.log(err);
     })
@@ -159,6 +160,5 @@ Tomorrow(card)
     let dialogRef = this.dialog.open(CollaborationComponent, {
       data: {note}
     });
-   
   }
 }

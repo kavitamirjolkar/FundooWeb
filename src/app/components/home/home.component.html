@@ -1,28 +1,24 @@
-<!-- <nav class="navbar navbar-light"  style="background-color: #e3f2fd;">
-  <a class="navbar-brand text-black">FundooNotes</a>
- 
-  <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
-</nav> -->
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun" >
-  <mat-toolbar  fxLayout="row">
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
+  <mat-toolbar fxLayout="row">
     <mat-toolbar-row style="background-color:white">
       <button mat-icon-button (click)="snav.toggle()" style="outline:none">
         <mat-icon>menu</mat-icon>
       </button>
       <div>
-      <img style="width:40px" src="../../assets/image/notes.png" />
+        <img style="width:40px" src="../../assets/image/notes.png" />
       </div>
-      <div>         
-  <h1 class="example-app-name">{{headName}}</h1>            
-      </div>   
-      
-    <div fxFlexOffset='20' fxHide.xs=true fxFlexOffset.md='15' fxFlexOffset.sm='10'  fxFlex='40'>
-        <input  class="search"   style="padding-left: 20px;outline: none" fxFlex="100" [(ngModel)]="value"  (keyup)="lookfor()" (click)='goSearch()'matInput placeholder="Search"
-    [style.fontSize.px]="16" autocomplete="off">
-  </div>
+      <div>
+        <h1 class="example-app-name">{{headName}}</h1>
+      </div>
+
+      <div fxFlexOffset='20' fxHide.xs=true fxFlexOffset.md='15' fxFlexOffset.sm='10' fxFlex='40'>
+        <input class="search" style="padding-left: 20px;outline: none" fxFlex="100" [(ngModel)]="value"
+          (keyup)="lookfor()" (click)='goSearch()' matInput placeholder="Search" [style.fontSize.px]="16"
+          autocomplete="off">
+      </div>
       <span class="example-spacer"></span>
-      <button mat-icon-button matTooltip="Refresh"  style="outline: none" (click)="refresh()">
-          <mat-icon>refresh</mat-icon>
+      <button mat-icon-button matTooltip="Refresh" style="outline: none" (click)="refresh()">
+        <mat-icon>refresh</mat-icon>
       </button>
       <button mat-icon-button style="outline: none" fxHide.xs=true>
         <mat-icon>
@@ -30,86 +26,86 @@
           <img style="margin-bottom: 10px" src="../../assets/image/list.svg" *ngIf="!islist" (click)="changeview()" />
         </mat-icon>
       </button>
-      
-      <!-- <button mat-mini-fab  style="background-color: #e3f2fd" [matMenuTriggerFor]="menu" style="outline:none"> -->
-        
-            
-        <button class="profile" mat-mini-fab [matMenuTriggerFor]="menu" color='disabled' style="outline:none" [ngStyle]="{'background-image': 'url(' + photo + ')','background-size':'cover'}"  [matMenuTriggerFor]="menu1" colour="basic" matTooltip=" Fundoo Account user: {{FirstName}}, email: {{Email}}"
+
+      <button class="profile" mat-mini-fab [matMenuTriggerFor]="menu" color='disabled' style="outline:none"
+        [ngStyle]="{'background-image': 'url(' + photo + ')','background-size':'cover'}" [matMenuTriggerFor]="menu1"
+        colour="basic" matTooltip=" Fundoo Account user: {{FirstName}}, email: {{Email}}"
         [matTooltipClass]="'my-tooltip'" fxLayout="row" fxLayoutAlign="end center">
-        <!-- <mat-menu #menu="matMenu"> -->
-            <mat-menu id="selectedFile" #menu="matMenu" class="menu-button" fxLayout="row" fxLayoutAlign="end start">
+        <mat-menu id="selectedFile" #menu="matMenu" class="menu-button" fxLayout="row" fxLayoutAlign="end start">
           <div class="backgroundimage">
-            <input type="file" style="display:none"  #file (change)="onFileChanged($event)"  id="selectedFile" >
-            <button   class="profile" [ngStyle]="{'background-image': 'url(' + photo + ')' ,'background-size':'cover','width':'75px','height':'75px'}" (click)="file.click()" mat-mini-fab>
-            <div mat-raised-button class="changeProfile" fxLayoutAlign="end center">change</div>
+            <input type="file" style="display:none" #file (change)="onFileChanged($event)" id="selectedFile">
+            <button class="profile"
+              [ngStyle]="{'background-image': 'url(' + photo + ')' ,'background-size':'cover','width':'75px','height':'75px'}"
+              (click)="file.click()" mat-mini-fab>
+              <div mat-raised-button class="changeProfile" fxLayoutAlign="end center">change</div>
             </button>
             <div>
-            <div class="profileName">
-              {{FirstName}}
-            </div>
-            <div class="profileEmail">
-              {{Email}}
-            </div>
+              <div class="profileName">
+                {{FirstName}}
+              </div>
+              <div class="profileEmail">
+                {{Email}}
+              </div>
             </div>
           </div>
           <mat-divider></mat-divider>
           <button class="signout" mat-button (click)="onLogout()">
             Sign out
-          </button> 
+          </button>
         </mat-menu>
       </button>
-      
-      
     </mat-toolbar-row>
   </mat-toolbar>
-  <div  class="divider"></div>
-  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
-      fixedTopGap="56" style="border: 0px;">
-      <mat-nav-list>       
-        <div>
-            <a mat-button (click)="headName='FundooNotes'" routerLink= "."  >
-            <i class="material-icons" style="padding-right: 50px">lightbulb_outline</i>Notes </a>
-            </div>
-            
-            <div>
-                <a mat-button (click)="headName='Reminders'" routerLink="/home/reminder" class="h1.example-app-name">
-                <i class="material-icons" style="padding-right: 50px">notifications</i>Reminder </a>
-                </div>
-        <mat-divider style="padding-bottom:20px"></mat-divider>
-        <label style="padding-left:20px">Labels</label><br>
+  <div class="divider"></div>
+  <div>
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+      <mat-sidenav fxHide.xs=true #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+        [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" style="border: 0px;">
+        <mat-nav-list>
+          <div>
+            <a mat-button (click)="headName='FundooNotes'" routerLink=".">
+              <i class="material-icons" style="padding-right: 50px">lightbulb_outline</i>Notes </a>
+          </div>
 
-       <div *ngFor="let label of notesLabel">
-        <button mat-button style="outline:none">
-          <div  fxLayout="row">
-          <div class="imageopac">
-            <img src="../../../assets/image/outline-label-24px.svg" />
+          <div>
+            <a mat-button (click)="headName='Reminders'" routerLink="/home/reminder" class="h1.example-app-name">
+              <i class="material-icons" style="padding-right: 50px">notifications</i>Reminder </a>
           </div>
-          <div style="margin-left:32px">{{label.label}}</div>
-        </div>
-        </button>
-      </div>
-      <div>
-          <a mat-button (click)="openDialog()">
-          <i class="material-icons" style="padding-right: 50px;"> edit </i>Edit Label </a>
+          <mat-divider style="padding-bottom:20px"></mat-divider>
+          <label style="padding-left:20px">Labels</label><br>
+
+          <div *ngFor="let label of notesLabel">
+            <button (AferAddEvent)="add($event)" mat-button style="outline:none">
+              <div fxLayout="row">
+                <div class="imageopac">
+                  <img src="../../../assets/image/outline-label-24px.svg" />
+                </div>
+                <div  style="margin-left:50px">{{label.label}}</div>
+              </div>
+            </button>
           </div>
-        <mat-divider style="padding-bottom:20px"></mat-divider>
-       
-        <div>
+          <div>
+            <a mat-button (click)="openDialog()">
+              <i class="material-icons" style="padding-right: 50px;"> edit </i>Edit Label </a>
+          </div>
+          <mat-divider style="padding-bottom:20px"></mat-divider>
+
+          <div>
             <a mat-button (click)="headName='Archive'" routerLink="/home/archive">
-                    <i class="material-icons" style="padding-right: 50px">archive</i>Archive
+              <i class="material-icons" style="padding-right: 50px">archive</i>Archive
             </a>
-    </div>
-    <div>
+          </div>
+          <div>
             <a mat-button (click)="headName='Trash'" routerLink="/home/trash">
-                    <i class="material-icons" style="padding-right: 50px"> delete </i> Trash
+              <i class="material-icons" style="padding-right: 50px"> delete </i> Trash
             </a>
-    </div>
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content >
-      <router-outlet>
-      </router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+          </div>
+        </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <router-outlet>
+        </router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
 </div>

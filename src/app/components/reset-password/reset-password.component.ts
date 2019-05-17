@@ -26,7 +26,6 @@ export class ResetPasswordComponent implements OnInit {
       this.router.navigateByUrl('/login');
   }
   onSubmit() {
-    // console.log('value',this.Email.value,'dj  ',this.Password.value,'  ',this.ConfirmPassword.value);
  if( this.Password.value!=this.ConfirmPassword.value){
    return;
  }
@@ -37,15 +36,12 @@ export class ResetPasswordComponent implements OnInit {
      }
 
     this.service.resetPassword(data).subscribe(
-      (res: any) => {
-        // localStorage.setItem('token', res.token);
-        // this.toastr.error("Password Changed Successfully");
+      (res: any) => {     
         alert("Password Changed Successfully");
         this.router.navigateByUrl('/login');       
       },
       err => {
         if (err.status == 400)
-          // this.toastr.error(' Email Id or Password is wrong');
          alert(' Email Id or Password is wrong');
         else
           console.log(err);

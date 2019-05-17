@@ -38,8 +38,7 @@ export class CollaborationComponent implements OnInit {
     }
     this.receiveremail=localStorage.setItem('receiverEmail',this.ReceiverEmail.value)
     this.notes.addcollaborator(values).subscribe(result=>
-      console.log(values) 
-    
+      console.log(values)    
       )
       this.getcollab(); 
       this.dialogRef.close(values);

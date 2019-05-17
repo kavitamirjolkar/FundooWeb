@@ -25,11 +25,8 @@ export class SearchComponent implements OnInit {
 }
 getallNotes(){
   this.notes.getNotesById(this.userid).subscribe(data =>{
-    console.log(data,"notes.ts");
-    console.log()
     this.noteCards=[];
     this.cards=data;
-    console.log(this.cards,"in serach");
   },err=>{
     console.log(err);
     

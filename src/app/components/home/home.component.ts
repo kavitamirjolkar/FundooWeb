@@ -38,12 +38,7 @@ export class HomeComponent implements OnInit,OnDestroy {
     
     this.token = localStorage.getItem('token');
     this.payLoad = jwt_decode(this.token);
-    this.notes.getlabels(this.payLoad.UserID).subscribe(responselabels => {
-      this.notesLabel = responselabels['result'];
-      console.log(this.notesLabel)
-    }, err => {
-      console.log(err);
-    })
+    
    }
   
    
@@ -52,7 +47,7 @@ export class HomeComponent implements OnInit,OnDestroy {
   }
   ngOnInit() {
     this.photo=localStorage.getItem('profile');
-    console.log(this.photo);
+  
     this.Email = localStorage.getItem("Email");
     this.FirstName = localStorage.getItem("FirstName");
     
@@ -60,8 +55,9 @@ export class HomeComponent implements OnInit,OnDestroy {
     islist: true;
     isClicked: false;
     this.email = localStorage.getItem("Email")
-    
+    this.getLabels();
   }
+  
   shouldRun =true;
 
   onLogout() {
@@ -111,6 +107,17 @@ export class HomeComponent implements OnInit,OnDestroy {
     
 }
 
+getLabels(){
+  this.notes.getlabels(this.payLoad.UserID).subscribe(responselabels => {
+    this.notesLabel = responselabels['result'];
+   
+  }, err => {
+    console.log(err);
+  })
+}
+add($event){
+  this.getLabels();
+}
 onFileChanged(event) {
   this.selectedFile = event.target.files[0];
   let uploadData=new FormData();

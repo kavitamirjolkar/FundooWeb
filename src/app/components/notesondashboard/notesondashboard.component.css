@@ -23,6 +23,7 @@
   }
   .grid .note{
     width: 280px;
+    height:auto;
     margin-top: 50px;
   }
   .list .note{

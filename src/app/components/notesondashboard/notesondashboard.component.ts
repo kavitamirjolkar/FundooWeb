@@ -42,29 +42,23 @@ export class NotesondashboardComponent implements OnInit {
     this.userId = localStorage.getItem("UserID")
     this.notesService.getlabels(this.userId).subscribe(responselabels => {
       this.allLabels = responselabels['result'];
-      console.log(this.allLabels, "all labels")
     }, err => {
       console.log(err);
     })
 
     this.notesService.getNotesLabels(this.userId).subscribe(response => {
       this.notesLabels = response['result'];
-      console.log(this.notesLabels, "notes labels")
     }, err => {
       console.log(err);
     })
 
     this.notesService.getCollaboratorNote(this.receiverEmail).subscribe(response=>{
       this.collaborator=response;
-      console.log(this.collaborator,"collaborator");
       
     },err=>{
       console.log(err);
-      
-    }
-      )
-     
-  }
+   })
+   }
 
   main={
     grid:false,
@@ -72,21 +66,14 @@ export class NotesondashboardComponent implements OnInit {
   }
  
   ngOnInit() { 
-  console.log('notes  '+this.notes);
   this.data.currentMessage.subscribe(message => {
-    console.log('message in notes',message);
-
+  
     this.main.grid=!message;
     this.main.list=message;  
-    //  this.getAllNotes(); 
   });
 
-  // var token=localStorage.getItem('token');
-  // var jwt_token=jwt_decode(token);
-  // console.log(jwt_token.UserID);
-  // localStorage.setItem("UserID",jwt_token.UserID)
    this.id=localStorage.getItem("UserID")
-  console.log(this.id);
+  
   this.receiverEmail=localStorage.getItem('receiverEmail')
   }
  
@@ -95,11 +82,9 @@ export class NotesondashboardComponent implements OnInit {
     this.id=localStorage.getItem("UserID")
     this.notesService.getNotesById(this.id).subscribe(  
       data => {
-        console.log(data);
         this.notes=data;
         this.noteCards=[];
       this.cards=data;
-      console.log(this.cards);
       this.cards.forEach(element => {
         if(element.isArchive || element.isTrash){
           return;
@@ -124,7 +109,6 @@ export class NotesondashboardComponent implements OnInit {
       console.log(result.id);
       this.notesService.updateNotes(result).subscribe(reult=>
         {
-          console.log(result);
           
         },err =>{
           console.log(err);         
@@ -136,7 +120,6 @@ export class NotesondashboardComponent implements OnInit {
 console.log('all trash note',this.noteCards);
 
     this.notesService.deleteNote(note).subscribe(data => {
-      console.log(note);
       this.cardUpdate.emit({})
     }, err => {
       console.log(err);
@@ -146,41 +129,29 @@ console.log('all trash note',this.noteCards);
     card.delete = false;
     card.isTrash = card.delete;
     this.notesService.updateNotes(card).subscribe(data => {
-      console.log(data);
       this.cardUpdate.emit({})
     }, err => {
       console.log(err);
     })
   }
 
-  updateCome(value) {
-    this.cardUpdate.emit({});
+  updateCome(event) {
+   
+    this.getAllNotes();
   }
   removeReminder(note)
   {
     note.reminder=null;
     this.notesService.updateNotes(note).subscribe(data =>{
-      console.log(data);
     },err =>{
       console.log(err);
     })
   }
 
-  // removeCollab(id){
-  //  this.notesService.removeCollaborator(id).subscribe(result=>
-  //   {
-  //     console.log(result);
-      
-  //   },err=>{
-  //     console.log(err);
-  //   }
-  //   )
-  // }
   remove(id) {
     console.log(id, "lable");
     this.notesService.deleteNotelabel(id).subscribe(result =>
        { 
-      console.log(result);
     }, err => {
       console.log(err);
     })
@@ -190,7 +161,6 @@ console.log('all trash note',this.noteCards);
     note.isPin = true;
     note.isPin = note.isPin;
     this.notesService.updateNotes(note).subscribe(data =>{
-      console.log(data);
     },err =>{
       console.log(err);
     })
@@ -201,20 +171,11 @@ console.log('all trash note',this.noteCards);
     note.isPin = false;
     note.isPin = note.isPin;
     this.notesService.updateNotes(note).subscribe(data =>{
-      console.log(data);
     },err =>{
       console.log(err);
     })
   }
-  // update(value){
-  //   console.log(value,'event');
-  //   this.getAllNotes();
-    
-  // }
-  // closed(value){
-  //   console.log(value,"from take note");
-  //   this.getAllNotes();
-  // }
+
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.noteCards, event.previousIndex, event.currentIndex);
   }

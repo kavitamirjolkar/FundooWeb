@@ -193,7 +193,7 @@ textarea {
   overflow: hidden;
   outline: none;
   resize: none;
- 
+ height:auto;
 }
 
 .take_a_note{

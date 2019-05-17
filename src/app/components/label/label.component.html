@@ -7,11 +7,11 @@
   <mat-divider></mat-divider>
   <div *ngFor="let label of notesLabel">
     <div fxLayout="row">
-      <button mat-button (click)="delete(label)">
+      <button style="outline: none" mat-button (click)="delete(label)">
         <i class="material-icons" >delete </i>
         </button>
     <input style="border: 0px;outline: none;justify-content: center" mat-input [(ngModel)]=label.label>
-    <button mat-button (click)="update(label)">
+    <button  style="outline: none" mat-button (click)="update(label)">
     <mat-icon >done</mat-icon>
     </button>     
   </div>
