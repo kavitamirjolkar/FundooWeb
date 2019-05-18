@@ -5,12 +5,14 @@
 </div>
 
 <div *ngIf=isOpen [style.background-color]=noteColor>
-<textarea [formControl]="title" [style.background-color]=noteColor  style="width: 560px; outline: none" placeholder="Title"></textarea>
+<input [formControl]="title"  [style.background-color]=noteColor class="title"placeholder="Title">
 
 
-<textarea   [formControl]=" take_a_note"  [style.background-color]=noteColor style="width: 560px; outline: none;" placeholder="Take a note..." ></textarea>
-<div>
- <app-iocns-on-note (setcolortoNote)="setcolor($event)"></app-iocns-on-note>
+<textarea   [formControl]=" take_a_note" matTextareaAutosize [style.background-color]=noteColor style="width: 560px; outline: none;" placeholder="Take a note..." ></textarea>
+<div  fxLayout="row">
+    <div >
+ <app-iocns-on-note class="takeanoteIcon" (setcolortoNote)="setcolor($event)"></app-iocns-on-note>
+ </div>
 <button mat-button  (click)="isOpen=false"  class="closeButton" (click)="AddNotes()">close</button>
 
 </div>

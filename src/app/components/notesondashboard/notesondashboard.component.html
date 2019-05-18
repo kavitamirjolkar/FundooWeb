@@ -22,16 +22,7 @@
                  <mat-icon matChipRemove (click)="removeReminder(note)">cancel</mat-icon>
               </mat-chip>
             </mat-chip-list>
-      </div>
-
-      <!-- <div>
-      <mat-chip-list>
-          <mat-chip [selectable]="selectable" [removable]="removable"  >
-            {{receiverEmail}}
-            <mat-icon matChipRemove (click)="removeCollab(note)">cancel</mat-icon>
-          </mat-chip>
-        </mat-chip-list>
-      </div> -->
+      </div>   
 
         <div>
           <mat-icon class="material-icons" matTooltip={{receiverEmail}}>account_circle</mat-icon>
@@ -59,8 +50,10 @@
                   <button mat-menu-item style="outline:none" (click)="Restore(note)" class="buttonOutline">Restore</button>
                 </mat-menu>
           </div>
+          <div class="cardhover" style="opacity: 0">
           <div *ngIf='cond!="trash"'>
               <app-iocns-on-note [card]="note" (update)='updateCome($event)' [type]='type'></app-iocns-on-note>
+    </div>
     </div>
   </div> 
   </mat-card>
@@ -70,7 +63,7 @@
 <!-- unpin -->
 <div [ngClass]="main"  fxLayoutGap='2%' cdkDropList  (cdkDropListDropped)="drop($event)" >
     <div class="loop" *ngFor="let note of noteCards |search:search " cdkDrag >
-
+<div >
         <mat-card  *ngIf = "note.isPin == false " fxLayoutGap="20px" class="note" [style.background-color]=note.color> 
     <div  class="element.style">
         <mat-icon class="pin" style="opacity: 0" (click)='pinnote(note)'>
@@ -94,8 +87,7 @@
                 </mat-chip-list>
           </div>         
               <div>
-                <mat-icon class="material-icons" matTooltip={{receiverEmail}}>account_circle</mat-icon>
-                
+                <mat-icon class="material-icons" matTooltip={{receiverEmail}}>account_circle</mat-icon>               
               </div>
           <div *ngFor="let notelables of notesLabels">
               <div *ngIf= "notelables.noteId == note.id">
@@ -120,10 +112,13 @@
                       <button mat-menu-item style="outline:none" (click)="Restore(note)">Restore</button>
                     </mat-menu>
               </div>
+              <div class="cardhover" style="opacity: 0">
               <div *ngIf='cond!="trash"'>
           <app-iocns-on-note [card]="note" (update)='updateCome($event)' [type]='type'></app-iocns-on-note>
        </div>
+       </div>
         </div>       
       </mat-card>
+    </div>
       </div>
     </div>

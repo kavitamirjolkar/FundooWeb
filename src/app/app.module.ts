@@ -44,7 +44,7 @@ import { SearchPipe } from './pipe/search.pipe';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
+import {MatInputModule} from '@angular/material/input';
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -106,6 +106,7 @@ export function getAuthServiceConfigs() {
     DragDropModule,
     MatDatepickerModule,
     MatTooltipModule,
+    MatInputModule,
     ToastrModule.forRoot({
       progressBar: true
     }),

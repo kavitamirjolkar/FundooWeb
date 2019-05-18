@@ -27,40 +27,44 @@
         </mat-icon>
       </button>
 
-      <button class="profile" mat-mini-fab [matMenuTriggerFor]="menu" color='disabled' style="outline:none"
-        [ngStyle]="{'background-image': 'url(' + photo + ')','background-size':'cover'}" [matMenuTriggerFor]="menu1"
-        colour="basic" matTooltip=" Fundoo Account user: {{FirstName}}, email: {{Email}}"
-        [matTooltipClass]="'my-tooltip'" fxLayout="row" fxLayoutAlign="end center">
-        <mat-menu id="selectedFile" #menu="matMenu" class="menu-button" fxLayout="row" fxLayoutAlign="end start">
-          <div class="backgroundimage">
-            <input type="file" style="display:none" #file (change)="onFileChanged($event)" id="selectedFile">
-            <button class="profile"
-              [ngStyle]="{'background-image': 'url(' + photo + ')' ,'background-size':'cover','width':'75px','height':'75px'}"
-              (click)="file.click()" mat-mini-fab>
-              <div mat-raised-button class="changeProfile" fxLayoutAlign="end center">change</div>
-            </button>
-            <div>
-              <div class="profileName">
-                {{FirstName}}
-              </div>
-              <div class="profileEmail">
-                {{Email}}
+      <div class="signoutMenu">
+        <button class="profile" mat-mini-fab [matMenuTriggerFor]="menu" color='disabled' style="outline:none"
+          [ngStyle]="{'background-image': 'url(' + photo + ')','background-size':'cover'}" [matMenuTriggerFor]="menu1"
+          colour="basic" matTooltip=" Fundoo Account user: {{FirstName}}, email: {{Email}}"
+          [matTooltipClass]="'my-tooltip'" fxLayout="row" fxLayoutAlign="end center">
+
+          <mat-menu id="selectedFile" #menu="matMenu" class="menu-button" fxLayout="row" fxLayoutAlign="end start">
+            <div class="backgroundimage" fxLayout="row">
+              <input type="file" style="display:none" #file (change)="onFileChanged($event)" id="selectedFile">
+              <button class="profile"
+                [ngStyle]="{'background-image': 'url(' + photo + ')' ,'background-size':'cover','width':'70px','height':'70px'}"
+                (click)="file.click()" mat-mini-fab>
+                <div mat-mini-fab class="changeProfile" fxLayoutAlign="end center">change</div>
+              </button>
+              <div>
+                <div class="profileName">
+                  {{FirstName}}
+                </div>
+                <div class="profileEmail">
+                  {{Email}}
+                </div>
               </div>
             </div>
-          </div>
-          <mat-divider></mat-divider>
-          <button class="signout" mat-button (click)="onLogout()">
-            Sign out
-          </button>
-        </mat-menu>
-      </button>
+            <mat-divider></mat-divider>
+            <button class="signout" style="margin-left: 192px"mat-button (click)="onLogout()">
+              Sign out
+            </button>
+          </mat-menu>
+
+        </button>
+      </div>
     </mat-toolbar-row>
   </mat-toolbar>
   <div class="divider"></div>
   <div>
     <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-      <mat-sidenav fxHide.xs=true #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-        [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" style="border: 0px;">
+      <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+        fixedTopGap="56" style="border: 0px;">
         <mat-nav-list>
           <div>
             <a mat-button (click)="headName='FundooNotes'" routerLink=".">
@@ -80,7 +84,7 @@
                 <div class="imageopac">
                   <img src="../../../assets/image/outline-label-24px.svg" />
                 </div>
-                <div  style="margin-left:50px">{{label.label}}</div>
+                <div style="margin-left:50px">{{label.label}}</div>
               </div>
             </button>
           </div>

@@ -9,11 +9,13 @@ h1.example-app-name {
     }
     .profile
   {
+    outline: none;
       background-size: cover
   }
 
   .backgroundimage {
     width: auto;
+    height: auto;
   }
 
 
@@ -67,5 +69,9 @@ h1.example-app-name {
     margin-left: 7px;
   }
   
-  
+  .signoutMenu{
+    width: 100%;
+    border:0px;
+    outline: none
+  }
 

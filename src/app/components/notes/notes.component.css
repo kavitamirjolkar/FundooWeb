@@ -1,6 +1,6 @@
 .closeButton{
-    left:12cm;
-   top:15%
+    left:6cm;
+   /* margin-top:-2cm; */
 }
 
 .pinIcon{
@@ -8,7 +8,11 @@
     resize: none;
      outline: none
 }
-/* .takeanotecss{
-    margin-left:37%;
-    
-} */
+.takeanoteIcon:not(.iconlist):hover{
+    opacity: 1;
+}
+.title{
+    width: 560px;
+     outline: none;
+     border: 0; 
+}

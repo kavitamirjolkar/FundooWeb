@@ -2,3 +2,7 @@
     left:80%;
     top:15%
 }
+.dialog{
+    border: 0;
+    outline: none;
+}
