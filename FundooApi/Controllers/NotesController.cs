@@ -97,7 +97,6 @@ namespace FundooApi.Controllers
         [HttpPut]
         [Route("notes/{id}")]
         public async Task<IActionResult> UpdateNotes(NotesModel model, int id)
-
         {
             try
             {
@@ -265,7 +264,6 @@ namespace FundooApi.Controllers
         [HttpPost]
         [Route("notelabel")]
         public IActionResult AddNoteLabel(NoteLabelModel label)
-
         {
             var result = this.notesBusiness.AddNotesLabel(label);
             if (result == null)
@@ -295,7 +293,7 @@ namespace FundooApi.Controllers
         }
 
         /// <summary>
-        /// Deletes the notelabel.
+        /// Deletes the note label.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>returns result</returns>
@@ -311,7 +309,6 @@ namespace FundooApi.Controllers
 
             return this.Ok(new { result });
         }
-
 
         /// <summary>
         /// Adds the collaborator to note.

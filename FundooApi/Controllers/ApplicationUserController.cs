@@ -77,6 +77,11 @@ namespace FundooApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Faces the book login.
+        /// </summary>
+        /// <param name="email">The email.</param>
+        /// <returns>returns response</returns>
         [HttpPost]
         [Route("fblogin")]
         public async Task<IActionResult> FaceBookLogin(string email)

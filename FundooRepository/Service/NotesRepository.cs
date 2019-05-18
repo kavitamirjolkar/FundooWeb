@@ -59,8 +59,7 @@ namespace FundooRepository.Service
                 IsArchive = notes.IsArchive,
                 IsTrash = notes.IsTrash,
                 IsPin = notes.IsPin,
-                Color = notes.Color, 
-               
+                Color = notes.Color,               
             };
             var result = this.Context.Notes.Add(note);
             return null;
@@ -119,11 +118,12 @@ namespace FundooRepository.Service
         {
             var list = new List<NotesModel>();
             var note = from notes in this.Context.Notes where notes.UserId == userId orderby notes.Id descending select notes;
-            ////return Context.NotesModels.FirstOrDefault(e => e.UserId == UserId);
+            ////return Context.NotesModels.FirstOrDefault(e => e.userId == userId);
             foreach (var item in note)
             {
                 list.Add(item);
             }
+
             return note.ToArray();                       
         }
 
@@ -141,8 +141,7 @@ namespace FundooRepository.Service
             notes.Color = model.Color;
             notes.IsArchive = model.IsArchive;
             notes.IsTrash = model.IsTrash;
-            notes.IsPin = model.IsPin;
-            
+            notes.IsPin = model.IsPin;            
         }
 
         /// <summary>
@@ -213,6 +212,12 @@ namespace FundooRepository.Service
             return list;
         }
 
+        /// <summary>
+        /// Adds the labels.
+        /// </summary>
+        /// <param name="label">The label.</param>
+        /// <returns>returns string</returns>
+        /// <exception cref="Exception">throws exception</exception>
         public string AddLabels([FromBody] LabelModel label)
         {
             var addLabel = new LabelModel()
@@ -232,12 +237,18 @@ namespace FundooRepository.Service
             }
         }
 
-        public List<LabelModel> GetLabels(Guid UserId)
+        /// <summary>
+        /// Gets the labels.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>returns list</returns>
+        /// <exception cref="Exception">throws exception</exception>
+        public List<LabelModel> GetLabels(Guid userId)
         {
             try
             {
                 var list = new List<LabelModel>();
-                var labels = from t in this.Context.Labels where t.UserId == UserId select t;
+                var labels = from t in this.Context.Labels where t.UserId == userId select t;
                 foreach (var items in labels)
                 {
                     list.Add(items);
@@ -251,6 +262,13 @@ namespace FundooRepository.Service
             }
         }
 
+        /// <summary>
+        /// Updates the labels.
+        /// </summary>
+        /// <param name="label">The label.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>returns string</returns>
+        /// <exception cref="Exception">throws exception</exception>
         public string UpdateLabels([FromBody] LabelModel label, int id)
         {
             LabelModel labels = this.Context.Labels.Where(t => t.Id == id).FirstOrDefault();
@@ -266,6 +284,12 @@ namespace FundooRepository.Service
             }
         }
 
+        /// <summary>
+        /// Deletes the label.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>returns string</returns>
+        /// <exception cref="Exception">throws exception</exception>
         public string DeleteLabel(int id)
         {
             LabelModel label = this.Context.Labels.Where(t => t.Id == id).FirstOrDefault();
@@ -281,6 +305,12 @@ namespace FundooRepository.Service
             }
         }
 
+        /// <summary>
+        /// Adds the notes label.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>returns string</returns>
+        /// <exception cref="Exception">throws exception</exception>
         public string AddNotesLabel([FromBody] NoteLabelModel model)
         {
             try
@@ -311,13 +341,19 @@ namespace FundooRepository.Service
             }
         }
 
+        /// <summary>
+        /// Gets the notes label.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>returns list of label</returns>
+        /// <exception cref="Exception">throws exception</exception>
         public List<NoteLabelModel> GetNotesLabel(Guid userId)
         {
             var list = new List<NoteLabelModel>();
-            var Labeldata = from t in this.Context.NoteLabel where t.UserId == userId select t;
+            var labelData = from t in this.Context.NoteLabel where t.UserId == userId select t;
             try
             {
-                foreach (var data in Labeldata)
+                foreach (var data in labelData)
                 {
                     list.Add(data);
                 }
@@ -326,9 +362,16 @@ namespace FundooRepository.Service
             {
                 throw new Exception(exception.Message);
             }
+
             return list;
         }
 
+        /// <summary>
+        /// Deletes the notes label.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>returns string</returns>
+        /// <exception cref="Exception">throws exception</exception>
         public string DeleteNotesLabel(int id)
         {
             var label = this.Context.NoteLabel.Where<NoteLabelModel>(t => t.Id == id).FirstOrDefault();
@@ -345,7 +388,12 @@ namespace FundooRepository.Service
             }
         }
 
-
+        /// <summary>
+        /// Adds the collaborator to note.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>returns string</returns>
+        /// <exception cref="Exception">throws exception</exception>
         public string AddCollaboratorToNote([FromBody] CollaboratorModel model)
         {
             try
@@ -358,13 +406,13 @@ namespace FundooRepository.Service
                         return false.ToString();
                     }
                 }
+
                 var newdata = new CollaboratorModel()
                 {
                     UserId = model.UserId,
                     NoteId = model.NoteId,
                     SenderEmail = model.SenderEmail,
                     ReceiverEmail = model.ReceiverEmail,
-
                 };               
                 this.Context.Collaborator.Add(newdata);
                var result = this.Context.SaveChanges();
@@ -376,6 +424,12 @@ namespace FundooRepository.Service
             }
         }
 
+        /// <summary>
+        /// Removes the collaborator to note.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>returns string</returns>
+        /// <exception cref="Exception">throws exception</exception>
         public string RemoveCollaboratorToNote(int id)
         {
             try
@@ -391,7 +445,13 @@ namespace FundooRepository.Service
             }
         }
 
-       public string CollaboratorNote(string receiverEmail)
+        /// <summary>
+        /// Collaborators the note.
+        /// </summary>
+        /// <param name="receiverEmail">The receiver email.</param>
+        /// <returns>returns string</returns>
+        /// <exception cref="Exception">throws exception</exception>
+        public string CollaboratorNote(string receiverEmail)
         {
             try
             {

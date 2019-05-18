@@ -35,8 +35,10 @@
         /// Adds the labels.
         /// </summary>
         /// <param name="label">The label.</param>
-        /// <returns>returns string</returns>
-        /// <exception cref="Exception"></exception>
+        /// <returns>
+        /// returns string
+        /// </returns>
+        /// <exception cref="Exception">throws exception</exception>
         public string AddLabels([FromBody] LabelModel label)
         {
             var addLabel = new LabelModel()
@@ -61,7 +63,7 @@
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>returns string</returns>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception">throws exception</exception>
         public string DeleteLabel(int id)
         {
             LabelModel label = this.Context.Labels.Where(t => t.Id == id).FirstOrDefault();
@@ -80,15 +82,15 @@
         /// <summary>
         /// Gets the labels.
         /// </summary>
-        /// <param name="UserId">The user identifier.</param>
+        /// <param name="userId">The user identifier.</param>
         /// <returns>returns list</returns>
-        /// <exception cref="Exception"></exception>
-        public List<LabelModel> GetLabels(Guid UserId)
+        /// <exception cref="Exception">throws exception</exception>
+        public List<LabelModel> GetLabels(Guid userId)
         {
             try
             {
                 var list = new List<LabelModel>();
-                var labels = from t in this.Context.Labels where t.UserId == UserId select t;
+                var labels = from t in this.Context.Labels where t.UserId == userId select t;
                 foreach (var items in labels)
                 {
                     list.Add(items);
@@ -106,9 +108,9 @@
         /// Updates the labels.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <param name="newlabel">The newlabel.</param>
+        /// <param name="newlabel">The new label.</param>
         /// <returns>returns string</returns>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception">throws exception</exception>
         public string UpdateLabels(int id, string newlabel)
         {
             LabelModel labels = this.Context.Labels.Where(t => t.Id == id).FirstOrDefault();

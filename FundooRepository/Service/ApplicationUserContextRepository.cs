@@ -42,7 +42,7 @@ namespace FundooRepository
         private readonly AuthenticationContext context;
 
         /// <summary>
-        /// The distributedcache/
+        /// The distributed cache
         /// </summary>
         private readonly IDistributedCache distributedcache;
 
@@ -57,13 +57,13 @@ namespace FundooRepository
         /// <param name="userManager">The user manager.</param>
         /// <param name="appSettings">The application settings.</param>
         /// <param name="context">The context.</param>
+        /// <param name="distributedcache">The distributed cache.</param>
         public ApplicationUserContextRepository(UserManager<ApplicationUserDBModel> userManager, IOptions<ApplicationSettings> appSettings, AuthenticationContext context, IDistributedCache distributedcache)
         {
             this.usermanager = userManager;
             this.appSettings = appSettings.Value;
             this.context = context;
             this.distributedcache = distributedcache;
-
         }
 
         /// <summary>
@@ -170,6 +170,11 @@ namespace FundooRepository
             return "invalid user";
         }
 
+        /// <summary>
+        /// Faces the book login asynchronous.
+        /// </summary>
+        /// <param name="email">The email.</param>
+        /// <returns>returns response</returns>
         public async Task<string> FaceBookLoginAsync(string email)
         {
             var user = await this.usermanager.FindByEmailAsync(email);
@@ -214,8 +219,7 @@ namespace FundooRepository
             {
                 File = new FileDescription(name, stream)
             };
-            var uploadResult = cloudinary.Upload(uploadParams);
-            cloudinary.Api.UrlImgUp.Transform(new Transformation().Height(99).Width(60).Crop("limit"));
+            var uploadResult = cloudinary.Upload(uploadParams);          
             var data = this.context.ApplicationUsers.Where(t => t.Email == email).FirstOrDefault();
             data.ProfilePicture = uploadResult.Uri.ToString();
 

@@ -96,7 +96,14 @@ namespace FundooBusiness.Services
             return result;
         }
 
-       public Task<string> FaceBookLoginAsync(string email)
+        /// <summary>
+        /// Faces the book login asynchronous.
+        /// </summary>
+        /// <param name="email">The email.</param>
+        /// <returns>
+        /// returns response
+        /// </returns>
+        public Task<string> FaceBookLoginAsync(string email)
         {
             var result = this.applicationUserContext.FaceBookLoginAsync(email);
             return result;

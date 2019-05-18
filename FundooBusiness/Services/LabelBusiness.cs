@@ -1,4 +1,10 @@
-﻿namespace FundooBusiness.Services
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="LabelBusiness.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator Name="Kavita Mirjolkar"/>
+// --------------------------------------------------------------------------------------------------------------------
+namespace FundooBusiness.Services
 {
     using System;
     using System.Collections.Generic;
@@ -54,20 +60,20 @@
         /// <summary>
         /// Gets the labels.
         /// </summary>
-        /// <param name="UserId">The user identifier.</param>
+        /// <param name="userId">The user identifier.</param>
         /// <returns>
         /// returns string
         /// </returns>
-        public List<LabelModel> GetLabels(Guid UserId)
+        public List<LabelModel> GetLabels(Guid userId)
         {
-            return this.labelsRepository.GetLabels(UserId);
+            return this.labelsRepository.GetLabels(userId);
         }
 
         /// <summary>
         /// Updates the labels.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <param name="newlabel">The newlabel.</param>
+        /// <param name="newlabel">The new label.</param>
         /// <returns>
         /// returns string
         /// </returns>

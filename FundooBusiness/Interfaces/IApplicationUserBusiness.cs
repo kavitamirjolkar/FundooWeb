@@ -30,6 +30,11 @@ namespace FundooBusiness.Interfaces
         /// <returns>returns string</returns>
         Task<string> LoginAsync(LoginModel model);
 
+        /// <summary>
+        /// Faces the book login asynchronous.
+        /// </summary>
+        /// <param name="email">The email.</param>
+        /// <returns>returns response</returns>
         Task<string> FaceBookLoginAsync(string email);
 
         /// <summary>

@@ -13,7 +13,7 @@ namespace Common.Model
     /// <summary>
     /// This model is used to post columns in database
     /// </summary>
-    public class ApplicationUserDBModel 
+    public class ApplicationUserDBModel :IdentityUser
     {
         /// <summary>
         /// Gets or sets the first name.
